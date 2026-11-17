@@ -136,3 +136,13 @@ Date: 2026-11-17
   deleted. Cancelled the queued run after it started; it also cleaned up.
 - Release deletion now also removes a leftover `tunnel` git tag, so recreating
   the release always starts from a clean tag.
+
+## Final green end-to-end run
+
+- `LLM over bore.pub` run 44119911428 on commit `171bb98`: passed.
+  - `Serve model`: passed.
+  - `Run CLI agent`: passed. It connected through the bore.pub tunnel, finished
+    in one step, and printed `{"name":"workflow-agent-ok"}` for the requested
+    marker.
+  - `Delete tunnel release`: passed. The `tunnel` release and git tag were both
+    gone after the run.
