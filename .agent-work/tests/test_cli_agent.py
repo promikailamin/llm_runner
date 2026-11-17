@@ -45,6 +45,8 @@ class JsonHandler(BaseHTTPRequestHandler):
             self.handle_ollama_text(request)
         elif type(self).mode == "ollama-loop":
             self.handle_ollama_loop(request)
+        elif type(self).mode == "ollama-unknown-name":
+            self.handle_ollama_unknown_name(request)
         else:
             self.handle_ollama_native(request)
 
@@ -78,6 +80,13 @@ class JsonHandler(BaseHTTPRequestHandler):
             users = [m for m in request.get("messages", []) if m.get("role") == "user"]
             assert users and "cli-text-ok" in users[-1].get("content", ""), users[-1]
             message = {"role": "assistant", "content": "FINAL: text flow complete"}
+        self.send_json(200, {"model": "mock", "message": message, "done": True})
+
+    def handle_ollama_unknown_name(self, request):
+        message = {
+            "role": "assistant",
+            "content": '{"name":"workflow-agent-ok","arguments":{}}',
+        }
         self.send_json(200, {"model": "mock", "message": message, "done": True})
 
     def handle_ollama_loop(self, request):
@@ -227,6 +236,22 @@ class CliAgentTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("text flow complete", result.stdout)
+
+    def test_unknown_tool_name_is_a_final_answer(self):
+        server, _ = self.start_server("ollama-unknown-name")
+        base = f"http://127.0.0.1:{server.server_address[1]}"
+        result = self.run_agent(
+            "--url",
+            base,
+            "--model",
+            "mock",
+            "--task",
+            "say the marker",
+            "--max-steps",
+            "3",
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("workflow-agent-ok", result.stdout)
 
     def test_repeated_tool_calls_stop(self):
         server, _ = self.start_server("ollama-loop")

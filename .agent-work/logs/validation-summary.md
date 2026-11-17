@@ -113,3 +113,16 @@ Date: 2026-11-17
   - `Delete tunnel release`: passed.
 - Loop detection was validated locally with mock and real Ollama servers and is
   covered by `test_repeated_tool_calls_stop`.
+
+## Follow-up fix after run 44117544171
+
+- The `serve` and `cleanup` jobs passed again and the `tunnel` release lifecycle
+  worked.
+- The tiny test model emitted `{"name":"workflow-agent-ok","arguments":{}}` as
+  text. The agent treated that unknown name as a tool call and looped.
+- Text tool-call extraction now accepts only the four implemented tool names
+  (`run_shell`, `read_file`, `write_file`, `list_dir`). Unknown names are treated
+  as a normal final answer.
+- Re-ran the CLI against the local real Ollama server with
+  `qwen2.5-coder:0.5b` and the same task; it finished successfully on step 1.
+- Added `test_unknown_tool_name_is_a_final_answer`.

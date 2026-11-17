@@ -107,6 +107,11 @@ nlohmann::json arguments_from(const nlohmann::json& container) {
   return nlohmann::json::object();
 }
 
+bool is_known_tool(const std::string& name) {
+  return name == "run_shell" || name == "read_file" || name == "write_file" ||
+         name == "list_dir";
+}
+
 bool tool_call_from_json(const nlohmann::json& value, ToolCall& call) {
   if (!value.is_object()) return false;
   nlohmann::json function = value;
@@ -148,11 +153,15 @@ void consider_candidate(const std::string& candidate, std::vector<ToolCall>& cal
     const nlohmann::json parsed = nlohmann::json::parse(text);
     if (parsed.is_object()) {
       ToolCall call;
-      if (tool_call_from_json(parsed, call)) calls.push_back(call);
+      if (tool_call_from_json(parsed, call) && is_known_tool(call.name)) {
+        calls.push_back(call);
+      }
     } else if (parsed.is_array()) {
       for (const auto& entry : parsed) {
         ToolCall call;
-        if (tool_call_from_json(entry, call)) calls.push_back(call);
+        if (tool_call_from_json(entry, call) && is_known_tool(call.name)) {
+          calls.push_back(call);
+        }
       }
     }
   } catch (...) {
@@ -686,6 +695,12 @@ bool run_self_test() {
     check("unfenced tool call parsed", calls.size() == 1 &&
                                           calls[0].name == "run_shell" &&
                                           calls[0].arguments.value("command", "") == "ls");
+  }
+
+  {
+    const auto calls =
+        extract_text_calls("{\"name\":\"workflow-agent-ok\",\"arguments\":{}}");
+    check("unknown tool name is not a call", calls.empty());
   }
 
   {
