@@ -43,6 +43,8 @@ class JsonHandler(BaseHTTPRequestHandler):
             self.handle_openai(request)
         elif type(self).mode == "ollama-text":
             self.handle_ollama_text(request)
+        elif type(self).mode == "ollama-loop":
+            self.handle_ollama_loop(request)
         else:
             self.handle_ollama_native(request)
 
@@ -76,6 +78,21 @@ class JsonHandler(BaseHTTPRequestHandler):
             users = [m for m in request.get("messages", []) if m.get("role") == "user"]
             assert users and "cli-text-ok" in users[-1].get("content", ""), users[-1]
             message = {"role": "assistant", "content": "FINAL: text flow complete"}
+        self.send_json(200, {"model": "mock", "message": message, "done": True})
+
+    def handle_ollama_loop(self, request):
+        message = {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+                {
+                    "function": {
+                        "name": "run_shell",
+                        "arguments": {"command": "printf loop-ok"},
+                    }
+                }
+            ],
+        }
         self.send_json(200, {"model": "mock", "message": message, "done": True})
 
     def handle_openai(self, request):
@@ -210,6 +227,22 @@ class CliAgentTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("text flow complete", result.stdout)
+
+    def test_repeated_tool_calls_stop(self):
+        server, _ = self.start_server("ollama-loop")
+        base = f"http://127.0.0.1:{server.server_address[1]}"
+        result = self.run_agent(
+            "--url",
+            base,
+            "--model",
+            "mock",
+            "--task",
+            "loop forever",
+            "--max-steps",
+            "8",
+        )
+        self.assertEqual(result.returncode, 2, result.stderr)
+        self.assertIn("stuck repeating", result.stderr)
 
     def test_openai_tool_flow(self):
         server, _ = self.start_server("openai")

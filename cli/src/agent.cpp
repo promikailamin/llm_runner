@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -499,6 +500,8 @@ int run_agent(const AgentConfig& config) {
     const auto deadline = Clock::now() + std::chrono::seconds(config.timeout_seconds);
     bool use_native_tools = config.native_tools;
     int malformed_tool_retries = 0;
+    int repeat_nudges = 0;
+    std::map<std::string, int> call_counts;
 
     for (int step = 1; step <= config.max_steps; ++step) {
       if (Clock::now() >= deadline) {
@@ -564,9 +567,31 @@ int run_agent(const AgentConfig& config) {
       messages.push_back(native ? assistant_message_for_native(result, api)
                                 : assistant_message_for_text(result.content));
 
+      if (calls.size() > 8) {
+        logger.warn("the model requested more than 8 tool calls in one step; using the first 8");
+        calls.resize(8);
+      }
+
+      std::size_t repeated_calls = 0;
       for (const auto& call : calls) {
-        logger.info("tool " + call.name + " " + pretty_arguments(call.arguments));
-        const std::string output = execute_tool(call.name, call.arguments, tool_context);
+        const std::string key = call.name + "|" + call.arguments.dump();
+        int& count = call_counts[key];
+        std::string output;
+        if (count >= 2) {
+          ++repeated_calls;
+          logger.warn("skipping repeated tool call " + call.name + " " +
+                      pretty_arguments(call.arguments));
+          output = nlohmann::json{
+              {"ok", false},
+              {"error", "repeated_tool_call"},
+              {"message", "This exact tool call was already executed twice. Do not repeat "
+                          "it. Use the previous result or reply with your final answer."}}
+                       .dump();
+        } else {
+          logger.info("tool " + call.name + " " + pretty_arguments(call.arguments));
+          output = execute_tool(call.name, call.arguments, tool_context);
+          ++count;
+        }
         logger.raw("TOOL RESULT " + call.name + " " + output);
         if (!config.quiet) {
           std::cerr << "  -> " << truncate_output(output, 1200) << "\n";
@@ -574,6 +599,19 @@ int run_agent(const AgentConfig& config) {
         messages.push_back(
             nlohmann::json::parse(tool_result_message(call, output, native && !fallback_calls,
                                                       api)));
+      }
+
+      if (!calls.empty() && repeated_calls == calls.size()) {
+        if (repeat_nudges >= 2) {
+          logger.error("agent is stuck repeating the same tool calls");
+          return 2;
+        }
+        ++repeat_nudges;
+        logger.warn("all tool calls in this step were repeats; asking for a final answer");
+        messages.push_back(
+            {{"role", "user"},
+             {"content", "You are repeating tool calls that already ran. Stop calling tools "
+                         "and reply with your final answer now."}});
       }
     }
 

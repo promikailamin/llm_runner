@@ -95,3 +95,21 @@ Date: 2026-11-17
   run attempt, action URL, run start, timeout, and expiry.
 - `delete-tunnel-release.sh` and `cleanup-stale-tunnel-release.sh` were tested
   with a fake `gh` for both active-run and idle cases.
+
+## GitHub Actions end-to-end runs for issue 2
+
+- `Build CLI agent` run 44115944204 (push `cc9fd0d`): passed.
+  - `Build linux-x86_64`: passed.
+  - `Build linux-aarch64`: passed (cross-compiled and self-tested under qemu).
+  - Both packaged artifacts uploaded.
+- `LLM over bore.pub` run 44116200226:
+  - `Serve model`: passed. The `tunnel` release was created with the tunnel
+    address and action metadata, kept alive, and deleted by the cleanup step.
+  - `Run CLI agent`: the agent job connected through the bore.pub tunnel,
+    executed `printf workflow-ok`, and received `workflow-ok`. The tiny
+    `qwen2.5-coder:0.5b` test model then repeated tool calls until the step
+    limit, so the agent step exited 2. This exposed the need for loop
+    detection, which was added afterward.
+  - `Delete tunnel release`: passed.
+- Loop detection was validated locally with mock and real Ollama servers and is
+  covered by `test_repeated_tool_calls_stop`.
