@@ -2518,3 +2518,662 @@ PY
 /tmp/actionlint .github/workflows/models-release.yml; echo "actionlint=$?"
 actionlint=0
 [0m
+[0m$ [0mpython3 -m unittest discover -s .agent-work/tests -p 'test_*.py' -v >/tmp/test.out 2>&1; status=$?; cat /tmp/test.out; echo "tests_status=$status"; git add -A && git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Stream model packaging and upload release assets incrementally" && git push origin main 2>&1 | tail -5
+test_llm_workflow (test_llm_workflows.WorkflowTests.test_llm_workflow) ... ok
+test_models_release_workflow (test_llm_workflows.WorkflowTests.test_models_release_workflow) ... ok
+test_ollama_binds_all_interfaces_for_tunnel_host_header (test_llm_workflows.WorkflowTests.test_ollama_binds_all_interfaces_for_tunnel_host_header) ... ok
+test_package_ollama_model (test_llm_workflows.WorkflowTests.test_package_ollama_model) ... ok
+test_resolve_model (test_llm_workflows.WorkflowTests.test_resolve_model) ... ok
+test_scripts_exist_and_are_parseable (test_llm_workflows.WorkflowTests.test_scripts_exist_and_are_parseable) ... ok
+test_start_tunnel_writes_json (test_llm_workflows.WorkflowTests.test_start_tunnel_writes_json) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.121s
+
+OK
+tests_status=0
+[main b372395] Stream model packaging and upload release assets incrementally
+ 5 files changed, 1441 insertions(+), 70 deletions(-)
+ create mode 100644 .agent-work/logs/llm-workflow-run-44094796185.log
+To https://github.com/promikailamin/llm_runner
+   4d5cf98..b372395  main -> main
+[0m
+[0m$ [0mgh workflow run models-release.yml --repo promikailamin/llm_runner --ref main \
+  -f include_starcoder2=false \
+  -f include_deepseek_coder=false \
+  -f include_qwen25_coder_7b=false \
+  -f include_qwen25_coder_3b=true \
+  -f extra_models='' \
+  -f release_tag=llm-models \
+  -f chunk_size=1900M \
+  -f verify_blobs=false \
+  -f draft=false 2>&1
+sleep 5
+gh run list --repo promikailamin/llm_runner --workflow models-release.yml --limit 1 --json databaseId,status,conclusion,url,displayTitle | tee /tmp/release-run.json
+https://github.com/promikailamin/llm_runner/actions/runs/44095974252
+[{"conclusion":"","databaseId":44095974252,"displayTitle":"Publish LLM models","status":"in_progress","url":"https://github.com/promikailamin/llm_runner/actions/runs/44095974252"}]
+[0m
+[0m$ [0mgh run watch 44095974252 --repo promikailamin/llm_runner --interval 10 --exit-status 2>&1 | tail -100; echo "watch_status=${PIPESTATUS[0]}"
+✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  * Pull, package and upload models
+  * Write release notes
+  * Update release notes
+  * Upload catalog and checksums
+  * Add summary
+  * Post Checkout repository
+Refreshing run status every 10 seconds. Press Ctrl+C to quit.
+
+* main Publish LLM models · 44095974252
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+* Package and publish models (ID 134083072823)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  * Pull, package and upload models
+  * Write release notes
+  * Update release notes
+  * Upload catalog and checksums
+  * Add summary
+  * Post Checkout repository
+Refreshing run status every 10 seconds. Press Ctrl+C to quit.
+
+* main Publish LLM models · 44095974252
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+* Package and publish models (ID 134083072823)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  * Pull, package and upload models
+  * Write release notes
+  * Update release notes
+  * Upload catalog and checksums
+  * Add summary
+  * Post Checkout repository
+Refreshing run status every 10 seconds. Press Ctrl+C to quit.
+
+* main Publish LLM models · 44095974252
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+* Package and publish models (ID 134083072823)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  * Pull, package and upload models
+  * Write release notes
+  * Update release notes
+  * Upload catalog and checksums
+  * Add summary
+  * Post Checkout repository
+✓ main Publish LLM models · 44095974252
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+✓ Package and publish models in 2m28s (ID 134083072823)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  ✓ Pull, package and upload models
+  ✓ Write release notes
+  ✓ Update release notes
+  ✓ Upload catalog and checksums
+  ✓ Add summary
+  ✓ Post Checkout repository
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Package and publish models: .github#3
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Package and publish models: .github#1
+
+watch_status=0
+[0m
+[0m$ [0mgh release view llm-models --repo promikailamin/llm_runner --json tagName,name,isDraft,assets --jq '{tagName,name,isDraft,assets:[.assets[]|{name,size}]}' | tee .agent-work/logs/release-3b.json; echo '--- disk ---'; gh run view 44095974252 --repo promikailamin/llm_runner --log > .agent-work/logs/models-release-3b.log 2>&1; grep -aE 'Filesystem|Avail|Overlay|/dev/root|Uploading|Assigned|release|models' .agent-work/logs/models-release-3b.log | head -60
+{"assets":[{"name":"models-manifest.json","size":1098},{"name":"qwen2.5-coder-3b.tar.part-000","size":1929932800},{"name":"SHA256SUMS","size":96}],"isDraft":false,"name":"LLM models","tagName":"llm-models"}
+--- disk ---
+Package and publish models	Set up job	﻿2026-11-17T13:45:50.7398531Z Current runner version: '2.338.2'
+Package and publish models	Set up job	2026-11-17T13:45:50.7424811Z ##[group]Runner Image Provisioner
+Package and publish models	Set up job	2026-11-17T13:45:50.7426072Z Hosted Compute Agent
+Package and publish models	Set up job	2026-11-17T13:45:50.7426779Z Version: 20261103.629
+Package and publish models	Set up job	2026-11-17T13:45:50.7427404Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+Package and publish models	Set up job	2026-11-17T13:45:50.7428135Z Build Date: 2026-11-03T17:26:59Z
+Package and publish models	Set up job	2026-11-17T13:45:50.7428741Z Worker ID: {1e1cfa59-60c8-4e99-9353-d0ba06f84724}
+Package and publish models	Set up job	2026-11-17T13:45:50.7429363Z Region: eastus2
+Package and publish models	Set up job	2026-11-17T13:45:50.7429826Z Cloud: Azure
+Package and publish models	Set up job	2026-11-17T13:45:50.7430278Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7431497Z ##[group]Operating System
+Package and publish models	Set up job	2026-11-17T13:45:50.7432040Z Ubuntu
+Package and publish models	Set up job	2026-11-17T13:45:50.7432513Z 26.04.1
+Package and publish models	Set up job	2026-11-17T13:45:50.7432945Z LTS
+Package and publish models	Set up job	2026-11-17T13:45:50.7433367Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7433893Z ##[group]Runner Image
+Package and publish models	Set up job	2026-11-17T13:45:50.7434423Z Image: ubuntu-26.04
+Package and publish models	Set up job	2026-11-17T13:45:50.7435266Z Version: 20261111.196.1
+Package and publish models	Set up job	2026-11-17T13:45:50.7436443Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+Package and publish models	Set up job	2026-11-17T13:45:50.7437910Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+Package and publish models	Set up job	2026-11-17T13:45:50.7438701Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7439697Z ##[group]GITHUB_TOKEN Permissions
+Package and publish models	Set up job	2026-11-17T13:45:50.7441480Z Actions: read
+Package and publish models	Set up job	2026-11-17T13:45:50.7442028Z Contents: write
+Package and publish models	Set up job	2026-11-17T13:45:50.7442542Z Metadata: read
+Package and publish models	Set up job	2026-11-17T13:45:50.7443000Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7444716Z Secret source: Actions
+Package and publish models	Set up job	2026-11-17T13:45:50.7445727Z Cache mode: write
+Package and publish models	Set up job	2026-11-17T13:45:50.7446613Z Prepare workflow directory
+Package and publish models	Set up job	2026-11-17T13:45:50.7867195Z Prepare all required actions
+Package and publish models	Set up job	2026-11-17T13:45:50.7907967Z Getting action download info
+Package and publish models	Set up job	2026-11-17T13:45:50.9952827Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Package and publish models	Set up job	2026-11-17T13:45:51.1969903Z Complete job name: Package and publish models
+Package and publish models	Checkout repository	﻿2026-11-17T13:45:51.3698268Z ##[group]Run actions/checkout@v4
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3700252Z with:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3700683Z   repository: promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3704156Z   token: ***
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3704516Z   ssh-strict: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3704988Z   ssh-user: git
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3705349Z   persist-credentials: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3705938Z   clean: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3706413Z   sparse-checkout-cone-mode: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3706908Z   fetch-depth: 1
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3707398Z   fetch-tags: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3707887Z   show-progress: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3708379Z   lfs: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3708881Z   submodules: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3709378Z   set-safe-directory: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3709801Z   allow-unsafe-pr-checkout: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3710714Z env:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3713867Z   GH_TOKEN: ***
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3714268Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3714719Z   RELEASE_TAG: llm-models
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3715095Z   CHUNK_SIZE: 1900M
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3715663Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6438388Z Syncing repository: promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6441208Z ##[group]Getting Git version info
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6442370Z Working directory is '/home/runner/work/llm_runner/llm_runner'
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6444036Z [command]/usr/bin/git version
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6444943Z git version 2.56.1
+[0m
+[0m$ [0mgrep -aE 'Report disk space|Pull, package and upload|/dev/root|/dev/sd|tmpfs|Avail|Uploading|Assigned|3b|SHA256SUMS|models-manifest' .agent-work/logs/models-release-3b.log | tail -60
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8368661Z verifying sha256 digest ⠦ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8369497Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8370181Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8370847Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9372225Z verifying sha256 digest ⠧ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9373053Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9373745Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9374484Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0365230Z verifying sha256 digest ⠇ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0366183Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0366882Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0367557Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1369177Z verifying sha256 digest ⠏ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1370039Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1370719Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1371398Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2371756Z verifying sha256 digest ⠋ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2372650Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2373332Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2373995Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3003235Z verifying sha256 digest ⠙ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3003813Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3004250Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3004669Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3004990Z verifying sha256 digest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3005205Z writing manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3005854Z success ^[[K^[[?25h^[[?2026l
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8944793Z {
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8945658Z   "model": "qwen2.5-coder:3b",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8946235Z   "safe_name": "qwen2.5-coder-3b",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8946587Z   "manifest": "manifests/registry.ollama.ai/library/qwen2.5-coder/3b",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8947142Z   "manifest_digest": "ce40a49b0aa2b3b607d26a603e0f2db06a256cecbc9cca7adf893ae11a80275a",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8947656Z   "blobs": [
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8947927Z     "sha256:bb967eff3bda079d4ee62c09c5ef0b2e71a6a75934a4c92a13c755fcfd655703",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8948520Z     "sha256:4a188102020e9c9530b687fd6400f775c45e90a0d7baafe65bd0a36963fbb7ba",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8949052Z     "sha256:66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8949604Z     "sha256:1e65450c30670713aa47fe23e8b9662bdf4065e81cc8e3cbfaa98924fcc0d320",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8950143Z     "sha256:45fc3ea7579acf3021044fc8c4c5dd5969ebc3ca2a68219b5075662cc949a4f1",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8950719Z     "sha256:f72c60cabf6237b07f6e632b2c48d533cef25eda2efbd34bed21c5e9c01e6225"
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8951127Z   ],
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8951638Z   "parts": [
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8951844Z     {
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952079Z       "name": "qwen2.5-coder-3b.tar.part-000",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952407Z       "sha256": "08140ecaa869ee94485b70de4b7c2098e39f392e16594d14d5a82ce388bb3913",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952716Z       "size": 1929932800
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952888Z     }
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8953027Z   ],
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8953176Z   "total_size": 1929932800
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8953349Z }
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.9086875Z Uploading 1 part(s) for qwen2.5-coder:3b
+Package and publish models	Pull, package and upload models	2026-11-17T13:48:15.0889308Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Pull, package and upload models	2026-11-17T13:48:15.0889789Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:48:15.0890100Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Write release notes	2026-11-17T13:48:15.0925678Z ^[[36;1m    "$ASSET_DIR/models-manifest.json"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0929468Z ^[[36;1m  echo '`SHA256SUMS` contains the checksum of every part.'^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089501Z - `qwen2.5-coder:3b` - 1 part(s), 1929932800 bytes
+Package and publish models	Write release notes	2026-11-17T13:48:15.1092131Z `SHA256SUMS` contains the checksum of every part.
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7676053Z ^[[36;1m  \( -name 'SHA256SUMS' -o -name 'models-manifest.json' \) | LC_ALL=C sort)^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2284680Z ^[[36;1m  if [ -f "${ASSET_DIR:-/nonexistent}/models-manifest.json" ]; then^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2285796Z ^[[36;1m      "$ASSET_DIR/models-manifest.json"^[[0m
+[0m
+[0m$ [0mgh workflow run models-release.yml --repo promikailamin/llm_runner --ref main \
+  -f include_starcoder2=true \
+  -f include_deepseek_coder=true \
+  -f include_qwen25_coder_7b=true \
+  -f include_qwen25_coder_3b=true \
+  -f extra_models='' \
+  -f release_tag=llm-models \
+  -f chunk_size=1900M \
+  -f verify_blobs=false \
+  -f draft=false 2>&1
+sleep 5
+gh run list --repo promikailamin/llm_runner --workflow models-release.yml --limit 1 --json databaseId,status,conclusion,url,displayTitle | tee /tmp/release-run-all.json
+https://github.com/promikailamin/llm_runner/actions/runs/44096468234
+[{"conclusion":"","databaseId":44096468234,"displayTitle":"Publish LLM models","status":"in_progress","url":"https://github.com/promikailamin/llm_runner/actions/runs/44096468234"}]
+[0m
+[0m$ [0mgh run watch 44096468234 --repo promikailamin/llm_runner --interval 20 --exit-status 2>&1 | tail -80; echo "watch_status=${PIPESTATUS[0]}"
+✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  * Pull, package and upload models
+  * Write release notes
+  * Update release notes
+  * Upload catalog and checksums
+  * Add summary
+  * Post Checkout repository
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Publish LLM models · 44096468234
+Triggered via workflow_dispatch about 9 minutes ago
+
+JOBS
+* Package and publish models (ID 134084782145)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  * Pull, package and upload models
+  * Write release notes
+  * Update release notes
+  * Upload catalog and checksums
+  * Add summary
+  * Post Checkout repository
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Publish LLM models · 44096468234
+Triggered via workflow_dispatch about 9 minutes ago
+
+JOBS
+* Package and publish models (ID 134084782145)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  * Pull, package and upload models
+  * Write release notes
+  * Update release notes
+  * Upload catalog and checksums
+  * Add summary
+  * Post Checkout repository
+✓ main Publish LLM models · 44096468234
+Triggered via workflow_dispatch about 9 minutes ago
+
+JOBS
+✓ Package and publish models in 9m33s (ID 134084782145)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate chunk size
+  ✓ Install and start Ollama
+  ✓ Build model list
+  ✓ Report disk space
+  ✓ Prepare release
+  ✓ Pull, package and upload models
+  ✓ Write release notes
+  ✓ Update release notes
+  ✓ Upload catalog and checksums
+  ✓ Add summary
+  ✓ Post Checkout repository
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Package and publish models: .github#3
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Package and publish models: .github#1
+
+watch_status=0
+[0m
+[0m$ [0mgh release view llm-models --repo promikailamin/llm_runner --json tagName,name,isDraft,body,assets --jq '{tagName,name,isDraft,assets:[.assets[]|{name,size}],body}' | tee .agent-work/logs/release-all.json
+{"assets":[{"name":"deepseek-coder-6.7b.tar.part-000","size":1992294400},{"name":"deepseek-coder-6.7b.tar.part-001","size":1835560960},{"name":"models-manifest.json","size":5106},{"name":"qwen2.5-coder-3b.tar.part-000","size":1929932800},{"name":"qwen2.5-coder-7b.tar.part-000","size":1992294400},{"name":"qwen2.5-coder-7b.tar.part-001","size":1992294400},{"name":"qwen2.5-coder-7b.tar.part-002","size":698521600},{"name":"SHA256SUMS","size":861},{"name":"starcoder2-7b.tar.part-000","size":1992294400},{"name":"starcoder2-7b.tar.part-001","size":1992294400},{"name":"starcoder2-7b.tar.part-002","size":58245120}],"body":"# LLM model assets\n\nOllama models packaged for the LLM tunnel workflow.\n\n## Models\n\n- `deepseek-coder:6.7b` - 2 part(s), 3827855360 bytes\n- `qwen2.5-coder:3b` - 1 part(s), 1929932800 bytes\n- `qwen2.5-coder:7b` - 3 part(s), 4683110400 bytes\n- `starcoder2:7b` - 3 part(s), 4042833920 bytes\n\n## Assets\n\nAssets are split into parts under 2000 MB because GitHub's\nrelease asset limit is 2 GiB per file. Download every\n`\u003cmodel\u003e.tar.part-*` file for the model you need and join them:\n\n```bash\ncat \u003cmodel\u003e.tar.part-* | tar -xf - -C ~/.ollama/models\n```\n\n`SHA256SUMS` contains the checksum of every part.\n\nThen use the **LLM over bore.pub** workflow with\n`model_source=release` and this release tag.\n","isDraft":false,"name":"LLM models","tagName":"llm-models"}
+[0m
+[0m$ [0mgh release view llm-models --repo promikailamin/llm_runner --json assets --jq '.assets | map(.size) | add' | python3 -c 'import sys; n=int(sys.stdin.read().strip() or 0); print(f"total release asset bytes: {n} ({n/1024**3:.2f} GiB)")'; gh run view 44096468234 --repo promikailamin/llm_runner --log > .agent-work/logs/models-release-all.log 2>&1; grep -aE 'Uploading|Report disk|Filesystem|/dev/root|Model release|^- `' .agent-work/logs/models-release-all.log | tail -30
+total release asset bytes: 14483738447 (13.49 GiB)
+Package and publish models	Report disk space	2026-11-17T13:49:30.4790394Z   GH_TOKEN: ***
+Package and publish models	Report disk space	2026-11-17T13:49:30.4790710Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Report disk space	2026-11-17T13:49:30.4791096Z   RELEASE_TAG: llm-models
+Package and publish models	Report disk space	2026-11-17T13:49:30.4791573Z   CHUNK_SIZE: 1900M
+Package and publish models	Report disk space	2026-11-17T13:49:30.4791899Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Report disk space	2026-11-17T13:49:30.4792267Z   OLLAMA_PID: 2514
+Package and publish models	Report disk space	2026-11-17T13:49:30.4792605Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Report disk space	2026-11-17T13:49:30.4792967Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Report disk space	2026-11-17T13:49:30.4793387Z ##[endgroup]
+Package and publish models	Report disk space	2026-11-17T13:49:30.4851600Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Report disk space	2026-11-17T13:49:30.4852214Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Report disk space	2026-11-17T13:49:30.4852723Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:49:31.1253567Z ^[[36;1m  printf 'Uploading %d part(s) for %s\n' "${#model_assets[@]}" "$model"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:50:07.9646886Z Uploading 3 part(s) for starcoder2:7b
+Package and publish models	Pull, package and upload models	2026-11-17T13:52:02.0287773Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Pull, package and upload models	2026-11-17T13:52:02.0288919Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:52:02.0289901Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:52:31.7760369Z Uploading 2 part(s) for deepseek-coder:6.7b
+Package and publish models	Pull, package and upload models	2026-11-17T13:54:19.5182737Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Pull, package and upload models	2026-11-17T13:54:19.5183464Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:54:19.5183922Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:54:59.6195197Z Uploading 3 part(s) for qwen2.5-coder:7b
+Package and publish models	Pull, package and upload models	2026-11-17T13:56:52.9641484Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Pull, package and upload models	2026-11-17T13:56:52.9641955Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:56:52.9642432Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:57:13.7910396Z Uploading 1 part(s) for qwen2.5-coder:3b
+Package and publish models	Pull, package and upload models	2026-11-17T13:58:15.5412915Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Pull, package and upload models	2026-11-17T13:58:15.5413396Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:58:15.5413665Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Add summary	2026-11-17T13:58:18.0447562Z ^[[36;1m  echo "### Model release"^[[0m
+[0m
+[0m$ [0mgh workflow run llm.yml --repo promikailamin/llm_runner --ref main \
+  -f model=qwen2.5-coder:3b \
+  -f custom_model='' \
+  -f model_source=release \
+  -f release_tag=llm-models \
+  -f timeout_minutes=1 \
+  -f warmup=true \
+  -f run_client=true \
+  -f probe_interval_seconds=15 2>&1
+sleep 5
+gh run list --repo promikailamin/llm_runner --workflow llm.yml --limit 1 --json databaseId,status,conclusion,url,displayTitle | tee /tmp/llm-release-run.json
+https://github.com/promikailamin/llm_runner/actions/runs/44098147042
+[{"conclusion":"","databaseId":44098147042,"displayTitle":"LLM over bore.pub","status":"in_progress","url":"https://github.com/promikailamin/llm_runner/actions/runs/44098147042"}]
+[0m
+[0m$ [0mgh run watch 44098147042 --repo promikailamin/llm_runner --interval 15 --exit-status 2>&1 | tail -80; echo "watch_status=${PIPESTATUS[0]}"
+✓ Add connection details to summary
+  * Keep model and tunnel online
+  * Post Checkout repository
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* main LLM over bore.pub · 44098147042
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+* Probe tunnel (ID 134090689622)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Wait for tunnel details
+  * Probe tunnel
+  * Add client details to summary
+  * Post Checkout repository
+✓ Serve model in 2m43s (ID 134090690419)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Resolve model
+  ✓ Install and start Ollama
+  ✓ Restore model from release
+  - Pull model from Ollama
+  ✓ Verify model
+  ✓ Warm up model
+  ✓ Install bore
+  ✓ Start bore tunnel
+  ✓ Publish tunnel details
+  ✓ Add connection details to summary
+  ✓ Keep model and tunnel online
+  ✓ Post Checkout repository
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Serve model: .github#10
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Serve model: .github#1
+
+✓ main LLM over bore.pub · 44098147042
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ Probe tunnel in 2m50s (ID 134090689622)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Wait for tunnel details
+  ✓ Probe tunnel
+  ✓ Add client details to summary
+  ✓ Post Checkout repository
+  ✓ Complete job
+✓ Serve model in 2m43s (ID 134090690419)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Resolve model
+  ✓ Install and start Ollama
+  ✓ Restore model from release
+  - Pull model from Ollama
+  ✓ Verify model
+  ✓ Warm up model
+  ✓ Install bore
+  ✓ Start bore tunnel
+  ✓ Publish tunnel details
+  ✓ Add connection details to summary
+  ✓ Keep model and tunnel online
+  ✓ Post Checkout repository
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Serve model: .github#10
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Serve model: .github#1
+
+watch_status=0
+[0m
+[0m$ [0mset -e; tmp=$(mktemp -d); gh release download llm-models --repo promikailamin/llm_runner --dir "$tmp" --pattern SHA256SUMS --pattern models-manifest.json --clobber; echo '--- manifest ---'; cat "$tmp/models-manifest.json"; echo '--- checksums ---'; cat "$tmp/SHA256SUMS"; (cd "$tmp" && jq -r '.models[].parts[].name' models-manifest.json | sort > expected; grep -oE '[^ ]+$' SHA256SUMS | sort > actual; diff -u expected actual && echo 'checksum entries match catalog')
+--- manifest ---
+{
+  "models": [
+    {
+      "model": "deepseek-coder:6.7b",
+      "safe_name": "deepseek-coder-6.7b",
+      "manifest": "manifests/registry.ollama.ai/library/deepseek-coder/6.7b",
+      "manifest_digest": "51441eba15cfb8a7751be4bdc36464f6c00788394f375898fe944f171bc01429",
+      "blobs": [
+        "sha256:772f510b95588aeb9fbd2298b2b647bceba48aceb05e3a26ff14812eb1f6dc14",
+        "sha256:59bb50d8116b6a1f9bfbb940d6bb946a05554e591e30c8c2429ed6c854867ecb",
+        "sha256:a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e",
+        "sha256:8893e08fa9f91f7dc39e24d27bdfaece4e9c86bb3269293ff8cea6cba98c872d",
+        "sha256:8972a96b8ff1957ca24ff839aeb54411e6849de68609857a3fa17a4e78114247",
+        "sha256:ce298d984115b93bb1b191b47fee6b39e4e9fbd5f18e651c02f9fa74e0edcd13"
+      ],
+      "parts": [
+        {
+          "name": "deepseek-coder-6.7b.tar.part-000",
+          "sha256": "ad8ca23fe6f225de1282380aa4352f14a7735d807eec1271afbf0904cf626dc6",
+          "size": 1992294400
+        },
+        {
+          "name": "deepseek-coder-6.7b.tar.part-001",
+          "sha256": "93c8b575d09e9bc80f3a54a0cce1ed03e92d292985b835bb21ff58bef9a48f06",
+          "size": 1835560960
+        }
+      ],
+      "total_size": 3827855360
+    },
+    {
+      "model": "qwen2.5-coder:3b",
+      "safe_name": "qwen2.5-coder-3b",
+      "manifest": "manifests/registry.ollama.ai/library/qwen2.5-coder/3b",
+      "manifest_digest": "ce40a49b0aa2b3b607d26a603e0f2db06a256cecbc9cca7adf893ae11a80275a",
+      "blobs": [
+        "sha256:bb967eff3bda079d4ee62c09c5ef0b2e71a6a75934a4c92a13c755fcfd655703",
+        "sha256:4a188102020e9c9530b687fd6400f775c45e90a0d7baafe65bd0a36963fbb7ba",
+        "sha256:66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e",
+        "sha256:1e65450c30670713aa47fe23e8b9662bdf4065e81cc8e3cbfaa98924fcc0d320",
+        "sha256:45fc3ea7579acf3021044fc8c4c5dd5969ebc3ca2a68219b5075662cc949a4f1",
+        "sha256:f72c60cabf6237b07f6e632b2c48d533cef25eda2efbd34bed21c5e9c01e6225"
+      ],
+      "parts": [
+        {
+          "name": "qwen2.5-coder-3b.tar.part-000",
+          "sha256": "b10b0a6e293c48560e954ceb7e579fdedb7fc789d75b2174fb7dd878364f024a",
+          "size": 1929932800
+        }
+      ],
+      "total_size": 1929932800
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "safe_name": "qwen2.5-coder-7b",
+      "manifest": "manifests/registry.ollama.ai/library/qwen2.5-coder/7b",
+      "manifest_digest": "4aaba1ee422af93aad53ecbdfc8a159770cf254a9950b7a4304cf9ee3555ef31",
+      "blobs": [
+        "sha256:d9bb33f2786931fea42f50936a2424818aa2f14500638af2f01861eb2c8fb446",
+        "sha256:60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+        "sha256:66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e",
+        "sha256:1e65450c30670713aa47fe23e8b9662bdf4065e81cc8e3cbfaa98924fcc0d320",
+        "sha256:832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "sha256:dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364"
+      ],
+      "parts": [
+        {
+          "name": "qwen2.5-coder-7b.tar.part-000",
+          "sha256": "1f7ea18c062d1b40fb00bc77559cdde0e2c41b614f04705704f12bcb86c5e77f",
+          "size": 1992294400
+        },
+        {
+          "name": "qwen2.5-coder-7b.tar.part-001",
+          "sha256": "ecfccb75051b2551b8dea8a1dfd231992595ca5fba2e00025be678876d336e63",
+          "size": 1992294400
+        },
+        {
+          "name": "qwen2.5-coder-7b.tar.part-002",
+          "sha256": "28f808ccae476f2f32494f0581755f63cfa143098786ee0e57366c0286b171f2",
+          "size": 698521600
+        }
+      ],
+      "total_size": 4683110400
+    },
+    {
+      "model": "starcoder2:7b",
+      "safe_name": "starcoder2-7b",
+      "manifest": "manifests/registry.ollama.ai/library/starcoder2/7b",
+      "manifest_digest": "ec952fb7836ddc5e058357c20ce5674f8fba70502147c311424df47606736267",
+      "blobs": [
+        "sha256:2ac306bb56587fb3cf66da7510c8c20d4dbb7b3396e497f4ba79d5a195e87913",
+        "sha256:cf866ccad4e444eb559c9389867d3b67cf1dc93d79e9cc976049367ce3519adb",
+        "sha256:4ec42cd966c9d5cf067cc4438869e0737679203b4d6fc551c226c15a1c2d7997",
+        "sha256:3b190e68fefe043e95b25825d7ebb8d2d61b154678765a2ab0d4a3a7a5b9733e",
+        "sha256:37c99d4c7b605f0ebce03962ea9051ea770cf2c8f86c0e75bc728582d18fdd0d",
+        "sha256:1550ab21b10d3b3a53bcb13e628f3de773d9dbabe814d2315e5c0d8b9f3ef7e6"
+      ],
+      "parts": [
+        {
+          "name": "starcoder2-7b.tar.part-000",
+          "sha256": "02878de93aeeb9d9a89077d8f570ca3e3237cdaeb0e3656bc99d7b0bd7147037",
+          "size": 1992294400
+        },
+        {
+          "name": "starcoder2-7b.tar.part-001",
+          "sha256": "e14d16b8cfc2941fc423158073b254aa51ef36504adf43389cdbcc3a2c4f61eb",
+          "size": 1992294400
+        },
+        {
+          "name": "starcoder2-7b.tar.part-002",
+          "sha256": "4e531fd7def7c0b959d59a36a7da9ebcc0eb739a858485eb0f6be1c7e818f0a8",
+          "size": 58245120
+        }
+      ],
+      "total_size": 4042833920
+    }
+  ],
+  "generated_at": "2026-11-17T13:57:13.767920+00:00"
+}
+--- checksums ---
+02878de93aeeb9d9a89077d8f570ca3e3237cdaeb0e3656bc99d7b0bd7147037  starcoder2-7b.tar.part-000
+e14d16b8cfc2941fc423158073b254aa51ef36504adf43389cdbcc3a2c4f61eb  starcoder2-7b.tar.part-001
+4e531fd7def7c0b959d59a36a7da9ebcc0eb739a858485eb0f6be1c7e818f0a8  starcoder2-7b.tar.part-002
+ad8ca23fe6f225de1282380aa4352f14a7735d807eec1271afbf0904cf626dc6  deepseek-coder-6.7b.tar.part-000
+93c8b575d09e9bc80f3a54a0cce1ed03e92d292985b835bb21ff58bef9a48f06  deepseek-coder-6.7b.tar.part-001
+1f7ea18c062d1b40fb00bc77559cdde0e2c41b614f04705704f12bcb86c5e77f  qwen2.5-coder-7b.tar.part-000
+ecfccb75051b2551b8dea8a1dfd231992595ca5fba2e00025be678876d336e63  qwen2.5-coder-7b.tar.part-001
+28f808ccae476f2f32494f0581755f63cfa143098786ee0e57366c0286b171f2  qwen2.5-coder-7b.tar.part-002
+b10b0a6e293c48560e954ceb7e579fdedb7fc789d75b2174fb7dd878364f024a  qwen2.5-coder-3b.tar.part-000
+checksum entries match catalog
+[0m
+[0m$ [0mgh run view 44098147042 --repo promikailamin/llm_runner --log > .agent-work/logs/llm-release-source-run-44098147042.log 2>&1; grep -aE 'Restored|Tunnel ready|Tunnel address|Probe summary|ok: probe|model' .agent-work/logs/llm-release-source-run-44098147042.log | head -30
+Probe tunnel	Wait for tunnel details	2026-11-17T14:00:35.1786264Z Tunnel address: bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.5701665Z ok: probe 1 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:00:50.9059068Z ok: probe 2 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:01:06.2457933Z ok: probe 3 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:01:21.5717780Z ok: probe 4 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:01:35.5752346Z Probe summary: 4 succeeded, 0 failed
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5790086Z ^[[36;1m- Tunnel address: \`$address\`^[[0m
+Serve model	Set up job	﻿2026-11-17T13:58:50.1208546Z Current runner version: '2.338.2'
+Serve model	Set up job	2026-11-17T13:58:50.1237983Z ##[group]Runner Image Provisioner
+Serve model	Set up job	2026-11-17T13:58:50.1238960Z Hosted Compute Agent
+Serve model	Set up job	2026-11-17T13:58:50.1239559Z Version: 20261103.629
+Serve model	Set up job	2026-11-17T13:58:50.1240194Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+Serve model	Set up job	2026-11-17T13:58:50.1240883Z Build Date: 2026-11-03T17:26:59Z
+Serve model	Set up job	2026-11-17T13:58:50.1241567Z Worker ID: {3636f35f-b730-4008-871f-08951d148b81}
+Serve model	Set up job	2026-11-17T13:58:50.1242351Z Region: westus3
+Serve model	Set up job	2026-11-17T13:58:50.1242870Z Cloud: Azure
+Serve model	Set up job	2026-11-17T13:58:50.1243404Z ##[endgroup]
+Serve model	Set up job	2026-11-17T13:58:50.1244876Z ##[group]Operating System
+Serve model	Set up job	2026-11-17T13:58:50.1245509Z Ubuntu
+Serve model	Set up job	2026-11-17T13:58:50.1245992Z 26.04.1
+Serve model	Set up job	2026-11-17T13:58:50.1246454Z LTS
+Serve model	Set up job	2026-11-17T13:58:50.1246998Z ##[endgroup]
+Serve model	Set up job	2026-11-17T13:58:50.1247510Z ##[group]Runner Image
+Serve model	Set up job	2026-11-17T13:58:50.1248554Z Image: ubuntu-26.04
+Serve model	Set up job	2026-11-17T13:58:50.1249087Z Version: 20261111.196.1
+Serve model	Set up job	2026-11-17T13:58:50.1250048Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+Serve model	Set up job	2026-11-17T13:58:50.1251899Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+Serve model	Set up job	2026-11-17T13:58:50.1252789Z ##[endgroup]
+Serve model	Set up job	2026-11-17T13:58:50.1253860Z ##[group]GITHUB_TOKEN Permissions
+Serve model	Set up job	2026-11-17T13:58:50.1256246Z Actions: read
+[0m

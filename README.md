@@ -17,6 +17,11 @@ The model release workflow supports these Ollama models:
 | Qwen2.5-Coder 7B | `qwen2.5-coder:7b` |
 | Qwen2.5-Coder 3B | `qwen2.5-coder:3b` |
 
+The [`llm-models`](https://github.com/promikailamin/llm_runner/releases/tag/llm-models)
+release contains packaged assets for all four models. Assets are split below
+GitHub's 2 GiB per-file limit and `SHA256SUMS` covers every part. Re-run
+**Publish LLM models** to regenerate or update the release.
+
 ## Serve a model with a public tunnel
 
 Run **Actions > LLM over bore.pub > Run workflow**.

@@ -32,3 +32,23 @@ bound to `127.0.0.1`. Requests forwarded by bore use a `bore.pub` Host header an
 received HTTP 403. `scripts/install-ollama.sh` therefore binds the server to
 `0.0.0.0:11434`, which disables that loopback-only host check and allows the
 tunnel to work. Local health checks still use `127.0.0.1:11434`.
+
+## GitHub Actions end-to-end runs
+
+- `llm.yml` with `qwen2.5-coder:0.5b`, timeout 1 minute:
+  run 44094796185 completed. The client read the tunnel artifact and made
+  4/4 successful probes. Log: `llm-workflow-run-44094796185.log`.
+- `models-release.yml` with `qwen2.5-coder:3b`:
+  run 44095974252 completed and created release `llm-models`.
+  Log: `models-release-3b.log`, release: `release-3b.json`.
+- `models-release.yml` with all four requested models:
+  run 44096468234 completed in 9m33s. Release assets total 13.49 GiB:
+  - starcoder2-7b: 3 parts
+  - deepseek-coder-6.7b: 2 parts
+  - qwen2.5-coder-7b: 3 parts
+  - qwen2.5-coder-3b: 1 part
+  Log: `models-release-all.log`, release: `release-all.json`.
+- `llm.yml` with `model_source=release`, `qwen2.5-coder:3b`, timeout 1 minute:
+  run 44098147042 completed. The model was restored from release assets, the
+  tunnel was created, and the client made 4/4 successful probes.
+  Log: `llm-release-source-run-44098147042.log`.

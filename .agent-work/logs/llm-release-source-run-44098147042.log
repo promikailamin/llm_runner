@@ -1,0 +1,575 @@
+Probe tunnel	Set up job	﻿2026-11-17T13:58:49.5484101Z Current runner version: '2.338.2'
+Probe tunnel	Set up job	2026-11-17T13:58:49.5506438Z ##[group]Runner Image Provisioner
+Probe tunnel	Set up job	2026-11-17T13:58:49.5507249Z Hosted Compute Agent
+Probe tunnel	Set up job	2026-11-17T13:58:49.5507796Z Version: 20261103.629
+Probe tunnel	Set up job	2026-11-17T13:58:49.5508321Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+Probe tunnel	Set up job	2026-11-17T13:58:49.5508909Z Build Date: 2026-11-03T17:26:59Z
+Probe tunnel	Set up job	2026-11-17T13:58:49.5509522Z Worker ID: {30bd275a-5be0-4fde-be4c-0952edc3ba20}
+Probe tunnel	Set up job	2026-11-17T13:58:49.5510100Z Region: westus2
+Probe tunnel	Set up job	2026-11-17T13:58:49.5510600Z Cloud: Azure
+Probe tunnel	Set up job	2026-11-17T13:58:49.5511086Z ##[endgroup]
+Probe tunnel	Set up job	2026-11-17T13:58:49.5512143Z ##[group]Operating System
+Probe tunnel	Set up job	2026-11-17T13:58:49.5512717Z Ubuntu
+Probe tunnel	Set up job	2026-11-17T13:58:49.5513183Z 26.04.1
+Probe tunnel	Set up job	2026-11-17T13:58:49.5513893Z LTS
+Probe tunnel	Set up job	2026-11-17T13:58:49.5514336Z ##[endgroup]
+Probe tunnel	Set up job	2026-11-17T13:58:49.5514792Z ##[group]Runner Image
+Probe tunnel	Set up job	2026-11-17T13:58:49.5515321Z Image: ubuntu-26.04
+Probe tunnel	Set up job	2026-11-17T13:58:49.5515787Z Version: 20261111.196.1
+Probe tunnel	Set up job	2026-11-17T13:58:49.5516654Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+Probe tunnel	Set up job	2026-11-17T13:58:49.5518122Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+Probe tunnel	Set up job	2026-11-17T13:58:49.5518940Z ##[endgroup]
+Probe tunnel	Set up job	2026-11-17T13:58:49.5519941Z ##[group]GITHUB_TOKEN Permissions
+Probe tunnel	Set up job	2026-11-17T13:58:49.5521530Z Actions: read
+Probe tunnel	Set up job	2026-11-17T13:58:49.5522461Z Contents: read
+Probe tunnel	Set up job	2026-11-17T13:58:49.5522932Z Metadata: read
+Probe tunnel	Set up job	2026-11-17T13:58:49.5523541Z ##[endgroup]
+Probe tunnel	Set up job	2026-11-17T13:58:49.5525398Z Secret source: Actions
+Probe tunnel	Set up job	2026-11-17T13:58:49.5526143Z Cache mode: write
+Probe tunnel	Set up job	2026-11-17T13:58:49.5526785Z Prepare workflow directory
+Probe tunnel	Set up job	2026-11-17T13:58:49.5845432Z Prepare all required actions
+Probe tunnel	Set up job	2026-11-17T13:58:49.5886445Z Getting action download info
+Probe tunnel	Set up job	2026-11-17T13:58:49.9131657Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Probe tunnel	Set up job	2026-11-17T13:58:50.1148757Z Complete job name: Probe tunnel
+Probe tunnel	Checkout repository	﻿2026-11-17T13:58:50.2007713Z ##[group]Run actions/checkout@v4
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2008512Z with:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2008938Z   repository: promikailamin/llm_runner
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2012292Z   token: ***
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2012701Z   ssh-strict: true
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2013096Z   ssh-user: git
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2013638Z   persist-credentials: true
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2014078Z   clean: true
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2014478Z   sparse-checkout-cone-mode: true
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2014944Z   fetch-depth: 1
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2015327Z   fetch-tags: false
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2015719Z   show-progress: true
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2016122Z   lfs: false
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2016513Z   submodules: false
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2016922Z   set-safe-directory: true
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2017368Z   allow-unsafe-pr-checkout: false
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.2018022Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5296921Z Syncing repository: promikailamin/llm_runner
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5298759Z ##[group]Getting Git version info
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5299516Z Working directory is '/home/runner/work/llm_runner/llm_runner'
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5302743Z [command]/usr/bin/git version
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5436155Z git version 2.56.1
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5452432Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5464700Z Temporarily overriding HOME='/home/runner/work/_temp/9fdeaf6c-6cee-4801-a952-6f91c9d7d904' before making global git config changes
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5466901Z Adding repository directory to the temporary git global config as a safe directory
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5468783Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/llm_runner/llm_runner
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5525922Z Deleting the contents of '/home/runner/work/llm_runner/llm_runner'
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5528111Z ##[group]Initializing the repository
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5530379Z [command]/usr/bin/git init /home/runner/work/llm_runner/llm_runner
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5606379Z hint: Using 'master' as the name for the initial branch. This default branch name
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5608221Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5609824Z hint: to use in all of your new repositories, which will suppress this warning,
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5611246Z hint: call:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5611747Z hint:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5612464Z hint: 	git config --global init.defaultBranch <name>
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5613393Z hint:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5614404Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5615875Z hint: 'development'. The just-created branch can be renamed via this command:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5617044Z hint:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5617558Z hint: 	git branch -m <name>
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5618187Z hint:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5619132Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5628820Z Initialized empty Git repository in /home/runner/work/llm_runner/llm_runner/.git/
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5652856Z [command]/usr/bin/git remote add origin https://github.com/promikailamin/llm_runner
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5704241Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5705623Z ##[group]Disabling automatic garbage collection
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5709329Z [command]/usr/bin/git config --local gc.auto 0
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5744868Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5746117Z ##[group]Setting up auth
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5752114Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.5784984Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6204407Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6255739Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6536415Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6575779Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6817209Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6870817Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6871820Z ##[group]Fetching the repository
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.6878547Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b37239518dedd6246937b3a45e471d64562ef7ea:refs/remotes/origin/main
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.9676812Z From https://github.com/promikailamin/llm_runner
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.9678151Z  * [new ref]         b37239518dedd6246937b3a45e471d64562ef7ea -> origin/main
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.9681248Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.9682115Z ##[group]Determining the checkout info
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.9683185Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.9688533Z [command]/usr/bin/git sparse-checkout disable
+Probe tunnel	Checkout repository	2026-11-17T13:58:50.9980468Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Probe tunnel	Checkout repository	2026-11-17T13:58:51.0010357Z ##[group]Checking out the ref
+Probe tunnel	Checkout repository	2026-11-17T13:58:51.0013387Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Probe tunnel	Checkout repository	2026-11-17T13:58:51.0117887Z Switched to a new branch 'main'
+Probe tunnel	Checkout repository	2026-11-17T13:58:51.0121604Z branch 'main' set up to track 'origin/main'.
+Probe tunnel	Checkout repository	2026-11-17T13:58:51.0127423Z ##[endgroup]
+Probe tunnel	Checkout repository	2026-11-17T13:58:51.0166138Z [command]/usr/bin/git log -1 --format=%H
+Probe tunnel	Checkout repository	2026-11-17T13:58:51.0188752Z b37239518dedd6246937b3a45e471d64562ef7ea
+Probe tunnel	Validate timeout	﻿2026-11-17T13:58:51.0429682Z ##[group]Run set -euo pipefail
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0430477Z ^[[36;1mset -euo pipefail^[[0m
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0431071Z ^[[36;1mminutes="1"^[[0m
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0431823Z ^[[36;1mif [ "$minutes" -lt 1 ] || [ "$minutes" -gt 300 ]; then^[[0m
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0432900Z ^[[36;1m  echo "timeout_minutes must be between 1 and 300" >&2^[[0m
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0433888Z ^[[36;1m  exit 1^[[0m
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0434342Z ^[[36;1mfi^[[0m
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0487834Z shell: /usr/bin/bash -e {0}
+Probe tunnel	Validate timeout	2026-11-17T13:58:51.0488697Z ##[endgroup]
+Probe tunnel	Wait for tunnel details	﻿2026-11-17T13:58:51.0646567Z ##[group]Run set -euo pipefail
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0647252Z ^[[36;1mset -euo pipefail^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0647976Z ^[[36;1mmax_wait_seconds=$(( (TIMEOUT_MINUTES + 30) * 60 ))^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0648849Z ^[[36;1mbash scripts/wait-for-tunnel.sh \^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0649576Z ^[[36;1m  "promikailamin/llm_runner" \^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0650225Z ^[[36;1m  "44098147042" \^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0650766Z ^[[36;1m  "llm-tunnel-44098147042" \^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0651436Z ^[[36;1m  "$RUNNER_TEMP/llm-tunnel" \^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0652093Z ^[[36;1m  "$max_wait_seconds" \^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0652665Z ^[[36;1m  10^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0696930Z shell: /usr/bin/bash -e {0}
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0697497Z env:
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0704275Z   GH_TOKEN: ***
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0704734Z   TIMEOUT_MINUTES: 1
+Probe tunnel	Wait for tunnel details	2026-11-17T13:58:51.0705210Z ##[endgroup]
+Probe tunnel	Wait for tunnel details	2026-11-17T14:00:35.1786264Z Tunnel address: bore.pub:42012
+Probe tunnel	Wait for tunnel details	2026-11-17T14:00:35.1787302Z Model: qwen2.5-coder:3b
+Probe tunnel	Probe tunnel	﻿2026-11-17T14:00:35.1875190Z ##[group]Run bash scripts/probe-tunnel.sh \
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1875528Z ^[[36;1mbash scripts/probe-tunnel.sh \^[[0m
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1875785Z ^[[36;1m  "$TUNNEL_ADDRESS" \^[[0m
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1876018Z ^[[36;1m  "1" \^[[0m
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1876191Z ^[[36;1m  "15"^[[0m
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1922971Z shell: /usr/bin/bash -e {0}
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1923233Z env:
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1923741Z   TUNNEL_ADDRESS: bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1923977Z   TUNNEL_HOST: bore.pub
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1924190Z   TUNNEL_PORT: 42012
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1924452Z   TUNNEL_URL: http://bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1924707Z   TUNNEL_MODEL: qwen2.5-coder:3b
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.1924926Z ##[endgroup]
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.2075750Z Probing http://bore.pub:42012/api/tags for 1 minute(s)
+Probe tunnel	Probe tunnel	2026-11-17T14:00:35.5701665Z ok: probe 1 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:00:50.9059068Z ok: probe 2 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:01:06.2457933Z ok: probe 3 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:01:21.5717780Z ok: probe 4 via bore.pub:42012
+Probe tunnel	Probe tunnel	2026-11-17T14:01:35.5752346Z Probe summary: 4 succeeded, 0 failed
+Probe tunnel	Add client details to summary	﻿2026-11-17T14:01:35.5788665Z ##[group]Run set -euo pipefail
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5788958Z ^[[36;1mset -euo pipefail^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5789201Z ^[[36;1maddress="${TUNNEL_ADDRESS:-not available}"^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5789483Z ^[[36;1mcat >> "$GITHUB_STEP_SUMMARY" <<EOF^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5789729Z ^[[36;1m### Client^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5789907Z ^[[36;1m^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5790086Z ^[[36;1m- Tunnel address: \`$address\`^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5790353Z ^[[36;1m- Model: \`${TUNNEL_MODEL:-qwen2.5-coder:3b}\`^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5790661Z ^[[36;1m- Probe interval: 15 second(s)^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5790958Z ^[[36;1m- Probe duration: 1 minute(s)^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5791175Z ^[[36;1mEOF^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5835263Z shell: /usr/bin/bash -e {0}
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5835493Z env:
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5835679Z   TUNNEL_ADDRESS: bore.pub:42012
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5835924Z   TUNNEL_HOST: bore.pub
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5836133Z   TUNNEL_PORT: 42012
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5836352Z   TUNNEL_URL: http://bore.pub:42012
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5836647Z   TUNNEL_MODEL: qwen2.5-coder:3b
+Probe tunnel	Add client details to summary	2026-11-17T14:01:35.5836859Z ##[endgroup]
+Probe tunnel	Post Checkout repository	﻿2026-11-17T14:01:35.6017015Z Post job cleanup.
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.6709762Z [command]/usr/bin/git version
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.6745776Z git version 2.56.1
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.6774840Z Temporarily overriding HOME='/home/runner/work/_temp/844f22e9-ba06-4074-917c-29040f97013f' before making global git config changes
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.6775920Z Adding repository directory to the temporary git global config as a safe directory
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.6778474Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/llm_runner/llm_runner
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.6813740Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.6844187Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.7092989Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.7116249Z http.https://github.com/.extraheader
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.7125821Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.7162179Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.7444581Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Probe tunnel	Post Checkout repository	2026-11-17T14:01:35.7481291Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Probe tunnel	Complete job	﻿2026-11-17T14:01:35.7863168Z Cleaning up orphan processes
+Probe tunnel	Complete job	2026-11-17T14:01:35.8155106Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Serve model	Set up job	﻿2026-11-17T13:58:50.1208546Z Current runner version: '2.338.2'
+Serve model	Set up job	2026-11-17T13:58:50.1237983Z ##[group]Runner Image Provisioner
+Serve model	Set up job	2026-11-17T13:58:50.1238960Z Hosted Compute Agent
+Serve model	Set up job	2026-11-17T13:58:50.1239559Z Version: 20261103.629
+Serve model	Set up job	2026-11-17T13:58:50.1240194Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+Serve model	Set up job	2026-11-17T13:58:50.1240883Z Build Date: 2026-11-03T17:26:59Z
+Serve model	Set up job	2026-11-17T13:58:50.1241567Z Worker ID: {3636f35f-b730-4008-871f-08951d148b81}
+Serve model	Set up job	2026-11-17T13:58:50.1242351Z Region: westus3
+Serve model	Set up job	2026-11-17T13:58:50.1242870Z Cloud: Azure
+Serve model	Set up job	2026-11-17T13:58:50.1243404Z ##[endgroup]
+Serve model	Set up job	2026-11-17T13:58:50.1244876Z ##[group]Operating System
+Serve model	Set up job	2026-11-17T13:58:50.1245509Z Ubuntu
+Serve model	Set up job	2026-11-17T13:58:50.1245992Z 26.04.1
+Serve model	Set up job	2026-11-17T13:58:50.1246454Z LTS
+Serve model	Set up job	2026-11-17T13:58:50.1246998Z ##[endgroup]
+Serve model	Set up job	2026-11-17T13:58:50.1247510Z ##[group]Runner Image
+Serve model	Set up job	2026-11-17T13:58:50.1248554Z Image: ubuntu-26.04
+Serve model	Set up job	2026-11-17T13:58:50.1249087Z Version: 20261111.196.1
+Serve model	Set up job	2026-11-17T13:58:50.1250048Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+Serve model	Set up job	2026-11-17T13:58:50.1251899Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+Serve model	Set up job	2026-11-17T13:58:50.1252789Z ##[endgroup]
+Serve model	Set up job	2026-11-17T13:58:50.1253860Z ##[group]GITHUB_TOKEN Permissions
+Serve model	Set up job	2026-11-17T13:58:50.1256246Z Actions: read
+Serve model	Set up job	2026-11-17T13:58:50.1256883Z Contents: read
+Serve model	Set up job	2026-11-17T13:58:50.1257388Z Metadata: read
+Serve model	Set up job	2026-11-17T13:58:50.1257953Z ##[endgroup]
+Serve model	Set up job	2026-11-17T13:58:50.1260159Z Secret source: Actions
+Serve model	Set up job	2026-11-17T13:58:50.1261132Z Cache mode: write
+Serve model	Set up job	2026-11-17T13:58:50.1261932Z Prepare workflow directory
+Serve model	Set up job	2026-11-17T13:58:50.1646085Z Prepare all required actions
+Serve model	Set up job	2026-11-17T13:58:50.1698412Z Getting action download info
+Serve model	Set up job	2026-11-17T13:58:50.4679030Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Serve model	Set up job	2026-11-17T13:58:50.5545996Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Serve model	Set up job	2026-11-17T13:58:50.7170462Z Complete job name: Serve model
+Serve model	Checkout repository	﻿2026-11-17T13:58:50.8164779Z ##[group]Run actions/checkout@v4
+Serve model	Checkout repository	2026-11-17T13:58:50.8165599Z with:
+Serve model	Checkout repository	2026-11-17T13:58:50.8166017Z   repository: promikailamin/llm_runner
+Serve model	Checkout repository	2026-11-17T13:58:50.8169768Z   token: ***
+Serve model	Checkout repository	2026-11-17T13:58:50.8170160Z   ssh-strict: true
+Serve model	Checkout repository	2026-11-17T13:58:50.8170565Z   ssh-user: git
+Serve model	Checkout repository	2026-11-17T13:58:50.8170976Z   persist-credentials: true
+Serve model	Checkout repository	2026-11-17T13:58:50.8171411Z   clean: true
+Serve model	Checkout repository	2026-11-17T13:58:50.8172039Z   sparse-checkout-cone-mode: true
+Serve model	Checkout repository	2026-11-17T13:58:50.8172518Z   fetch-depth: 1
+Serve model	Checkout repository	2026-11-17T13:58:50.8172919Z   fetch-tags: false
+Serve model	Checkout repository	2026-11-17T13:58:50.8173327Z   show-progress: true
+Serve model	Checkout repository	2026-11-17T13:58:50.8173726Z   lfs: false
+Serve model	Checkout repository	2026-11-17T13:58:50.8174091Z   submodules: false
+Serve model	Checkout repository	2026-11-17T13:58:50.8174494Z   set-safe-directory: true
+Serve model	Checkout repository	2026-11-17T13:58:50.8174957Z   allow-unsafe-pr-checkout: false
+Serve model	Checkout repository	2026-11-17T13:58:50.8175704Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.0626602Z Syncing repository: promikailamin/llm_runner
+Serve model	Checkout repository	2026-11-17T13:58:51.0630383Z ##[group]Getting Git version info
+Serve model	Checkout repository	2026-11-17T13:58:51.0632202Z Working directory is '/home/runner/work/llm_runner/llm_runner'
+Serve model	Checkout repository	2026-11-17T13:58:51.0634786Z [command]/usr/bin/git version
+Serve model	Checkout repository	2026-11-17T13:58:51.0635911Z git version 2.56.1
+Serve model	Checkout repository	2026-11-17T13:58:51.0639460Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.0647633Z Temporarily overriding HOME='/home/runner/work/_temp/d9a7480c-e8c0-477b-9692-81d596463067' before making global git config changes
+Serve model	Checkout repository	2026-11-17T13:58:51.0651192Z Adding repository directory to the temporary git global config as a safe directory
+Serve model	Checkout repository	2026-11-17T13:58:51.0653559Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/llm_runner/llm_runner
+Serve model	Checkout repository	2026-11-17T13:58:51.0713468Z Deleting the contents of '/home/runner/work/llm_runner/llm_runner'
+Serve model	Checkout repository	2026-11-17T13:58:51.0715548Z ##[group]Initializing the repository
+Serve model	Checkout repository	2026-11-17T13:58:51.0723290Z [command]/usr/bin/git init /home/runner/work/llm_runner/llm_runner
+Serve model	Checkout repository	2026-11-17T13:58:51.0835315Z hint: Using 'master' as the name for the initial branch. This default branch name
+Serve model	Checkout repository	2026-11-17T13:58:51.0836986Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Serve model	Checkout repository	2026-11-17T13:58:51.0838669Z hint: to use in all of your new repositories, which will suppress this warning,
+Serve model	Checkout repository	2026-11-17T13:58:51.0839556Z hint: call:
+Serve model	Checkout repository	2026-11-17T13:58:51.0840225Z hint:
+Serve model	Checkout repository	2026-11-17T13:58:51.0841331Z hint: 	git config --global init.defaultBranch <name>
+Serve model	Checkout repository	2026-11-17T13:58:51.0842806Z hint:
+Serve model	Checkout repository	2026-11-17T13:58:51.0843926Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Serve model	Checkout repository	2026-11-17T13:58:51.0845077Z hint: 'development'. The just-created branch can be renamed via this command:
+Serve model	Checkout repository	2026-11-17T13:58:51.0845897Z hint:
+Serve model	Checkout repository	2026-11-17T13:58:51.0846375Z hint: 	git branch -m <name>
+Serve model	Checkout repository	2026-11-17T13:58:51.0847495Z hint:
+Serve model	Checkout repository	2026-11-17T13:58:51.0848884Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Serve model	Checkout repository	2026-11-17T13:58:51.0850565Z Initialized empty Git repository in /home/runner/work/llm_runner/llm_runner/.git/
+Serve model	Checkout repository	2026-11-17T13:58:51.0899868Z [command]/usr/bin/git remote add origin https://github.com/promikailamin/llm_runner
+Serve model	Checkout repository	2026-11-17T13:58:51.0934779Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.0936891Z ##[group]Disabling automatic garbage collection
+Serve model	Checkout repository	2026-11-17T13:58:51.0948255Z [command]/usr/bin/git config --local gc.auto 0
+Serve model	Checkout repository	2026-11-17T13:58:51.0988455Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.0990432Z ##[group]Setting up auth
+Serve model	Checkout repository	2026-11-17T13:58:51.1002016Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Serve model	Checkout repository	2026-11-17T13:58:51.1039371Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Serve model	Checkout repository	2026-11-17T13:58:51.1468444Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Serve model	Checkout repository	2026-11-17T13:58:51.1504534Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Serve model	Checkout repository	2026-11-17T13:58:51.1791574Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Serve model	Checkout repository	2026-11-17T13:58:51.1826931Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Serve model	Checkout repository	2026-11-17T13:58:51.2075206Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Serve model	Checkout repository	2026-11-17T13:58:51.2114990Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.2117317Z ##[group]Fetching the repository
+Serve model	Checkout repository	2026-11-17T13:58:51.2128490Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b37239518dedd6246937b3a45e471d64562ef7ea:refs/remotes/origin/main
+Serve model	Checkout repository	2026-11-17T13:58:51.6909722Z From https://github.com/promikailamin/llm_runner
+Serve model	Checkout repository	2026-11-17T13:58:51.6910920Z  * [new ref]         b37239518dedd6246937b3a45e471d64562ef7ea -> origin/main
+Serve model	Checkout repository	2026-11-17T13:58:51.6914978Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.6916392Z ##[group]Determining the checkout info
+Serve model	Checkout repository	2026-11-17T13:58:51.6918335Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.6927031Z [command]/usr/bin/git sparse-checkout disable
+Serve model	Checkout repository	2026-11-17T13:58:51.6978043Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Serve model	Checkout repository	2026-11-17T13:58:51.7011190Z ##[group]Checking out the ref
+Serve model	Checkout repository	2026-11-17T13:58:51.7017091Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Serve model	Checkout repository	2026-11-17T13:58:51.7100032Z Switched to a new branch 'main'
+Serve model	Checkout repository	2026-11-17T13:58:51.7105564Z branch 'main' set up to track 'origin/main'.
+Serve model	Checkout repository	2026-11-17T13:58:51.7159465Z ##[endgroup]
+Serve model	Checkout repository	2026-11-17T13:58:51.7163164Z [command]/usr/bin/git log -1 --format=%H
+Serve model	Checkout repository	2026-11-17T13:58:51.7192316Z b37239518dedd6246937b3a45e471d64562ef7ea
+Serve model	Validate timeout	﻿2026-11-17T13:58:51.7480004Z ##[group]Run set -euo pipefail
+Serve model	Validate timeout	2026-11-17T13:58:51.7480800Z ^[[36;1mset -euo pipefail^[[0m
+Serve model	Validate timeout	2026-11-17T13:58:51.7481349Z ^[[36;1mminutes="1"^[[0m
+Serve model	Validate timeout	2026-11-17T13:58:51.7482310Z ^[[36;1mif [ "$minutes" -lt 1 ] || [ "$minutes" -gt 300 ]; then^[[0m
+Serve model	Validate timeout	2026-11-17T13:58:51.7483146Z ^[[36;1m  echo "timeout_minutes must be between 1 and 300" >&2^[[0m
+Serve model	Validate timeout	2026-11-17T13:58:51.7484126Z ^[[36;1m  exit 1^[[0m
+Serve model	Validate timeout	2026-11-17T13:58:51.7484600Z ^[[36;1mfi^[[0m
+Serve model	Validate timeout	2026-11-17T13:58:51.7523409Z shell: /usr/bin/bash -e {0}
+Serve model	Validate timeout	2026-11-17T13:58:51.7524116Z ##[endgroup]
+Serve model	Resolve model	﻿2026-11-17T13:58:51.7679121Z ##[group]Run bash scripts/resolve-model.sh
+Serve model	Resolve model	2026-11-17T13:58:51.7679946Z ^[[36;1mbash scripts/resolve-model.sh^[[0m
+Serve model	Resolve model	2026-11-17T13:58:51.7713127Z shell: /usr/bin/bash -e {0}
+Serve model	Resolve model	2026-11-17T13:58:51.7713729Z env:
+Serve model	Resolve model	2026-11-17T13:58:51.7714202Z   INPUT_MODEL: qwen2.5-coder:3b
+Serve model	Resolve model	2026-11-17T13:58:51.7714757Z   INPUT_CUSTOM_MODEL: 
+Serve model	Resolve model	2026-11-17T13:58:51.7715255Z ##[endgroup]
+Serve model	Resolve model	2026-11-17T13:58:51.7817683Z qwen2.5-coder:3b
+Serve model	Install and start Ollama	﻿2026-11-17T13:58:51.7892986Z ##[group]Run bash scripts/install-ollama.sh
+Serve model	Install and start Ollama	2026-11-17T13:58:51.7893743Z ^[[36;1mbash scripts/install-ollama.sh^[[0m
+Serve model	Install and start Ollama	2026-11-17T13:58:51.7927537Z shell: /usr/bin/bash -e {0}
+Serve model	Install and start Ollama	2026-11-17T13:58:51.7928156Z env:
+Serve model	Install and start Ollama	2026-11-17T13:58:51.7928618Z   MODEL: qwen2.5-coder:3b
+Serve model	Install and start Ollama	2026-11-17T13:58:51.7929153Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Install and start Ollama	2026-11-17T13:58:51.7929685Z ##[endgroup]
+Serve model	Install and start Ollama	2026-11-17T13:58:52.3010953Z >>> Installing ollama to /usr/local
+Serve model	Install and start Ollama	2026-11-17T13:58:52.6511292Z >>> Downloading ollama-linux-amd64.tar.zst
+Serve model	Install and start Ollama	2026-11-17T13:58:52.7882977Z 
+Serve model	Install and start Ollama	2026-11-17T13:58:52.8937601Z #=#=#                                                                          
+Serve model	Install and start Ollama	2026-11-17T13:58:52.9964507Z ##O#-#                                                                         
+Serve model	Install and start Ollama	2026-11-17T13:58:53.0976896Z ##O=#  #                                                                       
+Serve model	Install and start Ollama	2026-11-17T13:58:53.1971560Z                                                                            0.3%
+Serve model	Install and start Ollama	2026-11-17T13:58:53.3022499Z                                                                            1.3%
+Serve model	Install and start Ollama	2026-11-17T13:58:53.4012044Z ##                                                                         3.4%
+Serve model	Install and start Ollama	2026-11-17T13:58:53.5014832Z ####                                                                       6.9%
+Serve model	Install and start Ollama	2026-11-17T13:58:53.6014701Z #######                                                                   10.5%
+Serve model	Install and start Ollama	2026-11-17T13:58:53.7016973Z ##########                                                                14.1%
+Serve model	Install and start Ollama	2026-11-17T13:58:53.8018463Z ###########                                                               15.9%
+Serve model	Install and start Ollama	2026-11-17T13:58:53.9024231Z ##############                                                            19.8%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.0023558Z #################                                                         24.1%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.1028344Z ###################                                                       26.8%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.2035142Z ####################                                                      28.6%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.3054772Z #####################                                                     30.4%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.4072154Z ######################                                                    30.8%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.5074235Z #######################                                                   32.1%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.6083621Z #######################                                                   32.9%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.7080245Z #########################                                                 35.0%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.8083378Z ##########################                                                37.2%
+Serve model	Install and start Ollama	2026-11-17T13:58:54.9088834Z ############################                                              39.0%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.0091425Z ############################                                              40.1%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.1091132Z #############################                                             41.3%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.2091477Z ###############################                                           43.2%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.3087639Z #################################                                         46.4%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.4085350Z ###################################                                       49.6%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.5086607Z ####################################                                      51.3%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.6095122Z #######################################                                   55.3%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.7092937Z ########################################                                  56.8%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.8101088Z #########################################                                 57.7%
+Serve model	Install and start Ollama	2026-11-17T13:58:55.9106146Z ##########################################                                58.5%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.0104885Z ##########################################                                59.2%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.1105912Z ###########################################                               60.5%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.2107776Z #############################################                             63.4%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.3098105Z ################################################                          67.7%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.4103868Z ###################################################                       71.1%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.5100386Z #####################################################                     74.0%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.6102284Z ######################################################                    75.4%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.7105196Z ########################################################                  79.2%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.8104474Z ###########################################################               82.0%
+Serve model	Install and start Ollama	2026-11-17T13:58:56.9288531Z #############################################################             85.5%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.0289336Z ###############################################################           88.2%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.1295355Z #################################################################         91.2%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.2290534Z ###################################################################       94.3%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.3284239Z ######################################################################    97.3%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.4293546Z ######################################################################    98.2%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.5290086Z #######################################################################   99.0%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.5749450Z #######################################################################   99.7%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.5750745Z ######################################################################## 100.0%
+Serve model	Install and start Ollama	2026-11-17T13:58:57.5998795Z >>> Creating ollama user...
+Serve model	Install and start Ollama	2026-11-17T13:59:18.9063093Z >>> Adding ollama user to render group...
+Serve model	Install and start Ollama	2026-11-17T13:59:18.9308358Z >>> Adding ollama user to video group...
+Serve model	Install and start Ollama	2026-11-17T13:59:18.9430014Z >>> Adding current user to ollama group...
+Serve model	Install and start Ollama	2026-11-17T13:59:18.9580288Z >>> Creating ollama systemd service...
+Serve model	Install and start Ollama	2026-11-17T13:59:18.9688712Z >>> Enabling and starting ollama service...
+Serve model	Install and start Ollama	2026-11-17T13:59:19.2465533Z Created symlink '/etc/systemd/system/default.target.wants/ollama.service' → '/etc/systemd/system/ollama.service'.
+Serve model	Install and start Ollama	2026-11-17T13:59:21.4221174Z >>> The Ollama API is now available at 127.0.0.1:11434.
+Serve model	Install and start Ollama	2026-11-17T13:59:21.4222234Z WARNING: No NVIDIA/AMD GPU detected. Ollama will run in CPU-only mode.
+Serve model	Install and start Ollama	2026-11-17T13:59:21.4223332Z >>> Install complete. Run "ollama" from the command line.
+Serve model	Install and start Ollama	2026-11-17T13:59:22.7695055Z Ollama is ready (pid 2738, models in /home/runner/.ollama/models)
+Serve model	Restore model from release	﻿2026-11-17T13:59:22.7764525Z ##[group]Run bash scripts/restore-release-model.sh \
+Serve model	Restore model from release	2026-11-17T13:59:22.7764970Z ^[[36;1mbash scripts/restore-release-model.sh \^[[0m
+Serve model	Restore model from release	2026-11-17T13:59:22.7765274Z ^[[36;1m  "$MODEL_SAFE" \^[[0m
+Serve model	Restore model from release	2026-11-17T13:59:22.7765513Z ^[[36;1m  "llm-models" \^[[0m
+Serve model	Restore model from release	2026-11-17T13:59:22.7765762Z ^[[36;1m  "promikailamin/llm_runner" \^[[0m
+Serve model	Restore model from release	2026-11-17T13:59:22.7766031Z ^[[36;1m  "$OLLAMA_MODELS"^[[0m
+Serve model	Restore model from release	2026-11-17T13:59:22.7801869Z shell: /usr/bin/bash -e {0}
+Serve model	Restore model from release	2026-11-17T13:59:22.7802158Z env:
+Serve model	Restore model from release	2026-11-17T13:59:22.7802375Z   MODEL: qwen2.5-coder:3b
+Serve model	Restore model from release	2026-11-17T13:59:22.7802618Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Restore model from release	2026-11-17T13:59:22.7802885Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Restore model from release	2026-11-17T13:59:22.7803163Z   OLLAMA_PID: 2738
+Serve model	Restore model from release	2026-11-17T13:59:22.7803599Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Restore model from release	2026-11-17T13:59:22.7806410Z   GH_TOKEN: ***
+Serve model	Restore model from release	2026-11-17T13:59:22.7806625Z ##[endgroup]
+Serve model	Restore model from release	2026-11-17T14:00:20.4680119Z qwen2.5-coder-3b.tar.part-000: OK
+Serve model	Restore model from release	2026-11-17T14:00:22.0745667Z Restored qwen2.5-coder-3b from release llm-models into /home/runner/.ollama/models
+Serve model	Verify model	﻿2026-11-17T14:00:22.3998362Z ##[group]Run set -euo pipefail
+Serve model	Verify model	2026-11-17T14:00:22.3998871Z ^[[36;1mset -euo pipefail^[[0m
+Serve model	Verify model	2026-11-17T14:00:22.3999346Z ^[[36;1mOLLAMA_HOST=http://127.0.0.1:11434 ollama list^[[0m
+Serve model	Verify model	2026-11-17T14:00:22.4000080Z ^[[36;1mOLLAMA_HOST=http://127.0.0.1:11434 ollama show "$MODEL" | head -40^[[0m
+Serve model	Verify model	2026-11-17T14:00:22.4036284Z shell: /usr/bin/bash -e {0}
+Serve model	Verify model	2026-11-17T14:00:22.4036582Z env:
+Serve model	Verify model	2026-11-17T14:00:22.4036790Z   MODEL: qwen2.5-coder:3b
+Serve model	Verify model	2026-11-17T14:00:22.4037031Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Verify model	2026-11-17T14:00:22.4037298Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Verify model	2026-11-17T14:00:22.4037580Z   OLLAMA_PID: 2738
+Serve model	Verify model	2026-11-17T14:00:22.4037821Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Verify model	2026-11-17T14:00:22.4038112Z ##[endgroup]
+Serve model	Verify model	2026-11-17T14:00:22.9040538Z NAME                ID              SIZE      MODIFIED      
+Serve model	Verify model	2026-11-17T14:00:22.9061207Z qwen2.5-coder:3b    ce40a49b0aa2    1.9 GB    3 minutes ago    
+Serve model	Verify model	2026-11-17T14:00:22.9613352Z   Model
+Serve model	Verify model	2026-11-17T14:00:22.9613988Z     architecture        qwen2          
+Serve model	Verify model	2026-11-17T14:00:22.9614531Z     parameters          3.1B           
+Serve model	Verify model	2026-11-17T14:00:22.9615463Z     context length      32768          
+Serve model	Verify model	2026-11-17T14:00:22.9616015Z     embedding length    2048           
+Serve model	Verify model	2026-11-17T14:00:22.9616391Z     quantization        Q4_K_M         
+Serve model	Verify model	2026-11-17T14:00:22.9616775Z     template source     go_template    
+Serve model	Verify model	2026-11-17T14:00:22.9617033Z 
+Serve model	Verify model	2026-11-17T14:00:22.9617200Z   Capabilities
+Serve model	Verify model	2026-11-17T14:00:22.9617418Z     completion    
+Serve model	Verify model	2026-11-17T14:00:22.9617622Z     tools         
+Serve model	Verify model	2026-11-17T14:00:22.9617820Z     insert        
+Serve model	Verify model	2026-11-17T14:00:22.9617943Z 
+Serve model	Verify model	2026-11-17T14:00:22.9618017Z   System
+Serve model	Verify model	2026-11-17T14:00:22.9618350Z     You are Qwen, created by Alibaba Cloud. You are a helpful assistant.    
+Serve model	Verify model	2026-11-17T14:00:22.9618664Z 
+Serve model	Verify model	2026-11-17T14:00:22.9618750Z   License
+Serve model	Verify model	2026-11-17T14:00:22.9619022Z     Qwen RESEARCH LICENSE AGREEMENT                                     
+Serve model	Verify model	2026-11-17T14:00:22.9619446Z     Qwen RESEARCH LICENSE AGREEMENT Release Date: September 19, 2024    
+Serve model	Verify model	2026-11-17T14:00:22.9619824Z     ...                                                                 
+Serve model	Verify model	2026-11-17T14:00:22.9620045Z 
+Serve model	Warm up model	﻿2026-11-17T14:00:23.0449874Z ##[group]Run set -euo pipefail
+Serve model	Warm up model	2026-11-17T14:00:23.0450249Z ^[[36;1mset -euo pipefail^[[0m
+Serve model	Warm up model	2026-11-17T14:00:23.0450533Z ^[[36;1mpayload="$(jq -n --arg model "$MODEL" \^[[0m
+Serve model	Warm up model	2026-11-17T14:00:23.0451010Z ^[[36;1m  '{model: $model, prompt: "Reply with OK.", stream: false, options: {num_predict: 4}}')"^[[0m
+Serve model	Warm up model	2026-11-17T14:00:23.0451436Z ^[[36;1mcurl -fsS --max-time 900 \^[[0m
+Serve model	Warm up model	2026-11-17T14:00:23.0451868Z ^[[36;1m  -H 'Content-Type: application/json' \^[[0m
+Serve model	Warm up model	2026-11-17T14:00:23.0452170Z ^[[36;1m  -d "$payload" \^[[0m
+Serve model	Warm up model	2026-11-17T14:00:23.0452539Z ^[[36;1m  http://127.0.0.1:11434/api/generate | jq -r '.response // empty'^[[0m
+Serve model	Warm up model	2026-11-17T14:00:23.0485915Z shell: /usr/bin/bash -e {0}
+Serve model	Warm up model	2026-11-17T14:00:23.0486206Z env:
+Serve model	Warm up model	2026-11-17T14:00:23.0486416Z   MODEL: qwen2.5-coder:3b
+Serve model	Warm up model	2026-11-17T14:00:23.0486655Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Warm up model	2026-11-17T14:00:23.0486925Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Warm up model	2026-11-17T14:00:23.0487207Z   OLLAMA_PID: 2738
+Serve model	Warm up model	2026-11-17T14:00:23.0487437Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Warm up model	2026-11-17T14:00:23.0487764Z ##[endgroup]
+Serve model	Warm up model	2026-11-17T14:00:27.2673163Z OK.
+Serve model	Install bore	﻿2026-11-17T14:00:27.2711858Z ##[group]Run bash scripts/install-bore.sh
+Serve model	Install bore	2026-11-17T14:00:27.2712269Z ^[[36;1mbash scripts/install-bore.sh^[[0m
+Serve model	Install bore	2026-11-17T14:00:27.2744466Z shell: /usr/bin/bash -e {0}
+Serve model	Install bore	2026-11-17T14:00:27.2744743Z env:
+Serve model	Install bore	2026-11-17T14:00:27.2744961Z   MODEL: qwen2.5-coder:3b
+Serve model	Install bore	2026-11-17T14:00:27.2745206Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Install bore	2026-11-17T14:00:27.2745472Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Install bore	2026-11-17T14:00:27.2745754Z   OLLAMA_PID: 2738
+Serve model	Install bore	2026-11-17T14:00:27.2746195Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Install bore	2026-11-17T14:00:27.2746455Z ##[endgroup]
+Serve model	Install bore	2026-11-17T14:00:27.5242983Z /home/runner/work/_temp/bore-v0.6.0-x86_64-unknown-linux-musl.tar.gz: OK
+Serve model	Install bore	2026-11-17T14:00:27.5460123Z bore-cli 0.6.0
+Serve model	Start bore tunnel	﻿2026-11-17T14:00:27.5590514Z ##[group]Run mkdir -p "$RUNNER_TEMP/llm-tunnel"
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5591001Z ^[[36;1mmkdir -p "$RUNNER_TEMP/llm-tunnel"^[[0m
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5591302Z ^[[36;1mbash scripts/start-tunnel.sh \^[[0m
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5591560Z ^[[36;1m  11434 \^[[0m
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5592030Z ^[[36;1m  "$RUNNER_TEMP/llm-tunnel/tunnel.json" \^[[0m
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5592317Z ^[[36;1m  "$MODEL" \^[[0m
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5592522Z ^[[36;1m  "1"^[[0m
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5625322Z shell: /usr/bin/bash -e {0}
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5625605Z env:
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5625806Z   MODEL: qwen2.5-coder:3b
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5626047Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5626309Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5626588Z   OLLAMA_PID: 2738
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5626863Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5627142Z   BORE_BIN: /home/runner/work/_temp/bore/bore
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5627417Z   GITHUB_RUN_ID: 44098147042
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5627651Z   GITHUB_RUN_ATTEMPT: 1
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5627968Z   GITHUB_REPOSITORY: promikailamin/llm_runner
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5628258Z   GITHUB_SERVER_URL: https://github.com
+Serve model	Start bore tunnel	2026-11-17T14:00:27.5628521Z ##[endgroup]
+Serve model	Start bore tunnel	2026-11-17T14:00:28.6150161Z Tunnel ready at bore.pub:42012 (local port 11434, pid 2891)
+Serve model	Publish tunnel details	﻿2026-11-17T14:00:28.6223819Z ##[group]Run actions/upload-artifact@v4
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6224137Z with:
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6224350Z   name: llm-tunnel-44098147042
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6224640Z   path: /home/runner/work/_temp/llm-tunnel/tunnel.json
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6224946Z   if-no-files-found: error
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6225168Z   retention-days: 1
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6225375Z   compression-level: 6
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6225584Z   overwrite: false
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6225792Z   include-hidden-files: false
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6226043Z env:
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6226229Z   MODEL: qwen2.5-coder:3b
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6226456Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6226718Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6226984Z   OLLAMA_PID: 2738
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6227211Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6229622Z   BORE_BIN: /home/runner/work/_temp/bore/bore
+Serve model	Publish tunnel details	2026-11-17T14:00:28.6229901Z ##[endgroup]
+Serve model	Publish tunnel details	2026-11-17T14:00:28.7945960Z (node:2907) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Serve model	Publish tunnel details	2026-11-17T14:00:28.7947329Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Serve model	Publish tunnel details	2026-11-17T14:00:28.7994160Z With the provided path, there will be 1 file uploaded
+Serve model	Publish tunnel details	2026-11-17T14:00:28.8002045Z Artifact name is valid!
+Serve model	Publish tunnel details	2026-11-17T14:00:28.8004290Z Root directory input is valid!
+Serve model	Publish tunnel details	2026-11-17T14:00:29.1546515Z Beginning upload of artifact content to blob storage
+Serve model	Publish tunnel details	2026-11-17T14:00:29.1743484Z (node:2907) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Serve model	Publish tunnel details	2026-11-17T14:00:29.4663317Z Uploaded bytes 378
+Serve model	Publish tunnel details	2026-11-17T14:00:29.5323414Z Finished uploading artifact content to blob storage!
+Serve model	Publish tunnel details	2026-11-17T14:00:29.5324255Z SHA256 digest of uploaded artifact zip is aa287bd361d363678faf60d5050ca170b099d1dcb615200dfd06b392c9f79f2b
+Serve model	Publish tunnel details	2026-11-17T14:00:29.5325693Z Finalizing artifact upload
+Serve model	Publish tunnel details	2026-11-17T14:00:29.9703375Z Artifact llm-tunnel-44098147042.zip successfully finalized. Artifact ID 14334558288
+Serve model	Publish tunnel details	2026-11-17T14:00:29.9704488Z Artifact llm-tunnel-44098147042 has been successfully uploaded! Final size is 378 bytes. Artifact ID is 14334558288
+Serve model	Publish tunnel details	2026-11-17T14:00:29.9705759Z Artifact download URL: https://github.com/promikailamin/llm_runner/actions/runs/44098147042/artifacts/14334558288
+Serve model	Add connection details to summary	﻿2026-11-17T14:00:29.9851433Z ##[group]Run set -euo pipefail
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9852520Z ^[[36;1mset -euo pipefail^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9852936Z ^[[36;1maddress="bore.pub:42012"^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9853414Z ^[[36;1mcat >> "$GITHUB_STEP_SUMMARY" <<EOF^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9853875Z ^[[36;1m### LLM tunnel^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9854224Z ^[[36;1m^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9854541Z ^[[36;1m- Model: \`$MODEL\`^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9854948Z ^[[36;1m- Address: \`$address\`^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9855400Z ^[[36;1m- API base URL: \`http://$address\`^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9855847Z ^[[36;1m- Local Ollama port: \`11434\`^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9856296Z ^[[36;1m- Keep-alive: 1 minute(s)^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9856788Z ^[[36;1m- Tunnel artifact: \`llm-tunnel-44098147042\`^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9857262Z ^[[36;1mEOF^[[0m
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9907041Z shell: /usr/bin/bash -e {0}
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9907517Z env:
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9907864Z   MODEL: qwen2.5-coder:3b
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9908312Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9908833Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9909328Z   OLLAMA_PID: 2738
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9909731Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9910239Z   BORE_BIN: /home/runner/work/_temp/bore/bore
+Serve model	Add connection details to summary	2026-11-17T14:00:29.9910731Z ##[endgroup]
+Serve model	Keep model and tunnel online	﻿2026-11-17T14:00:30.0057795Z ##[group]Run bore_pid="$(cat "$RUNNER_TEMP/llm-tunnel/bore.pid")"
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0058268Z ^[[36;1mbore_pid="$(cat "$RUNNER_TEMP/llm-tunnel/bore.pid")"^[[0m
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0058690Z ^[[36;1mbash scripts/keep-alive.sh "1" "$OLLAMA_PID" "$bore_pid"^[[0m
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0089890Z shell: /usr/bin/bash -e {0}
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0090169Z env:
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0090377Z   MODEL: qwen2.5-coder:3b
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0090630Z   MODEL_SAFE: qwen2.5-coder-3b
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0090913Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0091199Z   OLLAMA_PID: 2738
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0091448Z   OLLAMA_HOST: http://127.0.0.1:11434
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0091816Z   BORE_BIN: /home/runner/work/_temp/bore/bore
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0092107Z ##[endgroup]
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0185968Z Keeping the LLM service alive for 1 minute(s)
+Serve model	Keep model and tunnel online	2026-11-17T14:00:30.0257194Z alive: 60s remaining
+Serve model	Keep model and tunnel online	2026-11-17T14:01:00.0371251Z alive: 30s remaining
+Serve model	Keep model and tunnel online	2026-11-17T14:01:30.0407633Z Keep-alive window finished
+Serve model	Post Checkout repository	﻿2026-11-17T14:01:30.0549474Z Post job cleanup.
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1462934Z [command]/usr/bin/git version
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1494252Z git version 2.56.1
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1532651Z Temporarily overriding HOME='/home/runner/work/_temp/54004031-da71-4c4b-b074-96403c983044' before making global git config changes
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1534081Z Adding repository directory to the temporary git global config as a safe directory
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1539813Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/llm_runner/llm_runner
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1578495Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1611003Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1892312Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1917573Z http.https://github.com/.extraheader
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1930071Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Serve model	Post Checkout repository	2026-11-17T14:01:30.1963117Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Serve model	Post Checkout repository	2026-11-17T14:01:30.2239428Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Serve model	Post Checkout repository	2026-11-17T14:01:30.2274148Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Serve model	Complete job	﻿2026-11-17T14:01:30.2697208Z Evaluate and set job outputs
+Serve model	Complete job	2026-11-17T14:01:30.2704934Z Set output 'address'
+Serve model	Complete job	2026-11-17T14:01:30.2707078Z Set output 'host'
+Serve model	Complete job	2026-11-17T14:01:30.2707917Z Set output 'port'
+Serve model	Complete job	2026-11-17T14:01:30.2708230Z Set output 'model'
+Serve model	Complete job	2026-11-17T14:01:30.2708892Z Cleaning up orphan processes
+Serve model	Complete job	2026-11-17T14:01:30.2983902Z Terminate orphan process: pid (2738) (ollama)
+Serve model	Complete job	2026-11-17T14:01:30.3006208Z Terminate orphan process: pid (2857) (llama-server)
+Serve model	Complete job	2026-11-17T14:01:30.3059760Z Terminate orphan process: pid (2891) (bore)
+Serve model	Complete job	2026-11-17T14:01:30.3144056Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,681 @@
+Package and publish models	Set up job	﻿2026-11-17T13:45:50.7398531Z Current runner version: '2.338.2'
+Package and publish models	Set up job	2026-11-17T13:45:50.7424811Z ##[group]Runner Image Provisioner
+Package and publish models	Set up job	2026-11-17T13:45:50.7426072Z Hosted Compute Agent
+Package and publish models	Set up job	2026-11-17T13:45:50.7426779Z Version: 20261103.629
+Package and publish models	Set up job	2026-11-17T13:45:50.7427404Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+Package and publish models	Set up job	2026-11-17T13:45:50.7428135Z Build Date: 2026-11-03T17:26:59Z
+Package and publish models	Set up job	2026-11-17T13:45:50.7428741Z Worker ID: {1e1cfa59-60c8-4e99-9353-d0ba06f84724}
+Package and publish models	Set up job	2026-11-17T13:45:50.7429363Z Region: eastus2
+Package and publish models	Set up job	2026-11-17T13:45:50.7429826Z Cloud: Azure
+Package and publish models	Set up job	2026-11-17T13:45:50.7430278Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7431497Z ##[group]Operating System
+Package and publish models	Set up job	2026-11-17T13:45:50.7432040Z Ubuntu
+Package and publish models	Set up job	2026-11-17T13:45:50.7432513Z 26.04.1
+Package and publish models	Set up job	2026-11-17T13:45:50.7432945Z LTS
+Package and publish models	Set up job	2026-11-17T13:45:50.7433367Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7433893Z ##[group]Runner Image
+Package and publish models	Set up job	2026-11-17T13:45:50.7434423Z Image: ubuntu-26.04
+Package and publish models	Set up job	2026-11-17T13:45:50.7435266Z Version: 20261111.196.1
+Package and publish models	Set up job	2026-11-17T13:45:50.7436443Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261111.196/images/ubuntu/Ubuntu2604-Readme.md
+Package and publish models	Set up job	2026-11-17T13:45:50.7437910Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261111.196
+Package and publish models	Set up job	2026-11-17T13:45:50.7438701Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7439697Z ##[group]GITHUB_TOKEN Permissions
+Package and publish models	Set up job	2026-11-17T13:45:50.7441480Z Actions: read
+Package and publish models	Set up job	2026-11-17T13:45:50.7442028Z Contents: write
+Package and publish models	Set up job	2026-11-17T13:45:50.7442542Z Metadata: read
+Package and publish models	Set up job	2026-11-17T13:45:50.7443000Z ##[endgroup]
+Package and publish models	Set up job	2026-11-17T13:45:50.7444716Z Secret source: Actions
+Package and publish models	Set up job	2026-11-17T13:45:50.7445727Z Cache mode: write
+Package and publish models	Set up job	2026-11-17T13:45:50.7446613Z Prepare workflow directory
+Package and publish models	Set up job	2026-11-17T13:45:50.7867195Z Prepare all required actions
+Package and publish models	Set up job	2026-11-17T13:45:50.7907967Z Getting action download info
+Package and publish models	Set up job	2026-11-17T13:45:50.9952827Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Package and publish models	Set up job	2026-11-17T13:45:51.1969903Z Complete job name: Package and publish models
+Package and publish models	Checkout repository	﻿2026-11-17T13:45:51.3698268Z ##[group]Run actions/checkout@v4
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3700252Z with:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3700683Z   repository: promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3704156Z   token: ***
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3704516Z   ssh-strict: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3704988Z   ssh-user: git
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3705349Z   persist-credentials: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3705938Z   clean: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3706413Z   sparse-checkout-cone-mode: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3706908Z   fetch-depth: 1
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3707398Z   fetch-tags: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3707887Z   show-progress: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3708379Z   lfs: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3708881Z   submodules: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3709378Z   set-safe-directory: true
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3709801Z   allow-unsafe-pr-checkout: false
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3710714Z env:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3713867Z   GH_TOKEN: ***
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3714268Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3714719Z   RELEASE_TAG: llm-models
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3715095Z   CHUNK_SIZE: 1900M
+Package and publish models	Checkout repository	2026-11-17T13:45:51.3715663Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6438388Z Syncing repository: promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6441208Z ##[group]Getting Git version info
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6442370Z Working directory is '/home/runner/work/llm_runner/llm_runner'
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6444036Z [command]/usr/bin/git version
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6444943Z git version 2.56.1
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6456820Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6462456Z Temporarily overriding HOME='/home/runner/work/_temp/39bdbcc8-8f74-48e8-81c5-d9e6478b1ad5' before making global git config changes
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6464649Z Adding repository directory to the temporary git global config as a safe directory
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6467466Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/llm_runner/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6530015Z Deleting the contents of '/home/runner/work/llm_runner/llm_runner'
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6534648Z ##[group]Initializing the repository
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6538792Z [command]/usr/bin/git init /home/runner/work/llm_runner/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6650725Z hint: Using 'master' as the name for the initial branch. This default branch name
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6652097Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6652968Z hint: to use in all of your new repositories, which will suppress this warning,
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6653655Z hint: call:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6654013Z hint:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6654591Z hint: 	git config --global init.defaultBranch <name>
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6655160Z hint:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6655877Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6656691Z hint: 'development'. The just-created branch can be renamed via this command:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6657625Z hint:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6658193Z hint: 	git branch -m <name>
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6658838Z hint:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6659703Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6661188Z Initialized empty Git repository in /home/runner/work/llm_runner/llm_runner/.git/
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6671824Z [command]/usr/bin/git remote add origin https://github.com/promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6720821Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6721546Z ##[group]Disabling automatic garbage collection
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6724337Z [command]/usr/bin/git config --local gc.auto 0
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6754696Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6755640Z ##[group]Setting up auth
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6761374Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Package and publish models	Checkout repository	2026-11-17T13:45:51.6791033Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7227956Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7257652Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7505955Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7540858Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7793413Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7831435Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7832856Z ##[group]Fetching the repository
+Package and publish models	Checkout repository	2026-11-17T13:45:51.7841763Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b37239518dedd6246937b3a45e471d64562ef7ea:refs/remotes/origin/main
+Package and publish models	Checkout repository	2026-11-17T13:45:51.9959639Z From https://github.com/promikailamin/llm_runner
+Package and publish models	Checkout repository	2026-11-17T13:45:51.9960833Z  * [new ref]         b37239518dedd6246937b3a45e471d64562ef7ea -> origin/main
+Package and publish models	Checkout repository	2026-11-17T13:45:51.9964008Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.9964940Z ##[group]Determining the checkout info
+Package and publish models	Checkout repository	2026-11-17T13:45:51.9966856Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:51.9973031Z [command]/usr/bin/git sparse-checkout disable
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0018960Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0045077Z ##[group]Checking out the ref
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0054848Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0132551Z Switched to a new branch 'main'
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0137970Z branch 'main' set up to track 'origin/main'.
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0142800Z ##[endgroup]
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0180698Z [command]/usr/bin/git log -1 --format=%H
+Package and publish models	Checkout repository	2026-11-17T13:45:52.0201710Z b37239518dedd6246937b3a45e471d64562ef7ea
+Package and publish models	Validate chunk size	﻿2026-11-17T13:45:52.0397853Z ##[group]Run set -euo pipefail
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0398401Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0398826Z ^[[36;1msize="$CHUNK_SIZE"^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0399339Z ^[[36;1mif ! printf '%s' "$size" | grep -Eq '^[0-9]+[MG]$'; then^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0400136Z ^[[36;1m  echo "chunk_size must look like 1900M or 1G" >&2^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0400640Z ^[[36;1m  exit 1^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0400981Z ^[[36;1mfi^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0401321Z ^[[36;1mnumber="${size%[MG]}"^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0401728Z ^[[36;1mif [ "${size: -1}" = "G" ]; then^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0402168Z ^[[36;1m  number=$((number * 1024))^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0402573Z ^[[36;1mfi^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0402980Z ^[[36;1mif [ "$number" -gt 2000 ] || [ "$number" -lt 1 ]; then^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0403565Z ^[[36;1m  echo "chunk_size must be between 1M and 2000M" >&2^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0404071Z ^[[36;1m  exit 1^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0404410Z ^[[36;1mfi^[[0m
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0452931Z shell: /usr/bin/bash -e {0}
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0453432Z env:
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0456706Z   GH_TOKEN: ***
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0457114Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0457552Z   RELEASE_TAG: llm-models
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0457941Z   CHUNK_SIZE: 1900M
+Package and publish models	Validate chunk size	2026-11-17T13:45:52.0458283Z ##[endgroup]
+Package and publish models	Install and start Ollama	﻿2026-11-17T13:45:52.0592972Z ##[group]Run bash scripts/install-ollama.sh
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0593511Z ^[[36;1mbash scripts/install-ollama.sh^[[0m
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0632961Z shell: /usr/bin/bash -e {0}
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0633384Z env:
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0636583Z   GH_TOKEN: ***
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0636981Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0637427Z   RELEASE_TAG: llm-models
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0637813Z   CHUNK_SIZE: 1900M
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.0638154Z ##[endgroup]
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.2390077Z >>> Installing ollama to /usr/local
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.4024650Z >>> Downloading ollama-linux-amd64.tar.zst
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.5151722Z 
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.6156710Z #=#=#                                                                          
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.7154457Z                                                                            0.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.8157230Z #                                                                          1.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:52.9156487Z #                                                                          2.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.0320103Z ##                                                                         3.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.1321912Z ##                                                                         4.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.2322612Z ###                                                                        5.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.3466928Z ####                                                                       6.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.4466151Z ####                                                                       6.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.5572950Z ######                                                                     8.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.6574737Z ######                                                                     9.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.7574367Z #######                                                                   10.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.8623438Z #######                                                                   10.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:53.9669893Z ########                                                                  11.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.0671090Z ########                                                                  12.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.1670827Z #########                                                                 12.7%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.2869962Z #########                                                                 13.7%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.4241791Z ##########                                                                14.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.5241986Z ###########                                                               16.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.6242867Z ############                                                              17.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.7247204Z #############                                                             19.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.8249269Z ###############                                                           20.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:54.9728466Z ###############                                                           22.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.0833441Z #################                                                         24.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.1838546Z ##################                                                        25.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.2838404Z ###################                                                       27.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.3862557Z #####################                                                     29.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.4862122Z #####################                                                     30.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.6020500Z ######################                                                    31.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.7637065Z #######################                                                   32.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.8644698Z ########################                                                  34.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:55.9627526Z ##########################                                                36.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.0630070Z ###########################                                               37.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.1632360Z ############################                                              39.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.2637907Z #############################                                             40.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.3712251Z ##############################                                            41.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.4713181Z ##############################                                            42.7%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.5714549Z ###############################                                           44.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.6717531Z #################################                                         45.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.7889941Z ##################################                                        47.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.8890955Z ###################################                                       48.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:56.9894644Z ###################################                                       50.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.0928417Z ####################################                                      50.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.1930500Z #####################################                                     52.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.2930491Z ######################################                                    54.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.3955045Z #######################################                                   55.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.4959256Z ########################################                                  56.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.5960345Z #########################################                                 57.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.6975884Z #########################################                                 58.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.7986841Z ##########################################                                58.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:57.9333907Z ###########################################                               60.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.0339075Z ###########################################                               61.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.1337666Z ############################################                              62.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.2340475Z ##############################################                            64.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.3391983Z ##############################################                            65.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.4393129Z ###############################################                           65.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.5746551Z ###############################################                           66.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.6746226Z ################################################                          67.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.8213430Z #################################################                         68.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:58.9229363Z ##################################################                        69.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.0266175Z ###################################################                       71.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.1435681Z ###################################################                       71.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.2438165Z ###################################################                       71.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.3495928Z ####################################################                      73.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.4498283Z #####################################################                     73.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.5654875Z ######################################################                    75.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.6654953Z #######################################################                   76.7%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.7844759Z ########################################################                  78.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:45:59.8853923Z #########################################################                 80.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.0043469Z ##########################################################                81.7%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.1364178Z ###########################################################               82.8%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.2542556Z ############################################################              84.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.3544273Z #############################################################             85.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.4556820Z ##############################################################            87.1%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.5820919Z ###############################################################           88.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.6936180Z ################################################################          89.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.8193893Z #################################################################         90.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:00.9184065Z ##################################################################        92.3%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.0184475Z ###################################################################       93.5%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.2024770Z ###################################################################       94.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.3033185Z ####################################################################      95.6%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.4040675Z #####################################################################     96.4%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.5042956Z #####################################################################     97.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.6232086Z ######################################################################    98.2%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.7234010Z #######################################################################   99.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.7339749Z #######################################################################   99.9%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.7340901Z ######################################################################## 100.0%
+Package and publish models	Install and start Ollama	2026-11-17T13:46:01.7574770Z >>> Creating ollama user...
+Package and publish models	Install and start Ollama	2026-11-17T13:46:39.5396381Z >>> Adding ollama user to render group...
+Package and publish models	Install and start Ollama	2026-11-17T13:46:39.8450492Z >>> Adding ollama user to video group...
+Package and publish models	Install and start Ollama	2026-11-17T13:46:40.3413888Z >>> Adding current user to ollama group...
+Package and publish models	Install and start Ollama	2026-11-17T13:46:40.5606096Z >>> Creating ollama systemd service...
+Package and publish models	Install and start Ollama	2026-11-17T13:46:40.5722244Z WARNING: systemd is not running
+Package and publish models	Install and start Ollama	2026-11-17T13:46:42.5090917Z >>> The Ollama API is now available at 127.0.0.1:11434.
+Package and publish models	Install and start Ollama	2026-11-17T13:46:42.5091445Z >>> Install complete. Run "ollama" from the command line.
+Package and publish models	Install and start Ollama	2026-11-17T13:46:42.5092026Z WARNING: No NVIDIA/AMD GPU detected. Ollama will run in CPU-only mode.
+Package and publish models	Install and start Ollama	2026-11-17T13:46:42.5092608Z >>> The Ollama API is now available at 127.0.0.1:11434.
+Package and publish models	Install and start Ollama	2026-11-17T13:46:42.5093040Z >>> Install complete. Run "ollama" from the command line.
+Package and publish models	Install and start Ollama	2026-11-17T13:46:43.8513978Z Ollama is ready (pid 2383, models in /home/runner/.ollama/models)
+Package and publish models	Build model list	﻿2026-11-17T13:46:43.8558338Z ##[group]Run set -euo pipefail
+Package and publish models	Build model list	2026-11-17T13:46:43.8558608Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8558993Z ^[[36;1mmodels=()^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8559250Z ^[[36;1m[ "$INCLUDE_STARCODER2" = "true" ] && models+=("starcoder2:7b")^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8559628Z ^[[36;1m[ "$INCLUDE_DEEPSEEK_CODER" = "true" ] && models+=("deepseek-coder:6.7b")^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8560006Z ^[[36;1m[ "$INCLUDE_QWEN25_CODER_7B" = "true" ] && models+=("qwen2.5-coder:7b")^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8560356Z ^[[36;1m[ "$INCLUDE_QWEN25_CODER_3B" = "true" ] && models+=("qwen2.5-coder:3b")^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8560630Z ^[[36;1m^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8560806Z ^[[36;1mif [ -n "$EXTRA_MODELS" ]; then^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8561020Z ^[[36;1m  while IFS= read -r model; do^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8561266Z ^[[36;1m    model="$(printf '%s' "$model" | xargs)"^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8561522Z ^[[36;1m    [ -n "$model" ] && models+=("$model")^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8561795Z ^[[36;1m  done < <(printf '%s' "$EXTRA_MODELS" | tr ',' '\n')^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8562092Z ^[[36;1mfi^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8562254Z ^[[36;1m^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8562422Z ^[[36;1mif [ "${#models[@]}" -eq 0 ]; then^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8562658Z ^[[36;1m  echo "Select at least one model" >&2^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8562879Z ^[[36;1m  exit 1^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8563050Z ^[[36;1mfi^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8563209Z ^[[36;1m^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8563424Z ^[[36;1mprintf '%s\n' "${models[@]}" > "$RUNNER_TEMP/models.txt"^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8563751Z ^[[36;1mecho "MODELS_FILE=$RUNNER_TEMP/models.txt" >> "$GITHUB_ENV"^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8564041Z ^[[36;1mprintf 'Models to package:\n'^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8564263Z ^[[36;1mprintf '  - %s\n' "${models[@]}"^[[0m
+Package and publish models	Build model list	2026-11-17T13:46:43.8610561Z shell: /usr/bin/bash -e {0}
+Package and publish models	Build model list	2026-11-17T13:46:43.8610774Z env:
+Package and publish models	Build model list	2026-11-17T13:46:43.8613211Z   GH_TOKEN: ***
+Package and publish models	Build model list	2026-11-17T13:46:43.8613414Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Build model list	2026-11-17T13:46:43.8613644Z   RELEASE_TAG: llm-models
+Package and publish models	Build model list	2026-11-17T13:46:43.8613832Z   CHUNK_SIZE: 1900M
+Package and publish models	Build model list	2026-11-17T13:46:43.8614043Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Build model list	2026-11-17T13:46:43.8614273Z   OLLAMA_PID: 2383
+Package and publish models	Build model list	2026-11-17T13:46:43.8614465Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Build model list	2026-11-17T13:46:43.8614707Z   INCLUDE_STARCODER2: false
+Package and publish models	Build model list	2026-11-17T13:46:43.8614907Z   INCLUDE_DEEPSEEK_CODER: false
+Package and publish models	Build model list	2026-11-17T13:46:43.8615295Z   INCLUDE_QWEN25_CODER_7B: false
+Package and publish models	Build model list	2026-11-17T13:46:43.8615693Z   INCLUDE_QWEN25_CODER_3B: true
+Package and publish models	Build model list	2026-11-17T13:46:43.8615883Z   EXTRA_MODELS: 
+Package and publish models	Build model list	2026-11-17T13:46:43.8616063Z ##[endgroup]
+Package and publish models	Build model list	2026-11-17T13:46:43.8675088Z Models to package:
+Package and publish models	Build model list	2026-11-17T13:46:43.8675578Z   - qwen2.5-coder:3b
+Package and publish models	Report disk space	﻿2026-11-17T13:46:43.8700367Z ##[group]Run df -h "$RUNNER_TEMP" "$OLLAMA_MODELS"
+Package and publish models	Report disk space	2026-11-17T13:46:43.8700665Z ^[[36;1mdf -h "$RUNNER_TEMP" "$OLLAMA_MODELS"^[[0m
+Package and publish models	Report disk space	2026-11-17T13:46:43.8739580Z shell: /usr/bin/bash -e {0}
+Package and publish models	Report disk space	2026-11-17T13:46:43.8739781Z env:
+Package and publish models	Report disk space	2026-11-17T13:46:43.8741998Z   GH_TOKEN: ***
+Package and publish models	Report disk space	2026-11-17T13:46:43.8742198Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Report disk space	2026-11-17T13:46:43.8742429Z   RELEASE_TAG: llm-models
+Package and publish models	Report disk space	2026-11-17T13:46:43.8742613Z   CHUNK_SIZE: 1900M
+Package and publish models	Report disk space	2026-11-17T13:46:43.8742815Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Report disk space	2026-11-17T13:46:43.8743047Z   OLLAMA_PID: 2383
+Package and publish models	Report disk space	2026-11-17T13:46:43.8743236Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Report disk space	2026-11-17T13:46:43.8743495Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Report disk space	2026-11-17T13:46:43.8743731Z ##[endgroup]
+Package and publish models	Report disk space	2026-11-17T13:46:43.8816545Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Report disk space	2026-11-17T13:46:43.8816966Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Report disk space	2026-11-17T13:46:43.8817255Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Prepare release	﻿2026-11-17T13:46:43.8843001Z ##[group]Run set -euo pipefail
+Package and publish models	Prepare release	2026-11-17T13:46:43.8843258Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8843609Z ^[[36;1mif gh api "repos/${REPOSITORY}/releases/tags/${RELEASE_TAG}" >/dev/null 2>&1; then^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8843989Z ^[[36;1m  echo "Release ${RELEASE_TAG} already exists"^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8844225Z ^[[36;1m  exit 0^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8844386Z ^[[36;1mfi^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8844600Z ^[[36;1margs=(--repo "$REPOSITORY" --title "LLM models")^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8845050Z ^[[36;1mif [ "$DRAFT" = "true" ]; then^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8845330Z ^[[36;1m  args+=(--draft)^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8845763Z ^[[36;1mfi^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8845964Z ^[[36;1mgh release create "$RELEASE_TAG" "${args[@]}" \^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8846314Z ^[[36;1m  --notes "Model assets are generated by the Publish LLM models workflow."^[[0m
+Package and publish models	Prepare release	2026-11-17T13:46:43.8887475Z shell: /usr/bin/bash -e {0}
+Package and publish models	Prepare release	2026-11-17T13:46:43.8887680Z env:
+Package and publish models	Prepare release	2026-11-17T13:46:43.8889874Z   GH_TOKEN: ***
+Package and publish models	Prepare release	2026-11-17T13:46:43.8890077Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Prepare release	2026-11-17T13:46:43.8890343Z   RELEASE_TAG: llm-models
+Package and publish models	Prepare release	2026-11-17T13:46:43.8890529Z   CHUNK_SIZE: 1900M
+Package and publish models	Prepare release	2026-11-17T13:46:43.8890720Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Prepare release	2026-11-17T13:46:43.8890945Z   OLLAMA_PID: 2383
+Package and publish models	Prepare release	2026-11-17T13:46:43.8891152Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Prepare release	2026-11-17T13:46:43.8891403Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Prepare release	2026-11-17T13:46:43.8891645Z   DRAFT: false
+Package and publish models	Prepare release	2026-11-17T13:46:43.8891811Z ##[endgroup]
+Package and publish models	Prepare release	2026-11-17T13:46:47.4023925Z https://github.com/promikailamin/llm_runner/releases/tag/llm-models
+Package and publish models	Pull, package and upload models	﻿2026-11-17T13:46:47.4078741Z ##[group]Run set -euo pipefail
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4079040Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4079257Z ^[[36;1mstage="$RUNNER_TEMP/llm-model-assets"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4079497Z ^[[36;1mrm -rf "$stage"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4079690Z ^[[36;1mmkdir -p "$stage"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4079889Z ^[[36;1m: > "$stage/SHA256SUMS"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4080117Z ^[[36;1mecho "ASSET_DIR=$stage" >> "$GITHUB_ENV"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4080346Z ^[[36;1m^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4080509Z ^[[36;1mverify_flag=()^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4080719Z ^[[36;1mif [ "$VERIFY_BLOBS" = "true" ]; then^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4080952Z ^[[36;1m  verify_flag+=(--verify)^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4081151Z ^[[36;1mfi^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4081305Z ^[[36;1m^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4081469Z ^[[36;1mwhile IFS= read -r model; do^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4081683Z ^[[36;1m  [ -z "$model" ] && continue^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4081928Z ^[[36;1m  bash scripts/pull-model.sh "$model"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4082141Z ^[[36;1m^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4082394Z ^[[36;1m  python3 scripts/package-ollama-model.py \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4082648Z ^[[36;1m    --model "$model" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4082864Z ^[[36;1m    --models-dir "$OLLAMA_MODELS" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4083104Z ^[[36;1m    --output-dir "$stage" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4083320Z ^[[36;1m    --chunk-size "$CHUNK_SIZE" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4083573Z ^[[36;1m    --catalog "$stage/models-manifest.json" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4083830Z ^[[36;1m    --checksums "$stage/SHA256SUMS" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4084050Z ^[[36;1m    "${verify_flag[@]}"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4084239Z ^[[36;1m^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4084420Z ^[[36;1m  safe_name="$(jq -r --arg model "$model" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4084693Z ^[[36;1m    '.models[] | select(.model == $model) | .safe_name' \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4084967Z ^[[36;1m    "$stage/models-manifest.json")"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4085261Z ^[[36;1m  mapfile -t model_assets < <(find "$stage" -maxdepth 1 -type f \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4085891Z ^[[36;1m    -name "${safe_name}.tar.part-*" | LC_ALL=C sort)^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4086171Z ^[[36;1m  if [ "${#model_assets[@]}" -eq 0 ]; then^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4086427Z ^[[36;1m    echo "No parts produced for ${model}" >&2^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4086652Z ^[[36;1m    exit 1^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4086814Z ^[[36;1m  fi^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4087063Z ^[[36;1m  printf 'Uploading %d part(s) for %s\n' "${#model_assets[@]}" "$model"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4087417Z ^[[36;1m  gh release upload "$RELEASE_TAG" "${model_assets[@]}" \^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4087705Z ^[[36;1m    --repo "$REPOSITORY" --clobber^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4087934Z ^[[36;1m  rm -f "${model_assets[@]}"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4088132Z ^[[36;1m^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4088449Z ^[[36;1m  OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama stop "$model" >/dev/null 2>&1 || true^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4088967Z ^[[36;1m  OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama rm "$model" >/dev/null 2>&1 || true^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4089501Z ^[[36;1m  df -h "$RUNNER_TEMP" "$OLLAMA_MODELS"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4089740Z ^[[36;1mdone < "$MODELS_FILE"^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4089930Z ^[[36;1m^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4090116Z ^[[36;1mif [ ! -s "$stage/SHA256SUMS" ]; then^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4090369Z ^[[36;1m  echo "No model assets were produced" >&2^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4090599Z ^[[36;1m  exit 1^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4090755Z ^[[36;1mfi^[[0m
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4134157Z shell: /usr/bin/bash -e {0}
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4134369Z env:
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4136815Z   GH_TOKEN: ***
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4137022Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4137258Z   RELEASE_TAG: llm-models
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4137457Z   CHUNK_SIZE: 1900M
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4137655Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4137881Z   OLLAMA_PID: 2383
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4138068Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4138321Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4138551Z   VERIFY_BLOBS: false
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4138890Z ##[endgroup]
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:47.4267830Z Pulling qwen2.5-coder:3b (attempt 1/3)
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:48.4417630Z ^[[?2026h^[[?25l^[[1Gpulling manifest ⠋ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠹ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠹ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠸ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠴ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠴ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠦ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠧ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ⠇ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:48.5376531Z pulling 4a188102020e:   6% ▕█                 ▏ 123 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:48.6383676Z pulling 4a188102020e:   9% ▕█                 ▏ 180 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:48.7373316Z pulling 4a188102020e:  18% ▕███               ▏ 338 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:48.8376581Z pulling 4a188102020e:  25% ▕████              ▏ 489 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:48.9372955Z pulling 4a188102020e:  29% ▕█████             ▏ 562 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.0373676Z pulling 4a188102020e:  36% ▕██████            ▏ 699 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.1367361Z pulling 4a188102020e:  43% ▕███████           ▏ 830 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.2399520Z pulling 4a188102020e:  47% ▕████████          ▏ 904 MB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.3369625Z pulling 4a188102020e:  56% ▕█████████         ▏ 1.1 GB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.4372710Z pulling 4a188102020e:  63% ▕███████████       ▏ 1.2 GB/1.9 GB                  ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.5383669Z pulling 4a188102020e:  67% ▕███████████       ▏ 1.3 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.6373823Z pulling 4a188102020e:  74% ▕█████████████     ▏ 1.4 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.7372649Z pulling 4a188102020e:  78% ▕██████████████    ▏ 1.5 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.8372418Z pulling 4a188102020e:  80% ▕██████████████    ▏ 1.5 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:49.9371864Z pulling 4a188102020e:  82% ▕██████████████    ▏ 1.6 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.0374652Z pulling 4a188102020e:  85% ▕███████████████   ▏ 1.6 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.1374022Z pulling 4a188102020e:  86% ▕███████████████   ▏ 1.7 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.2374539Z pulling 4a188102020e:  87% ▕███████████████   ▏ 1.7 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.3372232Z pulling 4a188102020e:  89% ▕████████████████  ▏ 1.7 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.4374671Z pulling 4a188102020e:  89% ▕████████████████  ▏ 1.7 GB/1.9 GB  1.2 GB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.5372628Z pulling 4a188102020e:  91% ▕████████████████  ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.6371729Z pulling 4a188102020e:  92% ▕████████████████  ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.7365075Z pulling 4a188102020e:  93% ▕████████████████  ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.8373006Z pulling 4a188102020e:  94% ▕████████████████  ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:50.9371637Z pulling 4a188102020e:  95% ▕█████████████████ ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.0367082Z pulling 4a188102020e:  95% ▕█████████████████ ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.1367591Z pulling 4a188102020e:  96% ▕█████████████████ ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.2372188Z pulling 4a188102020e:  96% ▕█████████████████ ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.3367542Z pulling 4a188102020e:  96% ▕█████████████████ ▏ 1.8 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.4371676Z pulling 4a188102020e:  96% ▕█████████████████ ▏ 1.9 GB/1.9 GB  855 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.5367569Z pulling 4a188102020e:  96% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.6373065Z pulling 4a188102020e:  96% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.7375130Z pulling 4a188102020e:  96% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.8373192Z pulling 4a188102020e:  97% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:51.9374971Z pulling 4a188102020e:  97% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.0367764Z pulling 4a188102020e:  98% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.1370978Z pulling 4a188102020e:  98% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.2370731Z pulling 4a188102020e:  98% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.3367006Z pulling 4a188102020e:  98% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.4372403Z pulling 4a188102020e:  98% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.5367735Z pulling 4a188102020e:  99% ▕█████████████████ ▏ 1.9 GB/1.9 GB  605 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.6371440Z pulling 4a188102020e:  99% ▕█████████████████ ▏ 1.9 GB/1.9 GB  465 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.7369401Z pulling 4a188102020e:  99% ▕█████████████████ ▏ 1.9 GB/1.9 GB  465 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.8372557Z pulling 4a188102020e:  99% ▕█████████████████ ▏ 1.9 GB/1.9 GB  465 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:52.9367656Z pulling 4a188102020e:  99% ▕█████████████████ ▏ 1.9 GB/1.9 GB  465 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.0375522Z pulling 4a188102020e: 100% ▕█████████████████ ▏ 1.9 GB/1.9 GB  465 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.1369395Z pulling 4a188102020e: 100% ▕█████████████████ ▏ 1.9 GB/1.9 GB  465 MB/s      0s^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.2371945Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.3366539Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.4365680Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.5367876Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.6367318Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.7370314Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.8372479Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:53.9373526Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.0365879Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.0366485Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.1374477Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.1375545Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.1376217Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.1376826Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.2368451Z verifying sha256 digest ⠋ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.2369356Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.2370044Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.2370708Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.3371732Z verifying sha256 digest ⠙ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.3372354Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.3373226Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.3373657Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.4374893Z verifying sha256 digest ⠹ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.4375627Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.4376074Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.4376494Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.5367791Z verifying sha256 digest ⠸ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.5368407Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.5368854Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.5369285Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.6371117Z verifying sha256 digest ⠼ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.6371992Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.6372685Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.6373356Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.7374817Z verifying sha256 digest ⠴ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.7375786Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.7376933Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.7377614Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8368661Z verifying sha256 digest ⠦ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8369497Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8370181Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.8370847Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9372225Z verifying sha256 digest ⠧ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9373053Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9373745Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:54.9374484Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0365230Z verifying sha256 digest ⠇ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0366183Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0366882Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.0367557Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1369177Z verifying sha256 digest ⠏ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1370039Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1370719Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.1371398Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2371756Z verifying sha256 digest ⠋ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2372650Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2373332Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.2373995Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3003235Z verifying sha256 digest ⠙ ^[[K^[[?25h^[[?2026l^[[?2026h^[[?25l^[[A^[[A^[[A^[[A^[[1Gpulling manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3003813Z pulling 4a188102020e: 100% ▕██████████████████▏ 1.9 GB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3004250Z pulling 45fc3ea7579a: 100% ▕██████████████████▏ 7.4 KB                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3004669Z pulling bb967eff3bda: 100% ▕██████████████████▏  487 B                         ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3004990Z verifying sha256 digest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3005205Z writing manifest ^[[K
+Package and publish models	Pull, package and upload models	2026-11-17T13:46:55.3005854Z success ^[[K^[[?25h^[[?2026l
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8944793Z {
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8945658Z   "model": "qwen2.5-coder:3b",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8946235Z   "safe_name": "qwen2.5-coder-3b",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8946587Z   "manifest": "manifests/registry.ollama.ai/library/qwen2.5-coder/3b",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8947142Z   "manifest_digest": "ce40a49b0aa2b3b607d26a603e0f2db06a256cecbc9cca7adf893ae11a80275a",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8947656Z   "blobs": [
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8947927Z     "sha256:bb967eff3bda079d4ee62c09c5ef0b2e71a6a75934a4c92a13c755fcfd655703",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8948520Z     "sha256:4a188102020e9c9530b687fd6400f775c45e90a0d7baafe65bd0a36963fbb7ba",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8949052Z     "sha256:66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8949604Z     "sha256:1e65450c30670713aa47fe23e8b9662bdf4065e81cc8e3cbfaa98924fcc0d320",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8950143Z     "sha256:45fc3ea7579acf3021044fc8c4c5dd5969ebc3ca2a68219b5075662cc949a4f1",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8950719Z     "sha256:f72c60cabf6237b07f6e632b2c48d533cef25eda2efbd34bed21c5e9c01e6225"
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8951127Z   ],
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8951638Z   "parts": [
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8951844Z     {
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952079Z       "name": "qwen2.5-coder-3b.tar.part-000",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952407Z       "sha256": "08140ecaa869ee94485b70de4b7c2098e39f392e16594d14d5a82ce388bb3913",
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952716Z       "size": 1929932800
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8952888Z     }
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8953027Z   ],
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8953176Z   "total_size": 1929932800
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.8953349Z }
+Package and publish models	Pull, package and upload models	2026-11-17T13:47:01.9086875Z Uploading 1 part(s) for qwen2.5-coder:3b
+Package and publish models	Pull, package and upload models	2026-11-17T13:48:15.0889308Z Filesystem      Size  Used Avail Use% Mounted on
+Package and publish models	Pull, package and upload models	2026-11-17T13:48:15.0889789Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Pull, package and upload models	2026-11-17T13:48:15.0890100Z /dev/root       145G   61G   85G  42% /
+Package and publish models	Write release notes	﻿2026-11-17T13:48:15.0922279Z ##[group]Run # shellcheck disable=SC2016
+Package and publish models	Write release notes	2026-11-17T13:48:15.0922625Z ^[[36;1m# shellcheck disable=SC2016^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0922879Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0923114Z ^[[36;1mnotes="$RUNNER_TEMP/release-notes.md"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0923347Z ^[[36;1m{^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0923514Z ^[[36;1m  echo "# LLM model assets"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0923715Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0923946Z ^[[36;1m  echo "Ollama models packaged for the LLM tunnel workflow."^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0924215Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0924384Z ^[[36;1m  echo "## Models"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0924570Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0924739Z ^[[36;1m  # shellcheck disable=SC2016^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0925068Z ^[[36;1m  jq -r '.models[] | "- `\(.model)` - \(.parts | length) part(s), \(.total_size) bytes"' \^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0925678Z ^[[36;1m    "$ASSET_DIR/models-manifest.json"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0925901Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0926062Z ^[[36;1m  echo "## Assets"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0926300Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0926540Z ^[[36;1m  echo "Assets are split into parts under 2000 MB because GitHub's"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0926906Z ^[[36;1m  echo "release asset limit is 2 GiB per file. Download every"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0927196Z ^[[36;1m  # shellcheck disable=SC2016^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0927492Z ^[[36;1m  echo '`<model>.tar.part-*` file for the model you need and join them:'^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0927777Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0927951Z ^[[36;1m  # shellcheck disable=SC2016^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0928152Z ^[[36;1m  echo '```bash'^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0928404Z ^[[36;1m  echo 'cat <model>.tar.part-* | tar -xf - -C ~/.ollama/models'^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0928681Z ^[[36;1m  # shellcheck disable=SC2016^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0928876Z ^[[36;1m  echo '```'^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0929044Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0929208Z ^[[36;1m  # shellcheck disable=SC2016^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0929468Z ^[[36;1m  echo '`SHA256SUMS` contains the checksum of every part.'^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0929734Z ^[[36;1m  echo^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0930129Z ^[[36;1m  echo "Then use the **LLM over bore.pub** workflow with"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0930404Z ^[[36;1m  # shellcheck disable=SC2016^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0930666Z ^[[36;1m  echo '`model_source=release` and this release tag.'^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0930922Z ^[[36;1m} > "$notes"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0931119Z ^[[36;1mecho "RELEASE_NOTES=$notes" >> "$GITHUB_ENV"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0931355Z ^[[36;1mcat "$notes"^[[0m
+Package and publish models	Write release notes	2026-11-17T13:48:15.0974687Z shell: /usr/bin/bash -e {0}
+Package and publish models	Write release notes	2026-11-17T13:48:15.0974905Z env:
+Package and publish models	Write release notes	2026-11-17T13:48:15.0977486Z   GH_TOKEN: ***
+Package and publish models	Write release notes	2026-11-17T13:48:15.0977702Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Write release notes	2026-11-17T13:48:15.0977931Z   RELEASE_TAG: llm-models
+Package and publish models	Write release notes	2026-11-17T13:48:15.0978116Z   CHUNK_SIZE: 1900M
+Package and publish models	Write release notes	2026-11-17T13:48:15.0978308Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Write release notes	2026-11-17T13:48:15.0978528Z   OLLAMA_PID: 2383
+Package and publish models	Write release notes	2026-11-17T13:48:15.0978715Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Write release notes	2026-11-17T13:48:15.0978972Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Write release notes	2026-11-17T13:48:15.0979255Z   ASSET_DIR: /home/runner/work/_temp/llm-model-assets
+Package and publish models	Write release notes	2026-11-17T13:48:15.0979493Z ##[endgroup]
+Package and publish models	Write release notes	2026-11-17T13:48:15.1087780Z # LLM model assets
+Package and publish models	Write release notes	2026-11-17T13:48:15.1088085Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1088542Z Ollama models packaged for the LLM tunnel workflow.
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089102Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089250Z ## Models
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089367Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089501Z - `qwen2.5-coder:3b` - 1 part(s), 1929932800 bytes
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089700Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089778Z ## Assets
+Package and publish models	Write release notes	2026-11-17T13:48:15.1089870Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1090005Z Assets are split into parts under 2000 MB because GitHub's
+Package and publish models	Write release notes	2026-11-17T13:48:15.1090309Z release asset limit is 2 GiB per file. Download every
+Package and publish models	Write release notes	2026-11-17T13:48:15.1090613Z `<model>.tar.part-*` file for the model you need and join them:
+Package and publish models	Write release notes	2026-11-17T13:48:15.1090836Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1090901Z ```bash
+Package and publish models	Write release notes	2026-11-17T13:48:15.1091475Z cat <model>.tar.part-* | tar -xf - -C ~/.ollama/models
+Package and publish models	Write release notes	2026-11-17T13:48:15.1091836Z ```
+Package and publish models	Write release notes	2026-11-17T13:48:15.1091977Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1092131Z `SHA256SUMS` contains the checksum of every part.
+Package and publish models	Write release notes	2026-11-17T13:48:15.1092411Z 
+Package and publish models	Write release notes	2026-11-17T13:48:15.1092566Z Then use the **LLM over bore.pub** workflow with
+Package and publish models	Write release notes	2026-11-17T13:48:15.1092951Z `model_source=release` and this release tag.
+Package and publish models	Update release notes	﻿2026-11-17T13:48:15.1118629Z ##[group]Run set -euo pipefail
+Package and publish models	Update release notes	2026-11-17T13:48:15.1118885Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Update release notes	2026-11-17T13:48:15.1119137Z ^[[36;1mgh release edit "$RELEASE_TAG" --repo "$REPOSITORY" \^[[0m
+Package and publish models	Update release notes	2026-11-17T13:48:15.1119467Z ^[[36;1m  --title "LLM models" --notes-file "$RELEASE_NOTES"^[[0m
+Package and publish models	Update release notes	2026-11-17T13:48:15.1159220Z shell: /usr/bin/bash -e {0}
+Package and publish models	Update release notes	2026-11-17T13:48:15.1159433Z env:
+Package and publish models	Update release notes	2026-11-17T13:48:15.1161697Z   GH_TOKEN: ***
+Package and publish models	Update release notes	2026-11-17T13:48:15.1161902Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Update release notes	2026-11-17T13:48:15.1162132Z   RELEASE_TAG: llm-models
+Package and publish models	Update release notes	2026-11-17T13:48:15.1162318Z   CHUNK_SIZE: 1900M
+Package and publish models	Update release notes	2026-11-17T13:48:15.1162512Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Update release notes	2026-11-17T13:48:15.1162734Z   OLLAMA_PID: 2383
+Package and publish models	Update release notes	2026-11-17T13:48:15.1162936Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Update release notes	2026-11-17T13:48:15.1163186Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Update release notes	2026-11-17T13:48:15.1163462Z   ASSET_DIR: /home/runner/work/_temp/llm-model-assets
+Package and publish models	Update release notes	2026-11-17T13:48:15.1163760Z   RELEASE_NOTES: /home/runner/work/_temp/release-notes.md
+Package and publish models	Update release notes	2026-11-17T13:48:15.1164047Z ##[endgroup]
+Package and publish models	Update release notes	2026-11-17T13:48:15.7614037Z https://github.com/promikailamin/llm_runner/releases/tag/llm-models
+Package and publish models	Upload catalog and checksums	﻿2026-11-17T13:48:15.7674771Z ##[group]Run set -euo pipefail
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7675063Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7675343Z ^[[36;1mmapfile -t assets < <(find "$ASSET_DIR" -maxdepth 1 -type f \^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7676053Z ^[[36;1m  \( -name 'SHA256SUMS' -o -name 'models-manifest.json' \) | LC_ALL=C sort)^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7676389Z ^[[36;1mif [ "${#assets[@]}" -eq 0 ]; then^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7676649Z ^[[36;1m  echo "No catalog assets found in $ASSET_DIR" >&2^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7676897Z ^[[36;1m  exit 1^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7677063Z ^[[36;1mfi^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7677494Z ^[[36;1mgh release upload "$RELEASE_TAG" "${assets[@]}" --repo "$REPOSITORY" --clobber^[[0m
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7721224Z shell: /usr/bin/bash -e {0}
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7721444Z env:
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7723645Z   GH_TOKEN: ***
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7723852Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7724077Z   RELEASE_TAG: llm-models
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7724266Z   CHUNK_SIZE: 1900M
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7724458Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7724722Z   OLLAMA_PID: 2383
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7724907Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7725145Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7725579Z   ASSET_DIR: /home/runner/work/_temp/llm-model-assets
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7725867Z   RELEASE_NOTES: /home/runner/work/_temp/release-notes.md
+Package and publish models	Upload catalog and checksums	2026-11-17T13:48:15.7726114Z ##[endgroup]
+Package and publish models	Add summary	﻿2026-11-17T13:48:17.2283044Z ##[group]Run set -euo pipefail
+Package and publish models	Add summary	2026-11-17T13:48:17.2283335Z ^[[36;1mset -euo pipefail^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2283535Z ^[[36;1m{^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2283705Z ^[[36;1m  echo "### Model release"^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2283911Z ^[[36;1m  echo^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2284100Z ^[[36;1m  echo "- Release: \`$RELEASE_TAG\`"^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2284360Z ^[[36;1m  echo "- Repository: \`$REPOSITORY\`"^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2284680Z ^[[36;1m  if [ -f "${ASSET_DIR:-/nonexistent}/models-manifest.json" ]; then^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2284976Z ^[[36;1m    echo^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2285215Z ^[[36;1m    jq -r '.models[] | "- `\(.model)` - \(.parts | length) part(s)"' \^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2285796Z ^[[36;1m      "$ASSET_DIR/models-manifest.json"^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2286103Z ^[[36;1m  fi^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2286278Z ^[[36;1m} >> "$GITHUB_STEP_SUMMARY"^[[0m
+Package and publish models	Add summary	2026-11-17T13:48:17.2329449Z shell: /usr/bin/bash -e {0}
+Package and publish models	Add summary	2026-11-17T13:48:17.2329662Z env:
+Package and publish models	Add summary	2026-11-17T13:48:17.2331916Z   GH_TOKEN: ***
+Package and publish models	Add summary	2026-11-17T13:48:17.2332202Z   REPOSITORY: promikailamin/llm_runner
+Package and publish models	Add summary	2026-11-17T13:48:17.2332436Z   RELEASE_TAG: llm-models
+Package and publish models	Add summary	2026-11-17T13:48:17.2332630Z   CHUNK_SIZE: 1900M
+Package and publish models	Add summary	2026-11-17T13:48:17.2332822Z   OLLAMA_MODELS: /home/runner/.ollama/models
+Package and publish models	Add summary	2026-11-17T13:48:17.2333047Z   OLLAMA_PID: 2383
+Package and publish models	Add summary	2026-11-17T13:48:17.2333237Z   OLLAMA_HOST: http://127.0.0.1:11434
+Package and publish models	Add summary	2026-11-17T13:48:17.2333485Z   MODELS_FILE: /home/runner/work/_temp/models.txt
+Package and publish models	Add summary	2026-11-17T13:48:17.2333765Z   ASSET_DIR: /home/runner/work/_temp/llm-model-assets
+Package and publish models	Add summary	2026-11-17T13:48:17.2334050Z   RELEASE_NOTES: /home/runner/work/_temp/release-notes.md
+Package and publish models	Add summary	2026-11-17T13:48:17.2334306Z ##[endgroup]
+Package and publish models	Post Checkout repository	﻿2026-11-17T13:48:17.2507655Z Post job cleanup.
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3256015Z [command]/usr/bin/git version
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3289306Z git version 2.56.1
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3319015Z Temporarily overriding HOME='/home/runner/work/_temp/9468cd56-0ce4-4287-86cc-31e8212d670d' before making global git config changes
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3320225Z Adding repository directory to the temporary git global config as a safe directory
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3323617Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/llm_runner/llm_runner
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3361349Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3396628Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3720178Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3720888Z http.https://github.com/.extraheader
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3726918Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.3772722Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.4036366Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Package and publish models	Post Checkout repository	2026-11-17T13:48:17.4075519Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Package and publish models	Complete job	﻿2026-11-17T13:48:17.4441756Z Cleaning up orphan processes
+Package and publish models	Complete job	2026-11-17T13:48:17.4752721Z Terminate orphan process: pid (2383) (ollama)
+Package and publish models	Complete job	2026-11-17T13:48:17.4815768Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
