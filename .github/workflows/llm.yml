@@ -1,0 +1,224 @@
+name: LLM over bore.pub
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Ollama model to serve
+        required: true
+        default: qwen2.5-coder:3b
+        type: choice
+        options:
+          - qwen2.5-coder:3b
+          - qwen2.5-coder:7b
+          - deepseek-coder:6.7b
+          - starcoder2:7b
+          - custom
+      custom_model:
+        description: Custom Ollama model reference (used when model=custom)
+        required: false
+        default: ""
+        type: string
+      model_source:
+        description: Pull the model from Ollama or restore it from the model release
+        required: true
+        default: ollama
+        type: choice
+        options:
+          - ollama
+          - release
+      release_tag:
+        description: Release tag that contains packaged model assets
+        required: true
+        default: llm-models
+        type: string
+      timeout_minutes:
+        description: Minutes to keep the model and bore tunnel online (1-300)
+        required: true
+        default: 30
+        type: number
+      warmup:
+        description: Run a small inference request before publishing the tunnel
+        required: true
+        default: true
+        type: boolean
+      run_client:
+        description: Run the client job that probes the tunnel for the full timeout
+        required: true
+        default: true
+        type: boolean
+      probe_interval_seconds:
+        description: Seconds between client health probes
+        required: true
+        default: 60
+        type: number
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  serve:
+    name: Serve model
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    outputs:
+      address: ${{ steps.tunnel.outputs.address }}
+      host: ${{ steps.tunnel.outputs.host }}
+      port: ${{ steps.tunnel.outputs.port }}
+      model: ${{ steps.resolve.outputs.model }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate timeout
+        run: |
+          set -euo pipefail
+          minutes="${{ inputs.timeout_minutes }}"
+          if [ "$minutes" -lt 1 ] || [ "$minutes" -gt 300 ]; then
+            echo "timeout_minutes must be between 1 and 300" >&2
+            exit 1
+          fi
+
+      - name: Resolve model
+        id: resolve
+        env:
+          INPUT_MODEL: ${{ inputs.model }}
+          INPUT_CUSTOM_MODEL: ${{ inputs.custom_model }}
+        run: bash scripts/resolve-model.sh
+
+      - name: Install and start Ollama
+        run: bash scripts/install-ollama.sh
+
+      - name: Restore model from release
+        if: ${{ inputs.model_source == 'release' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          bash scripts/restore-release-model.sh \
+            "$MODEL_SAFE" \
+            "${{ inputs.release_tag }}" \
+            "${{ github.repository }}" \
+            "$OLLAMA_MODELS"
+
+      - name: Pull model from Ollama
+        if: ${{ inputs.model_source == 'ollama' }}
+        run: bash scripts/pull-model.sh "$MODEL"
+
+      - name: Verify model
+        run: |
+          set -euo pipefail
+          OLLAMA_HOST=http://127.0.0.1:11434 ollama list
+          OLLAMA_HOST=http://127.0.0.1:11434 ollama show "$MODEL" | head -40
+
+      - name: Warm up model
+        if: ${{ inputs.warmup }}
+        run: |
+          set -euo pipefail
+          payload="$(jq -n --arg model "$MODEL" \
+            '{model: $model, prompt: "Reply with OK.", stream: false, options: {num_predict: 4}}')"
+          curl -fsS --max-time 900 \
+            -H 'Content-Type: application/json' \
+            -d "$payload" \
+            http://127.0.0.1:11434/api/generate | jq -r '.response // empty'
+
+      - name: Install bore
+        run: bash scripts/install-bore.sh
+
+      - name: Start bore tunnel
+        id: tunnel
+        env:
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/llm-tunnel"
+          bash scripts/start-tunnel.sh \
+            11434 \
+            "$RUNNER_TEMP/llm-tunnel/tunnel.json" \
+            "$MODEL" \
+            "${{ inputs.timeout_minutes }}"
+
+      - name: Publish tunnel details
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-tunnel-${{ github.run_id }}
+          path: ${{ runner.temp }}/llm-tunnel/tunnel.json
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Add connection details to summary
+        run: |
+          set -euo pipefail
+          address="${{ steps.tunnel.outputs.address }}"
+          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          ### LLM tunnel
+
+          - Model: \`$MODEL\`
+          - Address: \`$address\`
+          - API base URL: \`http://$address\`
+          - Local Ollama port: \`11434\`
+          - Keep-alive: ${{ inputs.timeout_minutes }} minute(s)
+          - Tunnel artifact: \`llm-tunnel-${{ github.run_id }}\`
+          EOF
+
+      - name: Keep model and tunnel online
+        run: |
+          bore_pid="$(cat "$RUNNER_TEMP/llm-tunnel/bore.pid")"
+          bash scripts/keep-alive.sh "${{ inputs.timeout_minutes }}" "$OLLAMA_PID" "$bore_pid"
+
+  client:
+    name: Probe tunnel
+    if: ${{ inputs.run_client }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate timeout
+        run: |
+          set -euo pipefail
+          minutes="${{ inputs.timeout_minutes }}"
+          if [ "$minutes" -lt 1 ] || [ "$minutes" -gt 300 ]; then
+            echo "timeout_minutes must be between 1 and 300" >&2
+            exit 1
+          fi
+
+      - name: Wait for tunnel details
+        id: tunnel
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TIMEOUT_MINUTES: ${{ inputs.timeout_minutes }}
+        run: |
+          set -euo pipefail
+          max_wait_seconds=$(( (TIMEOUT_MINUTES + 30) * 60 ))
+          bash scripts/wait-for-tunnel.sh \
+            "${{ github.repository }}" \
+            "${{ github.run_id }}" \
+            "llm-tunnel-${{ github.run_id }}" \
+            "$RUNNER_TEMP/llm-tunnel" \
+            "$max_wait_seconds" \
+            10
+
+      - name: Probe tunnel
+        run: |
+          bash scripts/probe-tunnel.sh \
+            "$TUNNEL_ADDRESS" \
+            "${{ inputs.timeout_minutes }}" \
+            "${{ inputs.probe_interval_seconds }}"
+
+      - name: Add client details to summary
+        if: always()
+        run: |
+          set -euo pipefail
+          address="${TUNNEL_ADDRESS:-not available}"
+          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          ### Client
+
+          - Tunnel address: \`$address\`
+          - Model: \`${TUNNEL_MODEL:-${{ inputs.model }}}\`
+          - Probe interval: ${{ inputs.probe_interval_seconds }} second(s)
+          - Probe duration: ${{ inputs.timeout_minutes }} minute(s)
+          EOF

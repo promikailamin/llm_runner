@@ -1,0 +1,254 @@
+name: Publish LLM models
+
+on:
+  workflow_dispatch:
+    inputs:
+      include_starcoder2:
+        description: Package starcoder2:7b
+        required: true
+        default: true
+        type: boolean
+      include_deepseek_coder:
+        description: Package deepseek-coder:6.7b
+        required: true
+        default: true
+        type: boolean
+      include_qwen25_coder_7b:
+        description: Package qwen2.5-coder:7b
+        required: true
+        default: true
+        type: boolean
+      include_qwen25_coder_3b:
+        description: Package qwen2.5-coder:3b
+        required: true
+        default: true
+        type: boolean
+      extra_models:
+        description: Extra Ollama model references, comma separated
+        required: false
+        default: ""
+        type: string
+      release_tag:
+        description: Release tag to create or update
+        required: true
+        default: llm-models
+        type: string
+      chunk_size:
+        description: Split size for release assets (must be under 2000M)
+        required: true
+        default: 1900M
+        type: string
+      verify_blobs:
+        description: Verify every Ollama blob digest before packaging
+        required: true
+        default: false
+        type: boolean
+      draft:
+        description: Create the release as a draft if it does not exist
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: publish-llm-models-${{ inputs.release_tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Package and publish models
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPOSITORY: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      CHUNK_SIZE: ${{ inputs.chunk_size }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate chunk size
+        run: |
+          set -euo pipefail
+          size="$CHUNK_SIZE"
+          if ! printf '%s' "$size" | grep -Eq '^[0-9]+[MG]$'; then
+            echo "chunk_size must look like 1900M or 1G" >&2
+            exit 1
+          fi
+          number="${size%[MG]}"
+          if [ "${size: -1}" = "G" ]; then
+            number=$((number * 1024))
+          fi
+          if [ "$number" -gt 2000 ] || [ "$number" -lt 1 ]; then
+            echo "chunk_size must be between 1M and 2000M" >&2
+            exit 1
+          fi
+
+      - name: Install and start Ollama
+        run: bash scripts/install-ollama.sh
+
+      - name: Build model list
+        env:
+          INCLUDE_STARCODER2: ${{ inputs.include_starcoder2 }}
+          INCLUDE_DEEPSEEK_CODER: ${{ inputs.include_deepseek_coder }}
+          INCLUDE_QWEN25_CODER_7B: ${{ inputs.include_qwen25_coder_7b }}
+          INCLUDE_QWEN25_CODER_3B: ${{ inputs.include_qwen25_coder_3b }}
+          EXTRA_MODELS: ${{ inputs.extra_models }}
+        run: |
+          set -euo pipefail
+          models=()
+          [ "$INCLUDE_STARCODER2" = "true" ] && models+=("starcoder2:7b")
+          [ "$INCLUDE_DEEPSEEK_CODER" = "true" ] && models+=("deepseek-coder:6.7b")
+          [ "$INCLUDE_QWEN25_CODER_7B" = "true" ] && models+=("qwen2.5-coder:7b")
+          [ "$INCLUDE_QWEN25_CODER_3B" = "true" ] && models+=("qwen2.5-coder:3b")
+
+          if [ -n "$EXTRA_MODELS" ]; then
+            while IFS= read -r model; do
+              model="$(printf '%s' "$model" | xargs)"
+              [ -n "$model" ] && models+=("$model")
+            done < <(printf '%s' "$EXTRA_MODELS" | tr ',' '\n')
+          fi
+
+          if [ "${#models[@]}" -eq 0 ]; then
+            echo "Select at least one model" >&2
+            exit 1
+          fi
+
+          printf '%s\n' "${models[@]}" > "$RUNNER_TEMP/models.txt"
+          echo "MODELS_FILE=$RUNNER_TEMP/models.txt" >> "$GITHUB_ENV"
+          printf 'Models to package:\n'
+          printf '  - %s\n' "${models[@]}"
+
+      - name: Pull models
+        run: |
+          set -euo pipefail
+          while IFS= read -r model; do
+            [ -z "$model" ] && continue
+            bash scripts/pull-model.sh "$model"
+          done < "$MODELS_FILE"
+
+      - name: Package models
+        env:
+          VERIFY_BLOBS: ${{ inputs.verify_blobs }}
+        run: |
+          set -euo pipefail
+          stage="$RUNNER_TEMP/llm-model-assets"
+          rm -rf "$stage"
+          mkdir -p "$stage"
+          : > "$stage/SHA256SUMS"
+          echo "ASSET_DIR=$stage" >> "$GITHUB_ENV"
+
+          verify_flag=()
+          if [ "$VERIFY_BLOBS" = "true" ]; then
+            verify_flag+=(--verify)
+          fi
+
+          while IFS= read -r model; do
+            [ -z "$model" ] && continue
+            python3 scripts/package-ollama-model.py \
+              --model "$model" \
+              --models-dir "$OLLAMA_MODELS" \
+              --output-dir "$stage" \
+              --chunk-size "$CHUNK_SIZE" \
+              --catalog "$stage/models-manifest.json" \
+              --checksums "$stage/SHA256SUMS" \
+              "${verify_flag[@]}"
+          done < "$MODELS_FILE"
+
+          if [ ! -s "$stage/SHA256SUMS" ]; then
+            echo "No model assets were produced" >&2
+            exit 1
+          fi
+
+      - name: Write release notes
+        run: |
+          # shellcheck disable=SC2016
+          set -euo pipefail
+          notes="$RUNNER_TEMP/release-notes.md"
+          {
+            echo "# LLM model assets"
+            echo
+            echo "Ollama models packaged for the LLM tunnel workflow."
+            echo
+            echo "## Models"
+            echo
+            # shellcheck disable=SC2016
+            jq -r '.models[] | "- `\(.model)` - \(.parts | length) part(s), \(.total_size) bytes"' \
+              "$ASSET_DIR/models-manifest.json"
+            echo
+            echo "## Assets"
+            echo
+            echo "Assets are split into parts under 2000 MB because GitHub's"
+            echo "release asset limit is 2 GiB per file. Download every"
+            # shellcheck disable=SC2016
+            echo '`<model>.tar.part-*` file for the model you need and join them:'
+            echo
+            # shellcheck disable=SC2016
+            echo '```bash'
+            echo 'cat <model>.tar.part-* | tar -xf - -C ~/.ollama/models'
+            # shellcheck disable=SC2016
+            echo '```'
+            echo
+            # shellcheck disable=SC2016
+            echo '`SHA256SUMS` contains the checksum of every part.'
+            echo
+            echo "Then use the **LLM over bore.pub** workflow with"
+            # shellcheck disable=SC2016
+            echo '`model_source=release` and this release tag.'
+          } > "$notes"
+          echo "RELEASE_NOTES=$notes" >> "$GITHUB_ENV"
+          cat "$notes"
+
+      - name: Create or update release
+        env:
+          DRAFT: ${{ inputs.draft }}
+        run: |
+          set -euo pipefail
+          args=(--repo "$REPOSITORY")
+          if gh release view "$RELEASE_TAG" "${args[@]}" >/dev/null 2>&1; then
+            gh release edit "$RELEASE_TAG" "${args[@]}" \
+              --title "LLM models" \
+              --notes-file "$RELEASE_NOTES"
+          else
+            create_args=("${args[@]}")
+            if [ "$DRAFT" = "true" ]; then
+              create_args+=(--draft)
+            fi
+            gh release create "$RELEASE_TAG" \
+              "${create_args[@]}" \
+              --title "LLM models" \
+              --notes-file "$RELEASE_NOTES"
+          fi
+
+      - name: Upload model assets
+        run: |
+          set -euo pipefail
+          mapfile -t assets < <(find "$ASSET_DIR" -maxdepth 1 -type f \
+            \( -name '*.tar.part-*' -o -name 'SHA256SUMS' -o -name 'models-manifest.json' \) \
+            | LC_ALL=C sort)
+          if [ "${#assets[@]}" -eq 0 ]; then
+            echo "No assets found in $ASSET_DIR" >&2
+            exit 1
+          fi
+          printf 'Uploading %d asset(s) to %s\n' "${#assets[@]}" "$RELEASE_TAG"
+          gh release upload "$RELEASE_TAG" "${assets[@]}" --repo "$REPOSITORY" --clobber
+
+      - name: Add summary
+        if: always()
+        run: |
+          set -euo pipefail
+          {
+            echo "### Model release"
+            echo
+            echo "- Release: \`$RELEASE_TAG\`"
+            echo "- Repository: \`$REPOSITORY\`"
+            if [ -f "${ASSET_DIR:-/nonexistent}/models-manifest.json" ]; then
+              echo
+              jq -r '.models[] | "- `\(.model)` - \(.parts | length) part(s)"' \
+                "$ASSET_DIR/models-manifest.json"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

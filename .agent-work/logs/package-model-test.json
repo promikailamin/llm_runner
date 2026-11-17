@@ -1,0 +1,22 @@
+{
+  "model": "qwen2.5-coder:0.5b",
+  "safe_name": "qwen2.5-coder-0.5b",
+  "manifest": "manifests/registry.ollama.ai/library/qwen2.5-coder/0.5b",
+  "manifest_digest": "6ff36c41f6f588c457e538a5a42d24f9730cc3be7caa391d95d8b8e14f92d103",
+  "blobs": [
+    "sha256:abd33a30420b0d013edc16c98fde77e4301f4c0cee721d6fbf203b76e5aee426",
+    "sha256:20693aeb02c63304e263a72453b6ab89e1c700a87c6948cac523ac1e6f7cade0",
+    "sha256:66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e",
+    "sha256:1e65450c30670713aa47fe23e8b9662bdf4065e81cc8e3cbfaa98924fcc0d320",
+    "sha256:832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "sha256:4ff64a7f502a08b7616edb8ca0a79eb1853fc363d842b7df4b46915d11a3fb09"
+  ],
+  "parts": [
+    {
+      "name": "qwen2.5-coder-0.5b.tar.part-000",
+      "sha256": "3acc6597d97666b63d0a7e134a1085e4996cc3a1b49b25b32a1cfde68d9734c9",
+      "size": 795699200
+    }
+  ],
+  "total_size": 795699200
+}

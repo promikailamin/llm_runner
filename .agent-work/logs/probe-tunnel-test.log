@@ -1,0 +1,8 @@
+Probing http://bore.pub:20427/api/tags for 1 minute(s)
+ok: probe 1 via bore.pub:20427
+ok: probe 2 via bore.pub:20427
+ok: probe 3 via bore.pub:20427
+ok: probe 4 via bore.pub:20427
+ok: probe 5 via bore.pub:20427
+ok: probe 6 via bore.pub:20427
+Probe summary: 6 succeeded, 0 failed
