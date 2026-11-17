@@ -1774,3 +1774,37 @@ secret_scan_status=0
 [0m← [0mWrite .agent-work/logs/validation-summary.md
 Wrote file successfully.
 [0m
+[0m$ [0mgit add -A && git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Add LLM serving and model release workflows" && git log --oneline -3 && git status --short
+[main f0fb582] Add LLM serving and model release workflows
+ 25 files changed, 3341 insertions(+)
+ create mode 100644 .agent-work/logs/autosave.log
+ create mode 100644 .agent-work/logs/install-ollama-test-2.log
+ create mode 100644 .agent-work/logs/install-ollama-test.log
+ create mode 100644 .agent-work/logs/opencode-output.log
+ create mode 100644 .agent-work/logs/package-model-test.json
+ create mode 100644 .agent-work/logs/probe-tunnel-test.log
+ create mode 100644 .agent-work/logs/pull-model-test.log
+ create mode 100644 .agent-work/logs/start-tunnel-test.log
+ create mode 100644 .agent-work/logs/validation-summary.md
+ create mode 100644 .agent-work/tests/__pycache__/test_llm_workflows.cpython-314.pyc
+ create mode 100755 .agent-work/tests/test_llm_workflows.py
+ create mode 100644 .agent-work/tmp/.gitkeep
+ create mode 100644 .github/workflows/llm.yml
+ create mode 100644 .github/workflows/models-release.yml
+ create mode 100644 README.md
+ create mode 100755 scripts/install-bore.sh
+ create mode 100755 scripts/install-ollama.sh
+ create mode 100755 scripts/keep-alive.sh
+ create mode 100755 scripts/package-ollama-model.py
+ create mode 100755 scripts/probe-tunnel.sh
+ create mode 100755 scripts/pull-model.sh
+ create mode 100755 scripts/resolve-model.sh
+ create mode 100755 scripts/restore-release-model.sh
+ create mode 100755 scripts/start-tunnel.sh
+ create mode 100755 scripts/wait-for-tunnel.sh
+f0fb582 Add LLM serving and model release workflows
+ccc6077 Add OpenCode workflow for issue handling
+[0m
+[0m← [0mWrite .gitignore
+Wrote file successfully.
+[0m
