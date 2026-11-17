@@ -1,0 +1,33 @@
+name: Clean stale tunnel release
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: tunnel-cleanup-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    name: Delete stale tunnel release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Delete stale tunnel release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          bash scripts/cleanup-stale-tunnel-release.sh \
+            "${{ github.repository }}" \
+            "llm.yml" \
+            "tunnel"

@@ -24,6 +24,10 @@ class WorkflowTests(unittest.TestCase):
         workflow = load_workflow("llm.yml")
         dispatch = workflow["on"]["workflow_dispatch"]["inputs"]
         self.assertEqual(dispatch["timeout_minutes"]["type"], "number")
+        self.assertEqual(dispatch["run_agent"]["type"], "boolean")
+        self.assertEqual(dispatch["agent_max_steps"]["type"], "number")
+        self.assertIn("auto", dispatch["agent_api"]["options"])
+        self.assertNotIn("run_client", dispatch)
         options = dispatch["model"]["options"]
         for model in (
             "starcoder2:7b",
@@ -33,24 +37,91 @@ class WorkflowTests(unittest.TestCase):
         ):
             self.assertIn(model, options)
         self.assertIn("serve", workflow["jobs"])
-        self.assertIn("client", workflow["jobs"])
+        self.assertIn("agent", workflow["jobs"])
+        self.assertIn("cleanup", workflow["jobs"])
+        self.assertEqual(workflow["concurrency"]["cancel-in-progress"], False)
+        self.assertIn("llm-tunnel", workflow["concurrency"]["group"])
+        self.assertEqual(workflow["permissions"]["contents"], "write")
         serve = workflow["jobs"]["serve"]
-        client = workflow["jobs"]["client"]
+        agent = workflow["jobs"]["agent"]
+        cleanup = workflow["jobs"]["cleanup"]
         self.assertEqual(serve["timeout-minutes"], 360)
         self.assertEqual(serve["outputs"]["address"], "${{ steps.tunnel.outputs.address }}")
-        self.assertNotIn("needs", client)
+        self.assertNotIn("needs", agent)
+        self.assertEqual(cleanup["needs"], ["serve"])
+        self.assertEqual(cleanup["if"], "always()")
         steps = serve["steps"]
         commands = "\n".join(step.get("run", "") for step in steps)
-        self.assertIn("scripts/install-ollama.sh", commands)
-        self.assertIn("scripts/start-tunnel.sh", commands)
-        self.assertIn("scripts/install-bore.sh", commands)
+        for expected in (
+            "scripts/install-ollama.sh",
+            "scripts/start-tunnel.sh",
+            "scripts/install-bore.sh",
+            "scripts/publish-tunnel-release.sh",
+            "scripts/delete-tunnel-release.sh",
+            "scripts/keep-alive.sh",
+        ):
+            self.assertIn(expected, commands)
         upload = [step for step in steps if step.get("uses", "").startswith("actions/upload-artifact")]
         self.assertEqual(len(upload), 1)
         self.assertEqual(upload[0]["with"]["name"], "llm-tunnel-${{ github.run_id }}")
-        client_commands = "\n".join(step.get("run", "") for step in client["steps"])
-        self.assertIn("scripts/wait-for-tunnel.sh", client_commands)
-        self.assertIn("max_wait_seconds=$(( (TIMEOUT_MINUTES + 30) * 60 ))", client_commands)
-        self.assertIn("scripts/probe-tunnel.sh", client_commands)
+        agent_commands = "\n".join(step.get("run", "") for step in agent["steps"])
+        for expected in (
+            "cmake -S cli",
+            "cmake --build build/cli",
+            "llm-agent --self-test",
+            "scripts/wait-for-tunnel.sh",
+            "llm-agent \\",
+            "$RUNNER_TEMP/llm-tunnel/tunnel.json",
+        ):
+            self.assertIn(expected, agent_commands)
+        cleanup_commands = "\n".join(step.get("run", "") for step in cleanup["steps"])
+        self.assertIn("scripts/delete-tunnel-release.sh", cleanup_commands)
+
+    def test_tunnel_release_helpers(self):
+        for name in ("publish-tunnel-release.sh", "delete-tunnel-release.sh"):
+            script = ROOT / "scripts" / name
+            self.assertTrue(script.is_file(), f"{name} is missing")
+            result = subprocess.run(["bash", "-n", str(script)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, f"{script}: {result.stderr}")
+        publish = (ROOT / "scripts" / "publish-tunnel-release.sh").read_text(encoding="utf-8")
+        for expected in ("gh release delete", "gh release create", "expires_at", "Action ID"):
+            self.assertIn(expected, publish)
+
+    def test_tunnel_cleanup_workflow(self):
+        workflow = load_workflow("tunnel-cleanup.yml")
+        self.assertIn("schedule", workflow["on"])
+        self.assertIn("workflow_dispatch", workflow["on"])
+        job = workflow["jobs"]["cleanup"]
+        commands = "\n".join(step.get("run", "") for step in job["steps"])
+        self.assertIn("scripts/cleanup-stale-tunnel-release.sh", commands)
+
+    def test_build_workflow(self):
+        workflow = load_workflow("build.yml")
+        self.assertIn("workflow_dispatch", workflow["on"])
+        job = workflow["jobs"]["build"]
+        names = {entry["name"] for entry in job["strategy"]["matrix"]["include"]}
+        self.assertIn("linux-x86_64", names)
+        self.assertIn("linux-aarch64", names)
+        entries = job["strategy"]["matrix"]["include"]
+        compilers = {entry["compiler"] for entry in entries}
+        self.assertIn("g++", compilers)
+        self.assertIn("aarch64-linux-gnu-g++", compilers)
+        self.assertIn("qemu-aarch64", {entry["qemu"] for entry in entries})
+        commands = "\n".join(step.get("run", "") for step in job["steps"])
+        for expected in (
+            "cmake -S cli",
+            "LLM_AGENT_STATIC=ON",
+            "g++-aarch64-linux-gnu",
+            "qemu-user",
+            "--self-test",
+            "actions/upload-artifact",
+        ):
+            if expected == "actions/upload-artifact":
+                self.assertTrue(any(
+                    step.get("uses", "").startswith(expected) for step in job["steps"]
+                ))
+            else:
+                self.assertIn(expected, commands)
 
     def test_models_release_workflow(self):
         workflow = load_workflow("models-release.yml")
@@ -147,6 +218,10 @@ class WorkflowTests(unittest.TestCase):
             self.assertEqual(data["address"], "bore.pub:45678")
             self.assertEqual(data["port"], 45678)
             self.assertEqual(data["model"], "test-model:1b")
+            self.assertEqual(data["status"], "online")
+            self.assertEqual(data["timeout_minutes"], 1)
+            self.assertIn("expires_at", data)
+            self.assertIn("action_id", data)
             pid = data["pid"]
             try:
                 os.kill(pid, 15)

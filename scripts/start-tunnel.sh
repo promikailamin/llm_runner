@@ -69,6 +69,12 @@ import os
 import sys
 
 output_file, address, port, local_port, model, timeout_minutes, pid = sys.argv[1:]
+now = datetime.datetime.now(datetime.timezone.utc)
+timeout = int(float(timeout_minutes))
+server = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
+repository = os.environ.get("GITHUB_REPOSITORY", "")
+run_id = os.environ.get("GITHUB_RUN_ID", "")
+run_attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "")
 data = {
     "host": "bore.pub",
     "port": int(port),
@@ -76,17 +82,17 @@ data = {
     "url": f"http://{address}",
     "local_port": int(local_port),
     "model": model,
-    "timeout_minutes": int(float(timeout_minutes)),
+    "timeout_minutes": timeout,
     "pid": int(pid),
-    "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-    "repository": os.environ.get("GITHUB_REPOSITORY", ""),
-    "run_id": os.environ.get("GITHUB_RUN_ID", ""),
-    "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
-    "run_url": (
-        f"{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/"
-        f"{os.environ.get('GITHUB_REPOSITORY', '')}/actions/runs/"
-        f"{os.environ.get('GITHUB_RUN_ID', '')}"
-    ),
+    "status": "online",
+    "created_at": now.isoformat(),
+    "run_started_at": now.isoformat(),
+    "expires_at": (now + datetime.timedelta(minutes=timeout)).isoformat(),
+    "repository": repository,
+    "run_id": run_id,
+    "action_id": run_id,
+    "run_attempt": run_attempt,
+    "run_url": f"{server}/{repository}/actions/runs/{run_id}",
 }
 with open(output_file, "w", encoding="utf-8") as handle:
     json.dump(data, handle, indent=2)

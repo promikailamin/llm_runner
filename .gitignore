@@ -3,3 +3,6 @@ __pycache__/
 .ollama/
 .agent-work/logs/opencode-output.log
 .agent-work/logs/autosave.log
+build/
+cmake-build-*/
+dist/

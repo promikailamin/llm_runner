@@ -1,0 +1,108 @@
+name: Build CLI agent
+
+on:
+  push:
+    paths:
+      - "cli/**"
+      - ".github/workflows/build.yml"
+  pull_request:
+    paths:
+      - "cli/**"
+      - ".github/workflows/build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-cli-agent-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x86_64
+            arch: x86_64
+            compiler: g++
+            qemu: ""
+          - name: linux-aarch64
+            arch: aarch64
+            compiler: aarch64-linux-gnu-g++
+            qemu: qemu-aarch64
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y cmake g++
+          if [ "${{ matrix.arch }}" = "aarch64" ]; then
+            sudo apt-get install -y g++-aarch64-linux-gnu
+            if ! sudo apt-get install -y qemu-user; then
+              sudo apt-get install -y qemu-user-static
+            fi
+          fi
+
+      - name: Configure
+        run: |
+          set -euo pipefail
+          cmake -S cli -B "build/${{ matrix.name }}" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DLLM_AGENT_STATIC=ON \
+            -DCMAKE_CXX_COMPILER="${{ matrix.compiler }}"
+
+      - name: Build
+        run: cmake --build "build/${{ matrix.name }}" --parallel
+
+      - name: Test
+        run: |
+          set -euo pipefail
+          binary="build/${{ matrix.name }}/llm-agent"
+          if [ "${{ matrix.arch }}" = "aarch64" ]; then
+            runner=""
+            for candidate in qemu-aarch64 qemu-aarch64-static; do
+              if command -v "$candidate" >/dev/null 2>&1; then
+                runner="$candidate"
+                break
+              fi
+            done
+            if [ -z "$runner" ]; then
+              echo "no aarch64 qemu runner found" >&2
+              exit 1
+            fi
+            "$runner" "$binary" --self-test
+          else
+            "$binary" --self-test
+          fi
+
+      - name: Package
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          version="1.0.0"
+          name="llm-agent-${version}-${{ matrix.name }}"
+          mkdir -p "dist/$name"
+          cp "build/${{ matrix.name }}/llm-agent" "dist/$name/"
+          cp cli/README.md "dist/$name/"
+          tar -czf "dist/$name.tar.gz" -C dist "$name"
+          sha256sum "dist/$name.tar.gz" > "dist/$name.tar.gz.sha256"
+          file "build/${{ matrix.name }}/llm-agent"
+          ls -lh dist
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: |
+            dist/*.tar.gz
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 30

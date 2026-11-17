@@ -42,20 +42,43 @@ on:
         required: true
         default: true
         type: boolean
-      run_client:
-        description: Run the client job that probes the tunnel for the full timeout
+      run_agent:
+        description: Run the C++ CLI agent against the tunnel
         required: true
         default: true
         type: boolean
-      probe_interval_seconds:
-        description: Seconds between client health probes
+      agent_task:
+        description: Task passed to the CLI agent
+        required: false
+        default: List the repository files and summarize what this project does. Do not modify files.
+        type: string
+      agent_max_steps:
+        description: Maximum number of agent steps
         required: true
-        default: 60
+        default: 20
         type: number
+      agent_timeout_minutes:
+        description: Maximum minutes for the CLI agent
+        required: true
+        default: 10
+        type: number
+      agent_api:
+        description: API flavor used by the CLI agent
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - ollama
+          - openai
 
 permissions:
-  contents: read
+  contents: write
   actions: read
+
+concurrency:
+  group: llm-tunnel-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
   serve:
@@ -148,6 +171,16 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
+      - name: Publish tunnel release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          bash scripts/publish-tunnel-release.sh \
+            "$RUNNER_TEMP/llm-tunnel/tunnel.json" \
+            tunnel \
+            "$GITHUB_REPOSITORY"
+
       - name: Add connection details to summary
         run: |
           set -euo pipefail
@@ -161,28 +194,56 @@ jobs:
           - Local Ollama port: \`11434\`
           - Keep-alive: ${{ inputs.timeout_minutes }} minute(s)
           - Tunnel artifact: \`llm-tunnel-${{ github.run_id }}\`
+          - Tunnel release: https://github.com/$GITHUB_REPOSITORY/releases/tag/tunnel
           EOF
 
       - name: Keep model and tunnel online
         run: |
+          set -euo pipefail
+          cleanup() {
+            bash scripts/delete-tunnel-release.sh tunnel "$GITHUB_REPOSITORY" || true
+          }
+          trap cleanup EXIT INT TERM
           bore_pid="$(cat "$RUNNER_TEMP/llm-tunnel/bore.pid")"
           bash scripts/keep-alive.sh "${{ inputs.timeout_minutes }}" "$OLLAMA_PID" "$bore_pid"
 
-  client:
-    name: Probe tunnel
-    if: ${{ inputs.run_client }}
+      - name: Delete tunnel release
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          bash scripts/delete-tunnel-release.sh tunnel "$GITHUB_REPOSITORY" || true
+
+  agent:
+    name: Run CLI agent
+    if: ${{ inputs.run_agent }}
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate timeout
+      - name: Build CLI agent
         run: |
           set -euo pipefail
-          minutes="${{ inputs.timeout_minutes }}"
-          if [ "$minutes" -lt 1 ] || [ "$minutes" -gt 300 ]; then
-            echo "timeout_minutes must be between 1 and 300" >&2
+          cmake -S cli -B build/cli -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/cli --parallel
+
+      - name: Test CLI agent
+        run: ./build/cli/llm-agent --self-test
+
+      - name: Validate agent limits
+        env:
+          AGENT_MAX_STEPS: ${{ inputs.agent_max_steps }}
+          AGENT_TIMEOUT_MINUTES: ${{ inputs.agent_timeout_minutes }}
+        run: |
+          set -euo pipefail
+          if [ "$AGENT_MAX_STEPS" -lt 1 ]; then
+            echo "agent_max_steps must be at least 1" >&2
+            exit 1
+          fi
+          if [ "$AGENT_TIMEOUT_MINUTES" -lt 1 ]; then
+            echo "agent_timeout_minutes must be at least 1" >&2
             exit 1
           fi
 
@@ -202,23 +263,60 @@ jobs:
             "$max_wait_seconds" \
             10
 
-      - name: Probe tunnel
+      - name: Run CLI agent against tunnel
+        env:
+          AGENT_TASK: ${{ inputs.agent_task }}
+          AGENT_MAX_STEPS: ${{ inputs.agent_max_steps }}
+          AGENT_TIMEOUT_MINUTES: ${{ inputs.agent_timeout_minutes }}
+          AGENT_API: ${{ inputs.agent_api }}
         run: |
-          bash scripts/probe-tunnel.sh \
-            "$TUNNEL_ADDRESS" \
-            "${{ inputs.timeout_minutes }}" \
-            "${{ inputs.probe_interval_seconds }}"
+          set -euo pipefail
+          ./build/cli/llm-agent \
+            --tunnel "$RUNNER_TEMP/llm-tunnel/tunnel.json" \
+            --api "$AGENT_API" \
+            --task "$AGENT_TASK" \
+            --max-steps "$AGENT_MAX_STEPS" \
+            --timeout "$(( AGENT_TIMEOUT_MINUTES * 60 ))" \
+            --shell-timeout 300 \
+            --log "$RUNNER_TEMP/llm-agent.log"
 
-      - name: Add client details to summary
+      - name: Add agent details to summary
         if: always()
         run: |
           set -euo pipefail
           address="${TUNNEL_ADDRESS:-not available}"
           cat >> "$GITHUB_STEP_SUMMARY" <<EOF
-          ### Client
+          ### CLI agent
 
           - Tunnel address: \`$address\`
           - Model: \`${TUNNEL_MODEL:-${{ inputs.model }}}\`
-          - Probe interval: ${{ inputs.probe_interval_seconds }} second(s)
-          - Probe duration: ${{ inputs.timeout_minutes }} minute(s)
+          - Maximum steps: ${{ inputs.agent_max_steps }}
+          - Agent timeout: ${{ inputs.agent_timeout_minutes }} minute(s)
+          - Task: ${{ inputs.agent_task }}
           EOF
+
+      - name: Upload agent log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-agent-${{ github.run_id }}
+          path: ${{ runner.temp }}/llm-agent.log
+          if-no-files-found: ignore
+          retention-days: 7
+
+  cleanup:
+    name: Delete tunnel release
+    runs-on: ubuntu-latest
+    needs:
+      - serve
+    if: always()
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Delete tunnel release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          bash scripts/delete-tunnel-release.sh tunnel "${{ github.repository }}"

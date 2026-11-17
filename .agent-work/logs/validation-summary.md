@@ -52,3 +52,46 @@ tunnel to work. Local health checks still use `127.0.0.1:11434`.
   run 44098147042 completed. The model was restored from release assets, the
   tunnel was created, and the client made 4/4 successful probes.
   Log: `llm-release-source-run-44098147042.log`.
+
+# Validation summary for issue 2
+
+Date: 2026-11-17
+
+## Static checks
+
+- `python3 -m unittest discover -s .agent-work/tests -p 'test_*.py' -v`: 14 tests passed.
+- `actionlint` 1.7.12 on all workflows: passed.
+- `shellcheck -x scripts/*.sh`: passed.
+- `yamllint` on the new/modified workflows: passed (only the repository's existing
+  `document-start` and `on` truthy style warnings).
+- `cmake` build for x86_64 with `LLM_AGENT_STATIC=ON`: passed.
+- `aarch64-linux-gnu-g++` cross build with `LLM_AGENT_STATIC=ON`: passed.
+- `qemu-aarch64 build/cli-arm64/llm-agent --self-test`: passed.
+- `ctest` in `build/cli`: 1/1 passed.
+
+## CLI agent tests
+
+- Local self-test covers URL parsing, tool schemas, fenced/tagged/unfenced tool
+  call parsing, shell execution, shell timeout, and file tools.
+- Mock Ollama `/api/chat` native tool call flow: passed.
+- Mock Ollama text fallback tool flow: passed.
+- Mock OpenAI `/v1/chat/completions` native tool call flow: passed.
+- `--tunnel tunnel.json` URL/model loading: passed.
+
+## Real Ollama validation
+
+- Installed Ollama with `scripts/install-ollama.sh` and pulled
+  `qwen2.5-coder:0.5b`.
+- Ran `llm-agent` against `http://127.0.0.1:11434` with a task that asks it to
+  execute `printf real-ollama-ok`.
+- The model emitted a text tool call; the agent parsed it, executed the shell
+  command, returned `real-ollama-ok`, and finished successfully.
+- Log: `.agent-work/logs/cli-real-ollama.log`.
+
+## Tunnel release scripts
+
+- `publish-tunnel-release.sh` with a fake `gh` deleted/recreated the release,
+  uploaded `tunnel.json`, and generated notes containing address, action ID,
+  run attempt, action URL, run start, timeout, and expiry.
+- `delete-tunnel-release.sh` and `cleanup-stale-tunnel-release.sh` were tested
+  with a fake `gh` for both active-run and idle cases.
