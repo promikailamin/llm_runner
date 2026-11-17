@@ -84,8 +84,16 @@ class WorkflowTests(unittest.TestCase):
             result = subprocess.run(["bash", "-n", str(script)], capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, f"{script}: {result.stderr}")
         publish = (ROOT / "scripts" / "publish-tunnel-release.sh").read_text(encoding="utf-8")
-        for expected in ("gh release delete", "gh release create", "expires_at", "Action ID"):
+        for expected in (
+            "delete-tunnel-release.sh",
+            "gh release create",
+            "expires_at",
+            "Action ID",
+        ):
             self.assertIn(expected, publish)
+        delete = (ROOT / "scripts" / "delete-tunnel-release.sh").read_text(encoding="utf-8")
+        for expected in ("gh release delete", "git/refs/tags"):
+            self.assertIn(expected, delete)
 
     def test_tunnel_cleanup_workflow(self):
         workflow = load_workflow("tunnel-cleanup.yml")

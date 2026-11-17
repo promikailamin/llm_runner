@@ -126,3 +126,13 @@ Date: 2026-11-17
 - Re-ran the CLI against the local real Ollama server with
   `qwen2.5-coder:0.5b` and the same task; it finished successfully on step 1.
 - Added `test_unknown_tool_name_is_a_final_answer`.
+
+## Concurrency and cancellation checks
+
+- Dispatched two `LLM over bore.pub` runs back-to-back. GitHub showed the first
+  as `in_progress` and the second as `pending`, confirming the workflow-level
+  concurrency group serializes runs instead of cancelling them.
+- Cancelled the serving run while the `tunnel` release existed; the release was
+  deleted. Cancelled the queued run after it started; it also cleaned up.
+- Release deletion now also removes a leftover `tunnel` git tag, so recreating
+  the release always starts from a clean tag.

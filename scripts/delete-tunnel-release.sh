@@ -9,9 +9,19 @@ if [ -z "$repo" ]; then
   exit 1
 fi
 
+found=0
 if gh release view "$tag" --repo "$repo" >/dev/null 2>&1; then
   gh release delete "$tag" --repo "$repo" --yes --cleanup-tag
-  echo "Deleted tunnel release $tag from $repo"
+  found=1
+fi
+
+if gh api "repos/${repo}/git/refs/tags/${tag}" >/dev/null 2>&1; then
+  gh api -X DELETE "repos/${repo}/git/refs/tags/${tag}" >/dev/null
+  found=1
+fi
+
+if [ "$found" -eq 1 ]; then
+  echo "Deleted tunnel release and tag $tag from $repo"
 else
-  echo "No tunnel release $tag to delete in $repo"
+  echo "No tunnel release or tag $tag to delete in $repo"
 fi

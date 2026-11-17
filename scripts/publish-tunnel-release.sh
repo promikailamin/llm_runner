@@ -89,10 +89,8 @@ with open(notes_file, "w", encoding="utf-8") as handle:
     handle.write("\n".join(lines))
 PY
 
-if gh release view "$tag" --repo "$repo" >/dev/null 2>&1; then
-  echo "Deleting previous release $tag"
-  gh release delete "$tag" --repo "$repo" --yes --cleanup-tag
-fi
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+bash "${script_dir}/delete-tunnel-release.sh" "$tag" "$repo"
 
 gh release create "$tag" "$tunnel_file" \
   --repo "$repo" \
