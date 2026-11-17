@@ -1808,3 +1808,713 @@ ccc6077 Add OpenCode workflow for issue handling
 [0m← [0mWrite .gitignore
 Wrote file successfully.
 [0m
+[0m$ [0mgit rm -r --cached .agent-work/tests/__pycache__ >/dev/null && rm -rf .agent-work/tests/__pycache__ && git add -A && git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Ignore Python bytecode caches" && git status --short && git log --oneline -3
+[main 4d5cf98] Ignore Python bytecode caches
+ 3 files changed, 37 insertions(+)
+ delete mode 100644 .agent-work/tests/__pycache__/test_llm_workflows.cpython-314.pyc
+ create mode 100644 .gitignore
+4d5cf98 Ignore Python bytecode caches
+f0fb582 Add LLM serving and model release workflows
+ccc6077 Add OpenCode workflow for issue handling
+[0m
+[0m$ [0mgit push origin main 2>&1 | tail -20; echo "push_status=${PIPESTATUS[0]}"
+To https://github.com/promikailamin/llm_runner
+   ccc6077..4d5cf98  main -> main
+push_status=0
+[0m
+[0m$ [0mgh workflow run llm.yml --repo promikailamin/llm_runner --ref main -f model=custom -f custom_model=qwen2.5-coder:0.5b -f timeout_minutes=1 -f warmup=true -f run_client=true -f probe_interval_seconds=15 -f model_source=ollama 2>&1; sleep 5; gh run list --repo promikailamin/llm_runner --workflow llm.yml --limit 1 --json databaseId,status,conclusion,url,displayTitle | tee /tmp/llm-run.json
+https://github.com/promikailamin/llm_runner/actions/runs/44094796185
+[{"conclusion":"","databaseId":44094796185,"displayTitle":"LLM over bore.pub","status":"in_progress","url":"https://github.com/promikailamin/llm_runner/actions/runs/44094796185"}]
+[0m
+[0m$ [0mgh run watch 44094796185 --repo promikailamin/llm_runner --interval 10 --exit-status 2>&1 | tail -80; echo "watch_status=${PIPESTATUS[0]}"
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ Serve model in 3m2s (ID 134078978751)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Resolve model
+  ✓ Install and start Ollama
+  - Restore model from release
+  ✓ Pull model from Ollama
+  ✓ Verify model
+  ✓ Warm up model
+  ✓ Install bore
+  ✓ Start bore tunnel
+  ✓ Publish tunnel details
+  ✓ Add connection details to summary
+  ✓ Keep model and tunnel online
+  ✓ Post Checkout repository
+  ✓ Complete job
+* Probe tunnel (ID 134078979187)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Wait for tunnel details
+  * Probe tunnel
+  * Add client details to summary
+  * Post Checkout repository
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Serve model: .github#10
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Serve model: .github#1
+
+✓ main LLM over bore.pub · 44094796185
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ Serve model in 3m2s (ID 134078978751)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Resolve model
+  ✓ Install and start Ollama
+  - Restore model from release
+  ✓ Pull model from Ollama
+  ✓ Verify model
+  ✓ Warm up model
+  ✓ Install bore
+  ✓ Start bore tunnel
+  ✓ Publish tunnel details
+  ✓ Add connection details to summary
+  ✓ Keep model and tunnel online
+  ✓ Post Checkout repository
+  ✓ Complete job
+✓ Probe tunnel in 3m10s (ID 134078979187)
+  ✓ Set up job
+  ✓ Checkout repository
+  ✓ Validate timeout
+  ✓ Wait for tunnel details
+  ✓ Probe tunnel
+  ✓ Add client details to summary
+  ✓ Post Checkout repository
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Serve model: .github#10
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Serve model: .github#1
+
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Probe tunnel: .github#2
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Probe tunnel: .github#1
+
+watch_status=0
+[0m
+[0m$ [0mgh run view 44094796185 --repo promikailamin/llm_runner --log > .agent-work/logs/llm-workflow-run-44094796185.log 2>&1; grep -aE 'Tunnel ready|Tunnel address|Probe summary|Model:|ok: probe|Listening at|Tunnel details' .agent-work/logs/llm-workflow-run-44094796185.log | head -40; wc -l .agent-work/logs/llm-workflow-run-44094796185.log
+Serve model	Start bore tunnel	2026-11-17T13:40:46.6805956Z Tunnel ready at bore.pub:52284 (local port 11434, pid 3455)
+Serve model	Add connection details to summary	2026-11-17T13:40:48.0104247Z ^[[36;1m- Model: \`$MODEL\`^[[0m
+Probe tunnel	Wait for tunnel details	2026-11-17T13:40:55.0237711Z Tunnel address: bore.pub:52284
+Probe tunnel	Wait for tunnel details	2026-11-17T13:40:55.0238417Z Model: qwen2.5-coder:0.5b
+Probe tunnel	Probe tunnel	2026-11-17T13:40:55.6790492Z ok: probe 1 via bore.pub:52284
+Probe tunnel	Probe tunnel	2026-11-17T13:41:11.0482106Z ok: probe 2 via bore.pub:52284
+Probe tunnel	Probe tunnel	2026-11-17T13:41:26.4143300Z ok: probe 3 via bore.pub:52284
+Probe tunnel	Probe tunnel	2026-11-17T13:41:41.7940416Z ok: probe 4 via bore.pub:52284
+Probe tunnel	Probe tunnel	2026-11-17T13:41:55.7971701Z Probe summary: 4 succeeded, 0 failed
+Probe tunnel	Add client details to summary	2026-11-17T13:41:55.8011564Z ^[[36;1m- Tunnel address: \`$address\`^[[0m
+Probe tunnel	Add client details to summary	2026-11-17T13:41:55.8011810Z ^[[36;1m- Model: \`${TUNNEL_MODEL:-custom}\`^[[0m
+647 .agent-work/logs/llm-workflow-run-44094796185.log
+[0m
+[0m$ [0mnl -ba .github/workflows/llm.yml | sed -n '148,172p;215,245p'
+148	          if-no-files-found: error
+   149	          retention-days: 1
+   150	
+   151	      - name: Add connection details to summary
+   152	        run: |
+   153	          set -euo pipefail
+   154	          address="${{ steps.tunnel.outputs.address }}"
+   155	          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+   156	          ### LLM tunnel
+   157	
+   158	          - Model: \`$MODEL\`
+   159	          - Address: \`$address\`
+   160	          - API base URL: \`http://$address\`
+   161	          - Local Ollama port: \`11434\`
+   162	          - Keep-alive: ${{ inputs.timeout_minutes }} minute(s)
+   163	          - Tunnel artifact: \`llm-tunnel-${{ github.run_id }}\`
+   164	          EOF
+   165	
+   166	      - name: Keep model and tunnel online
+   167	        run: |
+   168	          bore_pid="$(cat "$RUNNER_TEMP/llm-tunnel/bore.pid")"
+   169	          bash scripts/keep-alive.sh "${{ inputs.timeout_minutes }}" "$OLLAMA_PID" "$bore_pid"
+   170	
+   171	  client:
+   172	    name: Probe tunnel
+   215	          set -euo pipefail
+   216	          address="${TUNNEL_ADDRESS:-not available}"
+   217	          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+   218	          ### Client
+   219	
+   220	          - Tunnel address: \`$address\`
+   221	          - Model: \`${TUNNEL_MODEL:-${{ inputs.model }}}\`
+   222	          - Probe interval: ${{ inputs.probe_interval_seconds }} second(s)
+   223	          - Probe duration: ${{ inputs.timeout_minutes }} minute(s)
+   224	          EOF
+[0m
+[0m→ [0mRead scripts/package-ollama-model.py[90m [offset=60, limit=120][0m
+[0m
+[0m← [0mEdit scripts/package-ollama-model.py
+Index: /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
+===================================================================
+--- /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
++++ /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
+@@ -60,19 +60,9 @@
+             digest.update(chunk)
+     return digest.hexdigest()
+ 
+ 
+-def copy_manifest_and_blobs(
+-    manifest_path: Path, models_dir: Path, stage: Path, verify: bool
+-) -> list[str]:
+-    with manifest_path.open(encoding="utf-8") as handle:
+-        manifest = json.load(handle)
+-
+-    rel_manifest = manifest_path.relative_to(models_dir)
+-    staged_manifest = stage / rel_manifest
+-    staged_manifest.parent.mkdir(parents=True, exist_ok=True)
+-    shutil.copy2(manifest_path, staged_manifest)
+-
++def collect_blobs(manifest: dict, models_dir: Path, manifest_path: Path, verify: bool) -> list[str]:
+     digests: list[str] = []
+     config = manifest.get("config")
+     if isinstance(config, dict) and config.get("digest"):
+         digests.append(config["digest"])
+@@ -85,32 +75,43 @@
+         blob_name = digest.replace(":", "-")
+         source = models_dir / "blobs" / blob_name
+         if not source.is_file():
+             raise FileNotFoundError(f"blob {blob_name} referenced by {manifest_path} is missing")
+-        target = stage / "blobs" / blob_name
+-        target.parent.mkdir(parents=True, exist_ok=True)
+-        shutil.copy2(source, target)
+         if verify and sha256_file(source) != digest.split(":", 1)[-1]:
+             raise RuntimeError(f"digest mismatch for {source}")
+ 
+     return unique
+ 
+ 
+-def archive_stage(stage: Path, archive: Path) -> None:
+-    with tarfile.open(archive, "w") as tar:
+-        for path in sorted(stage.rglob("*")):
+-            tar.add(path, arcname=str(path.relative_to(stage)))
+-
+-
+-def split_archive(archive: Path, output_dir: Path, chunk_size: str, name: str) -> list[Path]:
++def stream_archive_to_split(
++    manifest_path: Path,
++    models_dir: Path,
++    blobs: list[str],
++    output_dir: Path,
++    chunk_size: str,
++    name: str,
++) -> list[Path]:
+     prefix = output_dir / f"{name}.tar.part-"
+-    subprocess.run(
+-        ["split", "-b", chunk_size, "-d", "-a", "3", str(archive), str(prefix)],
+-        check=True,
++    process = subprocess.Popen(
++        ["split", "-b", chunk_size, "-d", "-a", "3", "-", str(prefix)],
++        stdin=subprocess.PIPE,
+     )
++    try:
++        with tarfile.open(fileobj=process.stdin, mode="w|") as tar:
++            tar.add(manifest_path, arcname=str(manifest_path.relative_to(models_dir)))
++            for digest in blobs:
++                blob_path = models_dir / "blobs" / digest.replace(":", "-")
++                tar.add(blob_path, arcname=str(blob_path.relative_to(models_dir)))
++    finally:
++        if process.stdin is not None:
++            process.stdin.close()
++
++    if process.wait() != 0:
++        raise RuntimeError("split failed while writing model archive")
++
+     parts = sorted(output_dir.glob(f"{name}.tar.part-*"))
+     if not parts:
+-        raise RuntimeError(f"split produced no parts for {archive}")
++        raise RuntimeError("split produced no parts for the model archive")
+     return parts
+ 
+ 
+ def update_catalog(catalog_path: Path, entry: dict) -> None:
+
+[0m
+[0m← [0mEdit scripts/package-ollama-model.py
+Index: /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
+===================================================================
+--- /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
++++ /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
+@@ -154,20 +154,20 @@
+ manifest_path = find_manifest(models_dir, model)
+ with manifest_path.open(encoding="utf-8") as handle:
+     manifest = json.load(handle)
+ 
+-stage = output_dir / f".stage-{name}"
+-archive = output_dir / f"{name}.tar"
+-if stage.exists():
+-    shutil.rmtree(stage)
+-if archive.exists():
+-    archive.unlink()
++for stale in output_dir.glob(f"{name}.tar.part-*"):
++    stale.unlink()
+ 
+-digests = copy_manifest_and_blobs(manifest_path, models_dir, stage, args.verify)
+-archive_stage(stage, archive)
+-shutil.rmtree(stage)
+-parts = split_archive(archive, output_dir, args.chunk_size, name)
+-archive.unlink()
++digests = collect_blobs(manifest, models_dir, manifest_path, args.verify)
++parts = stream_archive_to_split(
++    manifest_path,
++    models_dir,
++    digests,
++    output_dir,
++    args.chunk_size,
++    name,
++)
+ 
+ checksum_lines = []
+ part_entries = []
+ for part in parts:
+
+[0m
+[0m$ [0msed -n '1,20p' scripts/package-ollama-model.py; python3 -m py_compile scripts/package-ollama-model.py && echo compiled
+#!/usr/bin/env python3
+"""Package an Ollama model directory into release-friendly split tar parts."""
+
+from __future__ import annotations
+
+import argparse
+import datetime
+import hashlib
+import json
+import re
+import shutil
+import subprocess
+import sys
+import tarfile
+from pathlib import Path
+
+
+def safe_name(model: str) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]", "-", model.replace(":", "-").replace("/", "-"))
+
+compiled
+[0m
+[0m← [0mEdit scripts/package-ollama-model.py
+Index: /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
+===================================================================
+--- /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
++++ /home/runner/work/llm_runner/llm_runner/scripts/package-ollama-model.py
+@@ -7,9 +7,8 @@
+ import datetime
+ import hashlib
+ import json
+ import re
+-import shutil
+ import subprocess
+ import sys
+ import tarfile
+ from pathlib import Path
+
+[0m
+[0m$ [0mnl -ba .github/workflows/models-release.yml | sed -n '105,245p'
+105	          [ "$INCLUDE_DEEPSEEK_CODER" = "true" ] && models+=("deepseek-coder:6.7b")
+   106	          [ "$INCLUDE_QWEN25_CODER_7B" = "true" ] && models+=("qwen2.5-coder:7b")
+   107	          [ "$INCLUDE_QWEN25_CODER_3B" = "true" ] && models+=("qwen2.5-coder:3b")
+   108	
+   109	          if [ -n "$EXTRA_MODELS" ]; then
+   110	            while IFS= read -r model; do
+   111	              model="$(printf '%s' "$model" | xargs)"
+   112	              [ -n "$model" ] && models+=("$model")
+   113	            done < <(printf '%s' "$EXTRA_MODELS" | tr ',' '\n')
+   114	          fi
+   115	
+   116	          if [ "${#models[@]}" -eq 0 ]; then
+   117	            echo "Select at least one model" >&2
+   118	            exit 1
+   119	          fi
+   120	
+   121	          printf '%s\n' "${models[@]}" > "$RUNNER_TEMP/models.txt"
+   122	          echo "MODELS_FILE=$RUNNER_TEMP/models.txt" >> "$GITHUB_ENV"
+   123	          printf 'Models to package:\n'
+   124	          printf '  - %s\n' "${models[@]}"
+   125	
+   126	      - name: Pull models
+   127	        run: |
+   128	          set -euo pipefail
+   129	          while IFS= read -r model; do
+   130	            [ -z "$model" ] && continue
+   131	            bash scripts/pull-model.sh "$model"
+   132	          done < "$MODELS_FILE"
+   133	
+   134	      - name: Package models
+   135	        env:
+   136	          VERIFY_BLOBS: ${{ inputs.verify_blobs }}
+   137	        run: |
+   138	          set -euo pipefail
+   139	          stage="$RUNNER_TEMP/llm-model-assets"
+   140	          rm -rf "$stage"
+   141	          mkdir -p "$stage"
+   142	          : > "$stage/SHA256SUMS"
+   143	          echo "ASSET_DIR=$stage" >> "$GITHUB_ENV"
+   144	
+   145	          verify_flag=()
+   146	          if [ "$VERIFY_BLOBS" = "true" ]; then
+   147	            verify_flag+=(--verify)
+   148	          fi
+   149	
+   150	          while IFS= read -r model; do
+   151	            [ -z "$model" ] && continue
+   152	            python3 scripts/package-ollama-model.py \
+   153	              --model "$model" \
+   154	              --models-dir "$OLLAMA_MODELS" \
+   155	              --output-dir "$stage" \
+   156	              --chunk-size "$CHUNK_SIZE" \
+   157	              --catalog "$stage/models-manifest.json" \
+   158	              --checksums "$stage/SHA256SUMS" \
+   159	              "${verify_flag[@]}"
+   160	          done < "$MODELS_FILE"
+   161	
+   162	          if [ ! -s "$stage/SHA256SUMS" ]; then
+   163	            echo "No model assets were produced" >&2
+   164	            exit 1
+   165	          fi
+   166	
+   167	      - name: Write release notes
+   168	        run: |
+   169	          # shellcheck disable=SC2016
+   170	          set -euo pipefail
+   171	          notes="$RUNNER_TEMP/release-notes.md"
+   172	          {
+   173	            echo "# LLM model assets"
+   174	            echo
+   175	            echo "Ollama models packaged for the LLM tunnel workflow."
+   176	            echo
+   177	            echo "## Models"
+   178	            echo
+   179	            # shellcheck disable=SC2016
+   180	            jq -r '.models[] | "- `\(.model)` - \(.parts | length) part(s), \(.total_size) bytes"' \
+   181	              "$ASSET_DIR/models-manifest.json"
+   182	            echo
+   183	            echo "## Assets"
+   184	            echo
+   185	            echo "Assets are split into parts under 2000 MB because GitHub's"
+   186	            echo "release asset limit is 2 GiB per file. Download every"
+   187	            # shellcheck disable=SC2016
+   188	            echo '`<model>.tar.part-*` file for the model you need and join them:'
+   189	            echo
+   190	            # shellcheck disable=SC2016
+   191	            echo '```bash'
+   192	            echo 'cat <model>.tar.part-* | tar -xf - -C ~/.ollama/models'
+   193	            # shellcheck disable=SC2016
+   194	            echo '```'
+   195	            echo
+   196	            # shellcheck disable=SC2016
+   197	            echo '`SHA256SUMS` contains the checksum of every part.'
+   198	            echo
+   199	            echo "Then use the **LLM over bore.pub** workflow with"
+   200	            # shellcheck disable=SC2016
+   201	            echo '`model_source=release` and this release tag.'
+   202	          } > "$notes"
+   203	          echo "RELEASE_NOTES=$notes" >> "$GITHUB_ENV"
+   204	          cat "$notes"
+   205	
+   206	      - name: Create or update release
+   207	        env:
+   208	          DRAFT: ${{ inputs.draft }}
+   209	        run: |
+   210	          set -euo pipefail
+   211	          args=(--repo "$REPOSITORY")
+   212	          if gh release view "$RELEASE_TAG" "${args[@]}" >/dev/null 2>&1; then
+   213	            gh release edit "$RELEASE_TAG" "${args[@]}" \
+   214	              --title "LLM models" \
+   215	              --notes-file "$RELEASE_NOTES"
+   216	          else
+   217	            create_args=("${args[@]}")
+   218	            if [ "$DRAFT" = "true" ]; then
+   219	              create_args+=(--draft)
+   220	            fi
+   221	            gh release create "$RELEASE_TAG" \
+   222	              "${create_args[@]}" \
+   223	              --title "LLM models" \
+   224	              --notes-file "$RELEASE_NOTES"
+   225	          fi
+   226	
+   227	      - name: Upload model assets
+   228	        run: |
+   229	          set -euo pipefail
+   230	          mapfile -t assets < <(find "$ASSET_DIR" -maxdepth 1 -type f \
+   231	            \( -name '*.tar.part-*' -o -name 'SHA256SUMS' -o -name 'models-manifest.json' \) \
+   232	            | LC_ALL=C sort)
+   233	          if [ "${#assets[@]}" -eq 0 ]; then
+   234	            echo "No assets found in $ASSET_DIR" >&2
+   235	            exit 1
+   236	          fi
+   237	          printf 'Uploading %d asset(s) to %s\n' "${#assets[@]}" "$RELEASE_TAG"
+   238	          gh release upload "$RELEASE_TAG" "${assets[@]}" --repo "$REPOSITORY" --clobber
+   239	
+   240	      - name: Add summary
+   241	        if: always()
+   242	        run: |
+   243	          set -euo pipefail
+   244	          {
+   245	            echo "### Model release"
+[0m
+[0m$ [0mpython3 - <<'PY'
+from pathlib import Path
+p = Path('.github/workflows/models-release.yml')
+s = p.read_text()
+start = s.index('      - name: Pull models\n')
+end = s.index('      - name: Add summary\n')
+new_block = '''      - name: Prepare release
+        env:
+          DRAFT: ${{ inputs.draft }}
+        run: |
+          set -euo pipefail
+          if gh api "repos/${REPOSITORY}/releases/tags/${RELEASE_TAG}" >/dev/null 2>&1; then
+            echo "Release ${RELEASE_TAG} already exists"
+            exit 0
+          fi
+          args=(--repo "$REPOSITORY" --title "LLM models")
+          if [ "$DRAFT" = "true" ]; then
+            args+=(--draft)
+          fi
+          gh release create "$RELEASE_TAG" "${args[@]}" \\
+            --notes "Model assets are generated by the Publish LLM models workflow."
+
+      - name: Pull, package and upload models
+        env:
+          VERIFY_BLOBS: ${{ inputs.verify_blobs }}
+        run: |
+          set -euo pipefail
+          stage="$RUNNER_TEMP/llm-model-assets"
+          rm -rf "$stage"
+          mkdir -p "$stage"
+          : > "$stage/SHA256SUMS"
+          echo "ASSET_DIR=$stage" >> "$GITHUB_ENV"
+
+          verify_flag=()
+          if [ "$VERIFY_BLOBS" = "true" ]; then
+            verify_flag+=(--verify)
+          fi
+
+          while IFS= read -r model; do
+            [ -z "$model" ] && continue
+            bash scripts/pull-model.sh "$model"
+
+            python3 scripts/package-ollama-model.py \\
+              --model "$model" \\
+              --models-dir "$OLLAMA_MODELS" \\
+              --output-dir "$stage" \\
+              --chunk-size "$CHUNK_SIZE" \\
+              --catalog "$stage/models-manifest.json" \\
+              --checksums "$stage/SHA256SUMS" \\
+              "${verify_flag[@]}"
+
+            safe_name="$(jq -r --arg model "$model" \\
+              '.models[] | select(.model == $model) | .safe_name' \\
+              "$stage/models-manifest.json")"
+            mapfile -t model_assets < <(find "$stage" -maxdepth 1 -type f \\
+              -name "${safe_name}.tar.part-*" | LC_ALL=C sort)
+            if [ "${#model_assets[@]}" -eq 0 ]; then
+              echo "No parts produced for ${model}" >&2
+              exit 1
+            fi
+            printf 'Uploading %d part(s) for %s\\n' "${#model_assets[@]}" "$model"
+            gh release upload "$RELEASE_TAG" "${model_assets[@]}" \\
+              --repo "$REPOSITORY" --clobber
+            rm -f "${model_assets[@]}"
+
+            OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama stop "$model" >/dev/null 2>&1 || true
+            OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama rm "$model" >/dev/null 2>&1 || true
+          done < "$MODELS_FILE"
+
+          if [ ! -s "$stage/SHA256SUMS" ]; then
+            echo "No model assets were produced" >&2
+            exit 1
+          fi
+
+      - name: Write release notes
+        run: |
+          # shellcheck disable=SC2016
+          set -euo pipefail
+          notes="$RUNNER_TEMP/release-notes.md"
+          {
+            echo "# LLM model assets"
+            echo
+            echo "Ollama models packaged for the LLM tunnel workflow."
+            echo
+            echo "## Models"
+            echo
+            # shellcheck disable=SC2016
+            jq -r '.models[] | "- `\\(.model)` - \\(.parts | length) part(s), \\(.total_size) bytes"' \\
+              "$ASSET_DIR/models-manifest.json"
+            echo
+            echo "## Assets"
+            echo
+            echo "Assets are split into parts under 2000 MB because GitHub's"
+            echo "release asset limit is 2 GiB per file. Download every"
+            # shellcheck disable=SC2016
+            echo '`<model>.tar.part-*` file for the model you need and join them:'
+            echo
+            # shellcheck disable=SC2016
+            echo '```bash'
+            echo 'cat <model>.tar.part-* | tar -xf - -C ~/.ollama/models'
+            # shellcheck disable=SC2016
+            echo '```'
+            echo
+            # shellcheck disable=SC2016
+            echo '`SHA256SUMS` contains the checksum of every part.'
+            echo
+            echo "Then use the **LLM over bore.pub** workflow with"
+            # shellcheck disable=SC2016
+            echo '`model_source=release` and this release tag.'
+          } > "$notes"
+          echo "RELEASE_NOTES=$notes" >> "$GITHUB_ENV"
+          cat "$notes"
+
+      - name: Update release notes
+        run: |
+          set -euo pipefail
+          gh release edit "$RELEASE_TAG" --repo "$REPOSITORY" \\
+            --title "LLM models" --notes-file "$RELEASE_NOTES"
+
+      - name: Upload catalog and checksums
+        run: |
+          set -euo pipefail
+          mapfile -t assets < <(find "$ASSET_DIR" -maxdepth 1 -type f \\
+            \\( -name 'SHA256SUMS' -o -name 'models-manifest.json' \\) | LC_ALL=C sort)
+          if [ "${#assets[@]}" -eq 0 ]; then
+            echo "No catalog assets found in $ASSET_DIR" >&2
+            exit 1
+          fi
+          gh release upload "$RELEASE_TAG" "${assets[@]}" --repo "$REPOSITORY" --clobber
+
+'''
+s = s[:start] + new_block + s[end:]
+p.write_text(s)
+PY
+/tmp/actionlint .github/workflows/models-release.yml 2>/dev/null || true
+(no output)
+[0m
+[0m$ [0mpython3 -m unittest discover -s .agent-work/tests -p 'test_*.py' -v && shellcheck -x scripts/*.sh && yamllint -d '{extends: default, rules: {line-length: {max: 140}, document-start: disable, truthy: disable}}' .github/workflows/*.yml
+test_llm_workflow (test_llm_workflows.WorkflowTests.test_llm_workflow) ... ok
+test_models_release_workflow (test_llm_workflows.WorkflowTests.test_models_release_workflow) ... ok
+test_ollama_binds_all_interfaces_for_tunnel_host_header (test_llm_workflows.WorkflowTests.test_ollama_binds_all_interfaces_for_tunnel_host_header) ... ok
+test_package_ollama_model (test_llm_workflows.WorkflowTests.test_package_ollama_model) ... ok
+test_resolve_model (test_llm_workflows.WorkflowTests.test_resolve_model) ... ok
+test_scripts_exist_and_are_parseable (test_llm_workflows.WorkflowTests.test_scripts_exist_and_are_parseable) ... ok
+test_start_tunnel_writes_json (test_llm_workflows.WorkflowTests.test_start_tunnel_writes_json) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.129s
+
+OK
+::group::.github/workflows/opencode.yml
+::error file=.github/workflows/opencode.yml,line=352,col=141::352:141 [line-length] line too long (150 > 140 characters)
+::error file=.github/workflows/opencode.yml,line=368,col=141::368:141 [line-length] line too long (147 > 140 characters)
+::error file=.github/workflows/opencode.yml,line=370,col=1::370:1 [trailing-spaces] trailing spaces
+::endgroup::
+[0m
+[0m$ [0mset -e; tmp=$(mktemp -d); ver=$(curl -fsSL https://api.github.com/repos/rhysd/actionlint/releases/latest | python3 -c 'import json,sys; print(json.load(sys.stdin)["tag_name"])'); curl -fsSL -o "$tmp/a.tgz" "https://github.com/rhysd/actionlint/releases/download/${ver}/actionlint_${ver#v}_linux_amd64.tar.gz"; tar -xzf "$tmp/a.tgz" -C "$tmp"; "$tmp/actionlint" .github/workflows/*.yml; echo "actionlint_status=$?"; cp "$tmp/actionlint" /tmp/actionlint
+actionlint_status=0
+[0m
+[0m$ [0mset -euo pipefail
+rm -rf .agent-work/tmp/package-test
+mkdir -p .agent-work/tmp/package-test
+python3 scripts/package-ollama-model.py \
+  --model qwen2.5-coder:0.5b \
+  --models-dir "$HOME/.ollama/models" \
+  --output-dir "$PWD/.agent-work/tmp/package-test" \
+  --chunk-size 1900M \
+  --catalog "$PWD/.agent-work/tmp/package-test/models-manifest.json" \
+  --checksums "$PWD/.agent-work/tmp/package-test/SHA256SUMS" \
+  --verify > .agent-work/logs/package-model-test.json
+ls -lh .agent-work/tmp/package-test
+(cd .agent-work/tmp/package-test && sha256sum -c SHA256SUMS)
+mkdir -p .agent-work/tmp/package-test/extract
+cat .agent-work/tmp/package-test/qwen2.5-coder-0.5b.tar.part-* | tar -xf - -C .agent-work/tmp/package-test/extract
+find .agent-work/tmp/package-test/extract -type f | wc -l
+rm -rf .agent-work/tmp/package-test
+total 380M
+-rw-r--r-- 1 runner runner   98 Nov 17 13:44 SHA256SUMS
+-rw-r--r-- 1 runner runner 1.1K Nov 17 13:44 models-manifest.json
+-rw-r--r-- 1 runner runner 380M Nov 17 13:44 qwen2.5-coder-0.5b.tar.part-000
+qwen2.5-coder-0.5b.tar.part-000: OK
+7
+[0m
+[0m$ [0mcurl -fsSL https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners | python3 -c 'import sys,re,html; t=sys.stdin.read(); t=re.sub(r"<[^>]+>"," ",t); t=html.unescape(t); t=re.sub(r"\s+"," ",t); i=t.find("Ubuntu"); print(t[i:i+2000])' | head -c 3000
+Ubuntu Linux, Windows, or macOS operating systems. When you use a GitHub-hosted runner, machine maintenance and upgrades are taken care of for you. You can choose one of the standard GitHub-hosted runner options or, if you are on the GitHub Team or GitHub Enterprise Cloud plan, you can provision a runner with more cores, or a runner that's powered by a GPU processor. These machines are referred to as "larger runner." For more information, see Larger runners . Larger runners also support custom images, which let you create and manage your own preconfigured VM images. For more information, see Custom images . Using GitHub-hosted runners requires network access with at least 70 kilobits per second upload and download speeds. Runner images GitHub maintains our own set of VM images for our standard hosted runners. The list of images and their included tools are managed in the actions/runner-images repository. Preinstalled software for GitHub-owned images The software tools included in our GitHub-owned images are updated weekly. The update process takes several days, and the list of preinstalled software on the main branch is updated after the whole deployment ends. Workflow logs include a link to the preinstalled tools on the exact runner. To find this information in the workflow log, expand the Set up job section. Under that section, expand the Runner Image section. The link following Included Software will describe the preinstalled tools on the runner that ran the workflow. For more information, see Viewing workflow run history . GitHub-hosted runners include the operating system's default built-in tools, in addition to the packages listed in the above references. For example, Ubuntu and macOS runners include grep , find , and which , among other default tools. You can also view a software bill of materials (SBOM) for each build of the Windows and Ubuntu runner images. For more information, see Secure use reference . We recommend using actions to interact with the soft
+[0m
+[0m$ [0mcurl -fsSL https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners | python3 -c 'import sys,re,html; t=sys.stdin.read(); t=re.sub(r"<[^>]+>"," ",t); t=html.unescape(t); t=re.sub(r"\s+"," ",t); [print(t[max(0,m.start()-300):m.start()+500]) for m in re.finditer("SSD|storage",t,re.I)]' | head -60
+on your images. Administrators can also apply policies to manage image versions, retention, and age to meet organizational security and compliance requirements. Custom images can only be used with larger runners. Jobs that use custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see GitHub Actions billing . To get started with custom images, see Using custom images . Cloud hosts used by GitHub-hosted runners GitHub Actions uses a multi-cloud compute pool to help improve runner availability for eligible Linux jobs. These jobs can run on either Amazon Web Services (AWS) or Microsoft Azure. Multi-cloud compute is used for standard 2-core and 4-core Linux runners and compat
+ versions, retention, and age to meet organizational security and compliance requirements. Custom images can only be used with larger runners. Jobs that use custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see GitHub Actions billing . To get started with custom images, see Using custom images . Cloud hosts used by GitHub-hosted runners GitHub Actions uses a multi-cloud compute pool to help improve runner availability for eligible Linux jobs. These jobs can run on either Amazon Web Services (AWS) or Microsoft Azure. Multi-cloud compute is used for standard 2-core and 4-core Linux runners and compatible 2-core and 4-core larger runners without specialized configuration
+ors can also apply policies to manage image versions, retention, and age to meet organizational security and compliance requirements.\u003c/p\u003e\n\u003cp\u003eCustom images can only be used with larger runners. Jobs that use custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see \u003ca href=\"/en/billing/concepts/product-billing/github-actions#custom-image-storage\"\u003eGitHub Actions billing\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eTo get started with custom images, see \u003ca href=\"/en/actions/how-tos/manage-runners/larger-runners/use-custom-images\"\u003eUsing custom images\u003c/a\u003e.\u003c/p\u003e\n\u003ch2 id=\"cloud-hosts-used-by-github-hosted-runner
+e to meet organizational security and compliance requirements.\u003c/p\u003e\n\u003cp\u003eCustom images can only be used with larger runners. Jobs that use custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see \u003ca href=\"/en/billing/concepts/product-billing/github-actions#custom-image-storage\"\u003eGitHub Actions billing\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eTo get started with custom images, see \u003ca href=\"/en/actions/how-tos/manage-runners/larger-runners/use-custom-images\"\u003eUsing custom images\u003c/a\u003e.\u003c/p\u003e\n\u003ch2 id=\"cloud-hosts-used-by-github-hosted-runners\" tabindex=\"-1\"\u003e\u003ca class=\"heading-link\" href=\"#cloud-h
+e used with larger runners. Jobs that use custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see \u003ca href=\"/en/billing/concepts/product-billing/github-actions#custom-image-storage\"\u003eGitHub Actions billing\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eTo get started with custom images, see \u003ca href=\"/en/actions/how-tos/manage-runners/larger-runners/use-custom-images\"\u003eUsing custom images\u003c/a\u003e.\u003c/p\u003e\n\u003ch2 id=\"cloud-hosts-used-by-github-hosted-runners\" tabindex=\"-1\"\u003e\u003ca class=\"heading-link\" href=\"#cloud-hosts-used-by-github-hosted-runners\"\u003eCloud hosts used by GitHub-hosted runners\u003cspan class=\"heading-link-
+tional security and compliance requirements."}]},{"type":"text","value":"\n"},{"type":"element","tagName":"p","properties":{},"children":[{"type":"text","value":"Custom images can only be used with larger runners. Jobs that use custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see "},{"type":"element","tagName":"a","properties":{"href":"/en/billing/concepts/product-billing/github-actions#custom-image-storage"},"children":[{"type":"text","value":"GitHub Actions billing"}]},{"type":"text","value":"."}]},{"type":"text","value":"\n"},{"type":"element","tagName":"p","properties":{},"children":[{"type":"text","value":"To get started with custom images, see "},{"type":"eleme
+:"\n"},{"type":"element","tagName":"p","properties":{},"children":[{"type":"text","value":"Custom images can only be used with larger runners. Jobs that use custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see "},{"type":"element","tagName":"a","properties":{"href":"/en/billing/concepts/product-billing/github-actions#custom-image-storage"},"children":[{"type":"text","value":"GitHub Actions billing"}]},{"type":"text","value":"."}]},{"type":"text","value":"\n"},{"type":"element","tagName":"p","properties":{},"children":[{"type":"text","value":"To get started with custom images, see "},{"type":"element","tagName":"a","properties":{"href":"/en/actions/how-tos/manage-runn
+custom images are billed at the same per-minute rates as those runners. Storage for custom images is billed and metered through GitHub Actions storage. For more information, see "},{"type":"element","tagName":"a","properties":{"href":"/en/billing/concepts/product-billing/github-actions#custom-image-storage"},"children":[{"type":"text","value":"GitHub Actions billing"}]},{"type":"text","value":"."}]},{"type":"text","value":"\n"},{"type":"element","tagName":"p","properties":{},"children":[{"type":"text","value":"To get started with custom images, see "},{"type":"element","tagName":"a","properties":{"href":"/en/actions/how-tos/manage-runners/larger-runners/use-custom-images"},"children":[{"type":"text","value":"Using custom images"}]},{"type":"text","value":"."}]},{"type":"text","value":"\n"}
+[0m
+[0m$ [0mfor spec in 'starcoder2 7b' 'deepseek-coder 6.7b' 'qwen2.5-coder 7b' 'qwen2.5-coder 3b'; do set -- $spec; name=$1; tag=$2; echo "== $name:$tag =="; curl -fsSL "https://registry.ollama.ai/v2/library/$name/manifests/$tag" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("layers total GiB:", round(sum(l.get("size",0) for l in d.get("layers",[]))/1024**3,2)); [print(l["mediaType"], round(l.get("size",0)/1024**3,2)) for l in d.get("layers",[])]'; done
+== starcoder2:7b ==
+layers total GiB: 3.77
+application/vnd.ollama.image.model 3.77
+application/vnd.ollama.image.license 0.0
+application/vnd.ollama.image.template 0.0
+application/vnd.ollama.image.params 0.0
+== deepseek-coder:6.7b ==
+layers total GiB: 3.56
+application/vnd.ollama.image.model 3.56
+application/vnd.ollama.image.license 0.0
+application/vnd.ollama.image.template 0.0
+application/vnd.ollama.image.system 0.0
+== qwen2.5-coder:7b ==
+layers total GiB: 4.36
+application/vnd.ollama.image.model 4.36
+application/vnd.ollama.image.system 0.0
+application/vnd.ollama.image.template 0.0
+application/vnd.ollama.image.license 0.0
+== qwen2.5-coder:3b ==
+layers total GiB: 1.8
+application/vnd.ollama.image.model 1.8
+application/vnd.ollama.image.system 0.0
+application/vnd.ollama.image.template 0.0
+application/vnd.ollama.image.license 0.0
+[0m
+[0m$ [0mgrep -aiE 'disk|free space|Total space|GB' .agent-work/logs/llm-workflow-run-44094796185.log | head -30
+(no output)
+[0m
+[0m$ [0mpython3 - <<'PY'
+from pathlib import Path
+p = Path('.github/workflows/models-release.yml')
+s = p.read_text()
+s = s.replace('''      - name: Prepare release
+''', '''      - name: Report disk space
+        run: df -h "$RUNNER_TEMP" "$OLLAMA_MODELS"
+
+      - name: Prepare release
+''')
+s = s.replace('''            OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama stop "$model" >/dev/null 2>&1 || true
+            OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama rm "$model" >/dev/null 2>&1 || true
+          done < "$MODELS_FILE"
+''', '''            OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama stop "$model" >/dev/null 2>&1 || true
+            OLLAMA_HOST="${OLLAMA_HOST:-http://127.0.0.1:11434}" ollama rm "$model" >/dev/null 2>&1 || true
+            df -h "$RUNNER_TEMP" "$OLLAMA_MODELS"
+          done < "$MODELS_FILE"
+''')
+p.write_text(s)
+PY
+/tmp/actionlint .github/workflows/models-release.yml; echo "actionlint=$?"
+actionlint=0
+[0m

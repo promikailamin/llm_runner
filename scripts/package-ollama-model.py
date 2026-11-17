@@ -8,7 +8,6 @@ import datetime
 import hashlib
 import json
 import re
-import shutil
 import subprocess
 import sys
 import tarfile
@@ -61,17 +60,7 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def copy_manifest_and_blobs(
-    manifest_path: Path, models_dir: Path, stage: Path, verify: bool
-) -> list[str]:
-    with manifest_path.open(encoding="utf-8") as handle:
-        manifest = json.load(handle)
-
-    rel_manifest = manifest_path.relative_to(models_dir)
-    staged_manifest = stage / rel_manifest
-    staged_manifest.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(manifest_path, staged_manifest)
-
+def collect_blobs(manifest: dict, models_dir: Path, manifest_path: Path, verify: bool) -> list[str]:
     digests: list[str] = []
     config = manifest.get("config")
     if isinstance(config, dict) and config.get("digest"):
@@ -86,30 +75,41 @@ def copy_manifest_and_blobs(
         source = models_dir / "blobs" / blob_name
         if not source.is_file():
             raise FileNotFoundError(f"blob {blob_name} referenced by {manifest_path} is missing")
-        target = stage / "blobs" / blob_name
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
         if verify and sha256_file(source) != digest.split(":", 1)[-1]:
             raise RuntimeError(f"digest mismatch for {source}")
 
     return unique
 
 
-def archive_stage(stage: Path, archive: Path) -> None:
-    with tarfile.open(archive, "w") as tar:
-        for path in sorted(stage.rglob("*")):
-            tar.add(path, arcname=str(path.relative_to(stage)))
-
-
-def split_archive(archive: Path, output_dir: Path, chunk_size: str, name: str) -> list[Path]:
+def stream_archive_to_split(
+    manifest_path: Path,
+    models_dir: Path,
+    blobs: list[str],
+    output_dir: Path,
+    chunk_size: str,
+    name: str,
+) -> list[Path]:
     prefix = output_dir / f"{name}.tar.part-"
-    subprocess.run(
-        ["split", "-b", chunk_size, "-d", "-a", "3", str(archive), str(prefix)],
-        check=True,
+    process = subprocess.Popen(
+        ["split", "-b", chunk_size, "-d", "-a", "3", "-", str(prefix)],
+        stdin=subprocess.PIPE,
     )
+    try:
+        with tarfile.open(fileobj=process.stdin, mode="w|") as tar:
+            tar.add(manifest_path, arcname=str(manifest_path.relative_to(models_dir)))
+            for digest in blobs:
+                blob_path = models_dir / "blobs" / digest.replace(":", "-")
+                tar.add(blob_path, arcname=str(blob_path.relative_to(models_dir)))
+    finally:
+        if process.stdin is not None:
+            process.stdin.close()
+
+    if process.wait() != 0:
+        raise RuntimeError("split failed while writing model archive")
+
     parts = sorted(output_dir.glob(f"{name}.tar.part-*"))
     if not parts:
-        raise RuntimeError(f"split produced no parts for {archive}")
+        raise RuntimeError("split produced no parts for the model archive")
     return parts
 
 
@@ -154,18 +154,18 @@ def main() -> int:
     with manifest_path.open(encoding="utf-8") as handle:
         manifest = json.load(handle)
 
-    stage = output_dir / f".stage-{name}"
-    archive = output_dir / f"{name}.tar"
-    if stage.exists():
-        shutil.rmtree(stage)
-    if archive.exists():
-        archive.unlink()
+    for stale in output_dir.glob(f"{name}.tar.part-*"):
+        stale.unlink()
 
-    digests = copy_manifest_and_blobs(manifest_path, models_dir, stage, args.verify)
-    archive_stage(stage, archive)
-    shutil.rmtree(stage)
-    parts = split_archive(archive, output_dir, args.chunk_size, name)
-    archive.unlink()
+    digests = collect_blobs(manifest, models_dir, manifest_path, args.verify)
+    parts = stream_archive_to_split(
+        manifest_path,
+        models_dir,
+        digests,
+        output_dir,
+        args.chunk_size,
+        name,
+    )
 
     checksum_lines = []
     part_entries = []

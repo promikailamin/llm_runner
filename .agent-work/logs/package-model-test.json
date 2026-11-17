@@ -14,9 +14,9 @@
   "parts": [
     {
       "name": "qwen2.5-coder-0.5b.tar.part-000",
-      "sha256": "3acc6597d97666b63d0a7e134a1085e4996cc3a1b49b25b32a1cfde68d9734c9",
-      "size": 795699200
+      "sha256": "c393e0b95ddb1a84dac2aa6cf2a99cb6bae363ffc034a7d642d110afc19928aa",
+      "size": 397844480
     }
   ],
-  "total_size": 795699200
+  "total_size": 397844480
 }
