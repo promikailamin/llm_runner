@@ -200,19 +200,22 @@ jobs:
       - name: Keep model and tunnel online
         run: |
           set -euo pipefail
-          cleanup() {
-            bash scripts/delete-tunnel-release.sh tunnel "$GITHUB_REPOSITORY" || true
+          mark_offline() {
+            bash scripts/mark-tunnel-release-offline.sh \
+              tunnel "$GITHUB_REPOSITORY" \
+              "serve job ended or was cancelled" || true
           }
-          trap cleanup EXIT INT TERM
+          trap mark_offline EXIT INT TERM
           bore_pid="$(cat "$RUNNER_TEMP/llm-tunnel/bore.pid")"
           bash scripts/keep-alive.sh "${{ inputs.timeout_minutes }}" "$OLLAMA_PID" "$bore_pid"
 
-      - name: Delete tunnel release
+      - name: Mark tunnel release offline
         if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          bash scripts/delete-tunnel-release.sh tunnel "$GITHUB_REPOSITORY" || true
+          bash scripts/mark-tunnel-release-offline.sh \
+            tunnel "$GITHUB_REPOSITORY" "serve job ended" || true
 
   agent:
     name: Run CLI agent
@@ -305,7 +308,7 @@ jobs:
           retention-days: 7
 
   cleanup:
-    name: Delete tunnel release
+    name: Mark tunnel release offline
     runs-on: ubuntu-latest
     needs:
       - serve
@@ -314,9 +317,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Delete tunnel release
+      - name: Mark tunnel release offline
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          bash scripts/delete-tunnel-release.sh tunnel "${{ github.repository }}"
+          bash scripts/mark-tunnel-release-offline.sh \
+            tunnel "${{ github.repository }}" "workflow finished"

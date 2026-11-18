@@ -57,10 +57,11 @@ class WorkflowTests(unittest.TestCase):
             "scripts/start-tunnel.sh",
             "scripts/install-bore.sh",
             "scripts/publish-tunnel-release.sh",
-            "scripts/delete-tunnel-release.sh",
+            "scripts/mark-tunnel-release-offline.sh",
             "scripts/keep-alive.sh",
         ):
             self.assertIn(expected, commands)
+        self.assertNotIn("scripts/delete-tunnel-release.sh", commands)
         upload = [step for step in steps if step.get("uses", "").startswith("actions/upload-artifact")]
         self.assertEqual(len(upload), 1)
         self.assertEqual(upload[0]["with"]["name"], "llm-tunnel-${{ github.run_id }}")
@@ -75,25 +76,191 @@ class WorkflowTests(unittest.TestCase):
         ):
             self.assertIn(expected, agent_commands)
         cleanup_commands = "\n".join(step.get("run", "") for step in cleanup["steps"])
-        self.assertIn("scripts/delete-tunnel-release.sh", cleanup_commands)
+        self.assertIn("scripts/mark-tunnel-release-offline.sh", cleanup_commands)
+        self.assertNotIn("scripts/delete-tunnel-release.sh", cleanup_commands)
 
     def test_tunnel_release_helpers(self):
-        for name in ("publish-tunnel-release.sh", "delete-tunnel-release.sh"):
+        for name in (
+            "publish-tunnel-release.sh",
+            "mark-tunnel-release-offline.sh",
+            "delete-tunnel-release.sh",
+        ):
             script = ROOT / "scripts" / name
             self.assertTrue(script.is_file(), f"{name} is missing")
             result = subprocess.run(["bash", "-n", str(script)], capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, f"{script}: {result.stderr}")
         publish = (ROOT / "scripts" / "publish-tunnel-release.sh").read_text(encoding="utf-8")
         for expected in (
-            "delete-tunnel-release.sh",
             "gh release create",
+            "gh release edit",
+            "gh release upload",
             "expires_at",
-            "Action ID",
+            "json.dump",
+            '"status": status',
         ):
             self.assertIn(expected, publish)
+        self.assertNotIn("delete-tunnel-release.sh", publish)
+        offline = (ROOT / "scripts" / "mark-tunnel-release-offline.sh").read_text(encoding="utf-8")
+        for expected in (
+            "gh release view",
+            "gh release edit",
+            'body["status"] = "offline"',
+            "offline_reason",
+        ):
+            self.assertIn(expected, offline)
         delete = (ROOT / "scripts" / "delete-tunnel-release.sh").read_text(encoding="utf-8")
         for expected in ("gh release delete", "git/refs/tags"):
             self.assertIn(expected, delete)
+        stale = (ROOT / "scripts" / "cleanup-stale-tunnel-release.sh").read_text(encoding="utf-8")
+        self.assertIn("mark-tunnel-release-offline.sh", stale)
+        self.assertNotIn("delete-tunnel-release.sh", stale)
+
+    def test_publish_and_offline_tunnel_release_json(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            state = tmp_path / "state"
+            state.mkdir()
+            fake_gh = tmp_path / "gh"
+            fake_gh.write_text(
+                "#!/usr/bin/env bash\n"
+                "set -euo pipefail\n"
+                'state="${FAKE_GH_STATE:?}"\n'
+                'printf "%s\\n" "$*" >> "$state/log"\n'
+                'cmd="${1:-} ${2:-}"\n'
+                'case "$cmd" in\n'
+                '  "release view")\n'
+                '    [ -f "$state/exists" ] || exit 1\n'
+                '    shift 2\n'
+                '    for arg in "$@"; do\n'
+                '      if [ "$arg" = "--json" ]; then cat "$state/body"; exit 0; fi\n'
+                "    done\n"
+                '    echo "release exists"\n'
+                "    ;;\n"
+                '  "release edit")\n'
+                '    [ -f "$state/exists" ] || exit 1\n'
+                '    shift 2\n'
+                '    notes=""\n'
+                '    while [ "$#" -gt 0 ]; do\n'
+                '      case "$1" in\n'
+                '        --notes-file) notes="$2"; shift 2 ;;\n'
+                "        *) shift ;;\n"
+                "      esac\n"
+                "    done\n"
+                '    [ -z "$notes" ] || cp "$notes" "$state/body"\n'
+                "    ;;\n"
+                '  "release create")\n'
+                '    : > "$state/exists"\n'
+                "    shift 2\n"
+                '    notes=""\n'
+                '    while [ "$#" -gt 0 ]; do\n'
+                '      case "$1" in\n'
+                '        --notes-file) notes="$2"; shift 2 ;;\n'
+                "        *) shift ;;\n"
+                "      esac\n"
+                "    done\n"
+                '    [ -z "$notes" ] || cp "$notes" "$state/body"\n'
+                "    ;;\n"
+                '  "release upload")\n'
+                '    [ -f "$state/exists" ] || exit 1\n'
+                "    ;;\n"
+                "  *)\n"
+                '    echo "unexpected gh call: $*" >&2\n'
+                "    exit 1\n"
+                "    ;;\n"
+                "esac\n",
+                encoding="utf-8",
+            )
+            fake_gh.chmod(0o755)
+            tunnel = tmp_path / "tunnel.json"
+            tunnel.write_text(
+                json.dumps(
+                    {
+                        "host": "bore.pub",
+                        "port": 45678,
+                        "address": "bore.pub:45678",
+                        "url": "http://bore.pub:45678",
+                        "local_port": 11434,
+                        "model": "test-model:1b",
+                        "timeout_minutes": 2,
+                        "status": "online",
+                        "created_at": "2026-01-01T00:00:00+00:00",
+                        "run_started_at": "2026-01-01T00:00:00+00:00",
+                        "expires_at": "2026-01-01T00:02:00+00:00",
+                        "repository": "owner/repo",
+                        "run_id": "123",
+                        "action_id": "123",
+                        "run_attempt": "1",
+                        "run_url": "https://github.com/owner/repo/actions/runs/123",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            env = os.environ.copy()
+            env["PATH"] = str(tmp_path) + os.pathsep + env.get("PATH", "")
+            env["FAKE_GH_STATE"] = str(state)
+
+            publish = subprocess.run(
+                [
+                    "bash",
+                    "scripts/publish-tunnel-release.sh",
+                    str(tunnel),
+                    "tunnel",
+                    "owner/repo",
+                ],
+                cwd=ROOT,
+                env=env,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(publish.returncode, 0, publish.stderr)
+            body = json.loads((state / "body").read_text(encoding="utf-8"))
+            self.assertEqual(body["status"], "online")
+            self.assertEqual(body["address"], "bore.pub:45678")
+            self.assertEqual(body["run"]["id"], "123")
+            self.assertEqual(body["usage"]["api_base_url"], "http://bore.pub:45678")
+            self.assertNotIn("release delete", (state / "log").read_text(encoding="utf-8"))
+
+            republish = subprocess.run(
+                [
+                    "bash",
+                    "scripts/publish-tunnel-release.sh",
+                    str(tunnel),
+                    "tunnel",
+                    "owner/repo",
+                ],
+                cwd=ROOT,
+                env=env,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(republish.returncode, 0, republish.stderr)
+            log = (state / "log").read_text(encoding="utf-8")
+            self.assertEqual(log.count("release create"), 1)
+            self.assertIn("release edit", log)
+            self.assertNotIn("release delete", log)
+            body = json.loads((state / "body").read_text(encoding="utf-8"))
+            self.assertEqual(body["status"], "online")
+
+            offline = subprocess.run(
+                [
+                    "bash",
+                    "scripts/mark-tunnel-release-offline.sh",
+                    "tunnel",
+                    "owner/repo",
+                    "test finished",
+                ],
+                cwd=ROOT,
+                env=env,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(offline.returncode, 0, offline.stderr)
+            body = json.loads((state / "body").read_text(encoding="utf-8"))
+            self.assertEqual(body["status"], "offline")
+            self.assertEqual(body["offline_reason"], "test finished")
+            self.assertEqual(body["address"], "bore.pub:45678")
+            self.assertIn("ended_at", body)
+            self.assertNotIn("release delete", (state / "log").read_text(encoding="utf-8"))
 
     def test_tunnel_cleanup_workflow(self):
         workflow = load_workflow("tunnel-cleanup.yml")

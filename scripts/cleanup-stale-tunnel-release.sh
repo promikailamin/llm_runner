@@ -17,8 +17,11 @@ active="$(
 )"
 
 if [ "${active:-0}" -gt 0 ]; then
-  echo "Found ${active} active or pending ${workflow_file} run(s); keeping release ${tag}"
+  echo "Found ${active} active or pending ${workflow_file} run(s); keeping release ${tag} online"
   exit 0
 fi
 
-bash "${script_dir}/delete-tunnel-release.sh" "$tag" "$repo"
+bash "${script_dir}/mark-tunnel-release-offline.sh" \
+  "$tag" \
+  "$repo" \
+  "stale release cleanup: no active or pending ${workflow_file} run"

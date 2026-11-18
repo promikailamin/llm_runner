@@ -50,32 +50,37 @@ The workflow has three jobs:
 
 1. `serve` installs Ollama, pulls or restores the selected model, starts
    `ollama serve` on `127.0.0.1:11434`, starts `bore local 11434 --to bore.pub`,
-   uploads `tunnel.json` as the `llm-tunnel-<run_id>` artifact, and publishes or
-   recreates the `tunnel` release.
+   uploads `tunnel.json` as the `llm-tunnel-<run_id>` artifact, and creates or
+   updates the `tunnel` release.
 2. `agent` runs at the same time. It builds the C++ CLI agent, waits for the
    tunnel artifact, and runs the agent against `http://<host:port>` with the
    requested task.
-3. `cleanup` deletes the `tunnel` release when the serving window ends.
+3. `cleanup` marks the `tunnel` release offline when the serving window ends.
 
 The jobs run concurrently because a bore tunnel is owned by the `bore` process.
 If the agent job waited for `serve` with `needs`, the tunnel would already be
 closed. The artifact is the hand-off between jobs; the `serve` job also
 publishes `address`, `host`, `port`, and `model` as job outputs.
 
-The `tunnel` release is recreated for every run and contains:
+The `tunnel` release is created or updated for every run. Its description is a
+single JSON document (not Markdown) containing:
 
-- the tunnel address (`host:port`),
-- the API base URL,
-- the model,
+- `status` (`online` while the tunnel is available, `offline` afterward),
+- the tunnel address (`host:port`) and API base URL,
+- the model and local Ollama port,
 - the action (run) ID and attempt,
 - the action URL,
-- the run start time, timeout, and expiry time,
-- `tunnel.json` as an asset.
+- the run start time, timeout, expiry time, and publication time,
+- usage commands and security notes.
 
-The release is deleted when the keep-alive finishes, when the run times out, or
-when the run is cancelled by a user or the workflow. The keep-alive step also
-installs a signal trap so cancellation cleans up the release before the runner
-disappears.
+`tunnel.json` is attached as an asset.
+
+The release is kept when the keep-alive finishes, when the run times out, or
+when the run is cancelled. Instead of deleting it, the workflow updates its JSON
+description and changes `status` to `offline`, adding `ended_at` and
+`offline_reason`. A later run updates the same release and sets `status` back to
+`online`. The keep-alive step also installs a signal trap so cancellation marks
+the release offline before the runner disappears.
 
 The connection address is printed in the `serve` job summary and log, for example:
 
@@ -158,14 +163,15 @@ cat qwen2.5-coder-3b.tar.part-* | tar -xf - -C ~/.ollama/models
 - `.github/workflows/llm.yml`: serve a model, publish the `tunnel` release, and run the CLI agent.
 - `.github/workflows/models-release.yml`: package models into a release.
 - `.github/workflows/build.yml`: build and test the CLI agent for x86_64 and aarch64.
-- `.github/workflows/tunnel-cleanup.yml`: delete a stale `tunnel` release when no run is active.
+- `.github/workflows/tunnel-cleanup.yml`: mark a stale `tunnel` release offline when no run is active.
 - `cli/`: C++17 CLI coding agent with shell and file tools.
 - `scripts/install-ollama.sh`: install and start Ollama.
 - `scripts/install-bore.sh`: download and verify the pinned bore release.
 - `scripts/start-tunnel.sh`: start bore and write `tunnel.json`.
-- `scripts/publish-tunnel-release.sh`: create or recreate the `tunnel` release.
-- `scripts/delete-tunnel-release.sh`: delete the `tunnel` release.
-- `scripts/cleanup-stale-tunnel-release.sh`: safety-net cleanup for cancelled runs.
+- `scripts/publish-tunnel-release.sh`: create or update the `tunnel` release with a JSON description.
+- `scripts/mark-tunnel-release-offline.sh`: change the release JSON status to `offline` without deleting it.
+- `scripts/delete-tunnel-release.sh`: manually delete the `tunnel` release and tag.
+- `scripts/cleanup-stale-tunnel-release.sh`: safety-net cleanup that marks cancelled-run releases offline.
 - `scripts/wait-for-tunnel.sh`: retrieve the tunnel artifact in the agent job.
 - `scripts/probe-tunnel.sh`: health-probe the public tunnel.
 - `scripts/keep-alive.sh`: keep the server alive for the selected timeout.

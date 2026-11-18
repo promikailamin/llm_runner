@@ -15,14 +15,14 @@ concurrency:
 
 jobs:
   cleanup:
-    name: Delete stale tunnel release
+    name: Mark stale tunnel release offline
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Delete stale tunnel release
+      - name: Mark stale tunnel release offline
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

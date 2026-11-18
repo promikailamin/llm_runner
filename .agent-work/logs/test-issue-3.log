@@ -1,0 +1,22 @@
+test_native_ollama_tool_flow_with_tunnel_file (test_cli_agent.CliAgentTests.test_native_ollama_tool_flow_with_tunnel_file) ... ok
+test_openai_tool_flow (test_cli_agent.CliAgentTests.test_openai_tool_flow) ... ok
+test_repeated_tool_calls_stop (test_cli_agent.CliAgentTests.test_repeated_tool_calls_stop) ... ok
+test_self_test (test_cli_agent.CliAgentTests.test_self_test) ... ok
+test_text_tool_fallback (test_cli_agent.CliAgentTests.test_text_tool_fallback) ... ok
+test_unknown_tool_name_is_a_final_answer (test_cli_agent.CliAgentTests.test_unknown_tool_name_is_a_final_answer) ... ok
+test_build_workflow (test_llm_workflows.WorkflowTests.test_build_workflow) ... ok
+test_llm_workflow (test_llm_workflows.WorkflowTests.test_llm_workflow) ... ok
+test_models_release_workflow (test_llm_workflows.WorkflowTests.test_models_release_workflow) ... ok
+test_ollama_binds_all_interfaces_for_tunnel_host_header (test_llm_workflows.WorkflowTests.test_ollama_binds_all_interfaces_for_tunnel_host_header) ... ok
+test_package_ollama_model (test_llm_workflows.WorkflowTests.test_package_ollama_model) ... ok
+test_publish_and_offline_tunnel_release_json (test_llm_workflows.WorkflowTests.test_publish_and_offline_tunnel_release_json) ... ok
+test_resolve_model (test_llm_workflows.WorkflowTests.test_resolve_model) ... ok
+test_scripts_exist_and_are_parseable (test_llm_workflows.WorkflowTests.test_scripts_exist_and_are_parseable) ... ok
+test_start_tunnel_writes_json (test_llm_workflows.WorkflowTests.test_start_tunnel_writes_json) ... ok
+test_tunnel_cleanup_workflow (test_llm_workflows.WorkflowTests.test_tunnel_cleanup_workflow) ... ok
+test_tunnel_release_helpers (test_llm_workflows.WorkflowTests.test_tunnel_release_helpers) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 13.638s
+
+OK
